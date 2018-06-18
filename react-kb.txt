@@ -1,0 +1,10 @@
+Course Git:
+https://github.com/StephenGrider
+- starter: https://github.com/StephenGrider/ReduxSimpleStarter.git
+
+- Starter kits
+https://reactjs.org/community/starter-kits.html
+- Official: https://github.com/facebook/create-react-app
+
+- other relevant? (need to investigate):
+ - react-boilerplate (community maintained) :https://github.com/react-boilerplate/react-boilerplate
