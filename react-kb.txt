@@ -5,6 +5,9 @@ https://github.com/StephenGrider
 - Starter kits
 https://reactjs.org/community/starter-kits.html
 - Official: https://github.com/facebook/create-react-app
+npx create-react-app test
+or
+npx create-react-app test --use-npm
 
 - other relevant? (need to investigate):
  - react-boilerplate (community maintained) :https://github.com/react-boilerplate/react-boilerplate
