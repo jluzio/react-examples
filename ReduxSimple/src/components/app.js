@@ -4,7 +4,7 @@ import TodoList from './playground/todo-list';
 export default class App extends Component {
   render() {
     return (
-      <div class="react-app-content">
+      <div className="react-app-content">
         <div>React simple starter</div>
         <TodoList />
       </div>

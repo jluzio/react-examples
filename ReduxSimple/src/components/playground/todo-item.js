@@ -9,7 +9,7 @@ export default class TodoItemComponent extends Component {
 
     render() {
         return (
-            <li class="todo-item">{this.state.info}</li>
+            <li className="todo-item">{this.state.info}</li>
         );
     }
 }
