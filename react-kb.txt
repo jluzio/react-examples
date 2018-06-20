@@ -11,3 +11,7 @@ npx create-react-app test --use-npm
 
 - other relevant? (need to investigate):
  - react-boilerplate (community maintained) :https://github.com/react-boilerplate/react-boilerplate
+
+Tutorial:
+https://reactjs.org/tutorial/tutorial.html
+current: https://reactjs.org/tutorial/tutorial.html#lifting-state-up
