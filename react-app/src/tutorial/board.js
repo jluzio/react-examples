@@ -12,7 +12,7 @@ export default class Board extends Component {
     }
 
     render() {
-        const winner = this.calculateWinner(this.state.squares);
+        const winner = this.state.winner;
         let status = winner 
             ? `Winner: ${winner}`
             : 'Next player: ' + this.playerToken(this.state.xIsNextMove);
@@ -47,19 +47,16 @@ export default class Board extends Component {
     }
 
     handleClick(i) {
-        //console.log(`winner: ${this.state.winner}`)
-        if (!this.state.winner || !this.state.squares[i]) {
+        if (!this.state.winner && !this.state.squares[i]) {
             var squares = this.state.squares.slice();
             squares[i] = this.playerToken(this.state.xIsNextMove);
-            const winner = this.calculateWinner(this.state.squares);
+            const winner = this.calculateWinner(squares);
 
             this.setState({
                 squares: squares, 
                 xIsNextMove: !this.state.xIsNextMove,
                 winner: winner,
             });
-
-            console.log(`winner: ${winner}`);
         }
     }
 
