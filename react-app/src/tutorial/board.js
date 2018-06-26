@@ -6,14 +6,16 @@ export default class Board extends Component {
         super(props);
         this.state = {
             squares: Array(9).fill(null),
-            nextMove: 'X',
+            xIsNextMove: true,
+            winner: null,
         };
-        this.state.squares[3] = 'X';
-        this.state.squares[5] = 'O';
     }
 
     render() {
-        const status = 'Next player: ' + this.state.nextMove;
+        const winner = this.calculateWinner(this.state.squares);
+        let status = winner 
+            ? `Winner: ${winner}`
+            : 'Next player: ' + this.playerToken(this.state.xIsNextMove);
         return (
             <div className="board">
                 <div className="status">{status}</div>
@@ -40,13 +42,59 @@ export default class Board extends Component {
         return <Square value={this.state.squares[i]} onClick={() => this.handleClick(i)} />;
     }
 
-    handleClick(i) {
-        var squares = this.state.squares.slice();
-        squares[i] = this.state.nextMove;
-        const nextMove = this.state.nextMove === 'X' ? 'O' : 'X';
-        this.setState({
-            squares: squares, 
-            nextMove: nextMove,
-        });
+    playerToken(xIsNextMove) {
+        return xIsNextMove ? "X" : "O";
     }
+
+    handleClick(i) {
+        //console.log(`winner: ${this.state.winner}`)
+        if (!this.state.winner || !this.state.squares[i]) {
+            var squares = this.state.squares.slice();
+            squares[i] = this.playerToken(this.state.xIsNextMove);
+            const winner = this.calculateWinner(this.state.squares);
+
+            this.setState({
+                squares: squares, 
+                xIsNextMove: !this.state.xIsNextMove,
+                winner: winner,
+            });
+
+            console.log(`winner: ${winner}`);
+        }
+    }
+
+    calculateWinner(squares) {
+        const lines = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6],
+        ];
+        var winner = null;
+        for (let i=0; i<lines.length; i++) {
+            const [p1, p2, p3] = lines[i];
+            winner = winner || this.calculateLineWinner(p1, p2, p3, squares);
+        }
+        return winner;
+    }
+
+    calculateLineWinner(p1, p2, p3, squares) {
+        if (squares[p1] && squares[p1] === squares[p2] && squares[p1] === squares[p3]) {
+            return squares[p1];
+        }
+        return null;
+    }
+
+    /*
+    shouldComponentUpdate(nextProps, nextState) {
+        if (this.state.squares !== nextState.squares) {
+            return true;
+        }
+        return false;
+    }
+    */
 }

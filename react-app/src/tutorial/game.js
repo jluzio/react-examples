@@ -9,4 +9,8 @@ export default class Game extends Component {
             </div>
         );
     }
+
+    handleNewGame() {
+        console.log("new game");
+    }
 }
