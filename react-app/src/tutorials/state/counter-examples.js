@@ -29,6 +29,6 @@ export default class CounterExamples extends Component {
 
     handleCountSet(value) {
         this.setState({count: value});
-        this.counterStateBasic.current.setState({count: value});
+        this.counterStateBasic.current.setCount(value);
     }
 }

@@ -15,5 +15,9 @@ export default class CounterStateBasic extends Component {
             </span>
         );
     }
+
+    setCount(count) {
+        this.setState({count: count});
+    }
     
 }
