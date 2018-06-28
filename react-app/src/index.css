@@ -5,9 +5,17 @@ body {
 }
 
 
-.tutorial {
+.tutorial-list {
   font: 14px "Century Gothic", Futura, sans-serif;
   margin: 20px;
+  
+  margin: 0 auto;
+  width: 400px;
+  text-align: center;
+}
+
+.tutorial li {
+  list-style: none;
 }
 
 .tutorial ol, .tutorial ul {
@@ -54,4 +62,9 @@ body {
 
 .tutorial .game-info {
   margin-left: 20px;
+}
+
+.tutorial .tutorial-game {
+  /*width: 200px;*/
+  text-align: initial;
 }

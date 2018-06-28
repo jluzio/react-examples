@@ -4,7 +4,15 @@ import Square from './square';
 export default class Board extends Component {
     constructor(props) {
         super(props);
-        this.state = {
+        this.state = this.newGameState();
+    }
+
+    newGame() {
+        this.setState(this.newGameState);
+    }
+
+    newGameState() {
+        return {
             squares: Array(9).fill(null),
             xIsNextMove: true,
             winner: null,
@@ -86,12 +94,4 @@ export default class Board extends Component {
         return null;
     }
 
-    /*
-    shouldComponentUpdate(nextProps, nextState) {
-        if (this.state.squares !== nextState.squares) {
-            return true;
-        }
-        return false;
-    }
-    */
 }
