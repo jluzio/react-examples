@@ -19,10 +19,12 @@ export default class JsE6Test extends Component {
         let defaultUser = new User(0, 'user@server.org', 'John Doe');
         let currentUser = Object.setPrototypeOf({...defaultUser}, User.prototype);
         currentUser.name = 'Jane Doe';
+        let mixedUser = Object.setPrototypeOf(Object.assign({}, defaultUser, {name: 'Zane Moe'}, {id: 2}), User.prototype);
 
         this.state = {
             defaultUser: defaultUser,
             currentUser: currentUser,
+            mixedUser: mixedUser,
         }
     }
 
@@ -35,6 +37,9 @@ export default class JsE6Test extends Component {
                 </div>
                 <div className="user">
                     Default: {this.state.currentUser.toString()}
+                </div>
+                <div className="user">
+                    Default: {this.state.mixedUser.toString()}
                 </div>
             </div>
         );
