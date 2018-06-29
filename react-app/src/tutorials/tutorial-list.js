@@ -8,11 +8,35 @@ export default class TutorialList extends Component {
         return (
             <div className="tutorial-list">
                 <h2>Tutorials</h2>
-                <div className="tutorial-item">
-                    <Game />
-                </div>
-                <div className="tutorial-item">
-                    <CounterExamples />
+                <div id="accordion">
+                    <div className="card tutorial-item">
+                        <div className="card-header" id="headingTicTacToe">
+                            <h5 className="mb-0">
+                                <button className="btn btn-link" data-toggle="collapse" data-target="#collapseTicTacToe" aria-expanded="true" aria-controls="collapseTicTacToe">
+                                    TicTacToe
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseTicTacToe" className="collapse show" aria-labelledby="headingTicTacToe" data-parent="#accordion">
+                            <div className="card-body">
+                                <Game />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="card tutorial-item">
+                        <div className="card-header" id="headingState">
+                            <h5 className="mb-0">
+                                <button className="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseState" aria-expanded="false" aria-controls="collapseState">
+                                    Counter State
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseState" className="collapse" aria-labelledby="headingState" data-parent="#accordion">
+                            <div className="card-body">
+                                <CounterExamples />
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         );
