@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import TutorialList from './tutorials/tutorial-list';
 
 const App: React.FC = () => {
   return (
@@ -18,6 +19,9 @@ const App: React.FC = () => {
         >
           Learn React
         </a>
+        <div className="app-items">
+          <TutorialList />
+        </div>
       </header>
     </div>
   );
