@@ -14,7 +14,16 @@ https://create-react-app.dev/docs/adding-typescript/
 https://www.reactjscn.com/community/starter-kits.html
 - other relevant? (need to investigate):
  - react-boilerplate (community maintained) :https://github.com/react-boilerplate/react-boilerplate
- 
+
+> ESLint + Prettier
+https://medium.com/@pppped/extend-create-react-app-with-airbnbs-eslint-config-prettier-flow-and-react-testing-library-96627e9a9672
+1)
+npm i eslint-config-airbnb eslint-config-prettier eslint-plugin-jsx-a11y eslint-plugin-prettier prettier --save-dev
+/
+yarn add -D eslint-config-airbnb eslint-config-prettier eslint-plugin-jsx-a11y eslint-plugin-prettier prettier
+2) etc/.eslintrc
+
+
 > Tutorial
 https://reactjs.org/tutorial/tutorial.html
 current: https://reactjs.org/tutorial/tutorial.html#lifting-state-up

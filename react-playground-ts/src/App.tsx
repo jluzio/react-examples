@@ -1,7 +1,11 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import TutorialList from './tutorials/tutorial-list';
+import React from 'react'
+import logo from './logo.svg'
+import 'jquery'
+import 'popper.js'
+import 'bootstrap/dist/js/bootstrap'
+import './App.scss'
+
+import TutorialList from './tutorials/tutorial-list'
 
 const App: React.FC = () => {
   return (
@@ -24,7 +28,7 @@ const App: React.FC = () => {
         </div>
       </header>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
