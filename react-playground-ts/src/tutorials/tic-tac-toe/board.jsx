@@ -13,7 +13,7 @@ export default class Board extends React.Component {
       : `Next player: ${this.playerToken(this.props.xIsNextMove)}`
     return (
       <div className="board">
-        <div className="status">{status}</div>
+        <div className={`status ${winner ? 'winner' : ''}`}>{status}</div>
         <div className="board-row">
           {this.renderSquare(0)}
           {this.renderSquare(1)}

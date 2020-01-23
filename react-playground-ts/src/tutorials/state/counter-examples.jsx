@@ -36,10 +36,20 @@ export default class CounterExamples extends Component {
             />
           </li>
         </ul>
-        <button onClick={() => this.handleCountSet(this.state.count + 1)}>
-          Inc Count
-        </button>
-        <button onClick={() => this.handleCountSet(0)}>Reset Count</button>
+        <div className="btn-group">
+          <button
+            className="btn btn-outline-primary"
+            onClick={() => this.handleCountSet(this.state.count + 1)}
+          >
+            Inc Count
+          </button>
+          <button
+            className="btn btn-outline-primary"
+            onClick={() => this.handleCountSet(0)}
+          >
+            Reset Count
+          </button>
+        </div>
       </div>
     )
   }

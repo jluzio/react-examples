@@ -38,10 +38,10 @@ export default class Game extends React.Component {
             onSquareClick={this.handleSquareClick}
           />
         </div>
-        <div className="actions">
+        <div className="btn-group">
           {this.renderHistoryItem(this.state.history.length - 2, 'Previous')}
         </div>
-        <div className="actions">{this.renderHistory()}</div>
+        <div>{this.renderHistory()}</div>
       </div>
     )
   }
@@ -53,14 +53,18 @@ export default class Game extends React.Component {
     return (
       <div>
         <p>History</p>
-        {history}
+        <div className="btn-group">{history}</div>
       </div>
     )
   }
 
   renderHistoryItem(index, label) {
     return (
-      <button key={index} onClick={() => this.handleGotoGameState(index)}>
+      <button
+        className="btn btn-outline-secondary"
+        key={index}
+        onClick={() => this.handleGotoGameState(index)}
+      >
         {label}
       </button>
     )

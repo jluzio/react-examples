@@ -19,6 +19,9 @@
 .tutorial .status {
     margin-bottom: 10px;
 }
+.tutorial .status.winner {
+    font-weight: bold;
+}
 .tutorial .square {
     background: #fff;
     border: 1px solid #999;
