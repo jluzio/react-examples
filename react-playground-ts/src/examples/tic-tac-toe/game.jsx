@@ -28,7 +28,7 @@ export default class Game extends React.Component {
   render() {
     const gameState = this.currentGameState()
     return (
-      <div className="tutorial">
+      <div className="example tictactoe">
         <h3>Tic-tac-toe</h3>
         <div className="game">
           <Board

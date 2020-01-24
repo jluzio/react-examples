@@ -1,11 +1,11 @@
 import React from 'react'
 import logo from './logo.svg'
-import 'jquery'
-import 'popper.js'
-import 'bootstrap/dist/js/bootstrap'
+// import 'jquery'
+// import 'popper.js'
+// import 'bootstrap/dist/js/bootstrap'
 import './App.scss'
 
-import TutorialList from './tutorials/tutorial-list'
+import ExampleList from './examples/example-list'
 
 const App: React.FC = () => {
   return (
@@ -17,7 +17,7 @@ const App: React.FC = () => {
         </p>
       </header>
       <div className="app-items">
-        <TutorialList />
+        <ExampleList />
       </div>
     </div>
   )

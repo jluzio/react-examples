@@ -19,7 +19,7 @@ export default class CounterExamples extends Component {
 
   render() {
     return (
-      <div className="tutorial">
+      <div className="example state">
         <h3>State propagation examples</h3>
         <ul>
           <li>
