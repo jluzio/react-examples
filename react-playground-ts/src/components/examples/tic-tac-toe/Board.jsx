@@ -3,7 +3,7 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
 import React from 'react'
-import Square from './square'
+import Square from './Square'
 
 export default class Board extends React.Component {
   render() {

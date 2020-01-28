@@ -6,7 +6,8 @@
 /* eslint-disable react/sort-comp */
 /* eslint-disable max-classes-per-file */
 import React from 'react'
-import Board from './board'
+import { Button } from 'antd'
+import Board from './Board'
 
 class GameState {
   constructor(squares, xIsNextMove, winner) {
@@ -60,13 +61,13 @@ export default class Game extends React.Component {
 
   renderHistoryItem(index, label) {
     return (
-      <button
-        className="btn btn-outline-secondary"
+      <Button
+        type="default"
         key={index}
         onClick={() => this.handleGotoGameState(index)}
       >
         {label}
-      </button>
+      </Button>
     )
   }
 

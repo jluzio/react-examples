@@ -4,9 +4,10 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react'
-import CouterStateProps from './counter-state-props'
-import CouterStateBasic from './counter-state-basic'
-import CounterProps from './counter-props'
+import { Button } from 'antd'
+import CouterStateProps from './CounterStateProps'
+import CouterStateBasic from './CounterStateBasic'
+import CounterProps from './CounterProps'
 
 export default class CounterExamples extends Component {
   constructor(props) {
@@ -37,18 +38,15 @@ export default class CounterExamples extends Component {
           </li>
         </ul>
         <div className="btn-group">
-          <button
-            className="btn btn-outline-primary"
+          <Button
+            type="primary"
             onClick={() => this.handleCountSet(this.state.count + 1)}
           >
             Inc Count
-          </button>
-          <button
-            className="btn btn-outline-primary"
-            onClick={() => this.handleCountSet(0)}
-          >
+          </Button>
+          <Button type="ghost" onClick={() => this.handleCountSet(0)}>
             Reset Count
-          </button>
+          </Button>
         </div>
       </div>
     )

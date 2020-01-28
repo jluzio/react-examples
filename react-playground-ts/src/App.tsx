@@ -1,11 +1,10 @@
-import React from 'react'
-import logo from './logo.svg'
-// import 'jquery'
-// import 'popper.js'
-// import 'bootstrap/dist/js/bootstrap'
-import './App.scss'
-
-import ExampleList from './examples/example-list'
+import React, { Suspense } from 'react'
+import { BrowserRouter as Router } from 'react-router-dom'
+import logo from 'assets/images/logo.svg'
+import 'assets/css/App.scss'
+import 'antd/dist/antd.css'
+import AppMenu from './components/AppMenu'
+import AppRoutes from './routes/AppRoutes'
 
 const App: React.FC = () => {
   return (
@@ -17,7 +16,12 @@ const App: React.FC = () => {
         </p>
       </header>
       <div className="app-items">
-        <ExampleList />
+        <Suspense fallback={<div>Loading...</div>}>
+          <Router>
+            <AppMenu />
+            <AppRoutes />
+          </Router>
+        </Suspense>
       </div>
     </div>
   )

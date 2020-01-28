@@ -23,6 +23,39 @@ npm i eslint-config-airbnb eslint-config-prettier eslint-plugin-jsx-a11y eslint-
 yarn add -D eslint-config-airbnb eslint-config-prettier eslint-plugin-jsx-a11y eslint-plugin-prettier prettier
 2) etc/.eslintrc
 
+> Absolute imports
+https://medium.com/hackernoon/absolute-imports-with-create-react-app-4c6cfb66c35d
+- tsconfig.json
+ 1: compilerOptions / baseUrl : 
+"baseUrl": "src"
+- package.json
+ 1: eslintConfig / settings / import/resolver / node / paths
+"eslintConfig": {
+"settings": {
+  "import/resolver": {
+	"node": {
+	  "paths": ["src"],
+	  "extensions": [ ".js", ".jsx", ".ts", ".tsx" ]
+	}
+  }
+},
+
+> Import alias (removed by CRA)
+- eslint-import-resolver-alias (dev lib)
+- tsconfig.json
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+- package.json
+...
+  "eslintConfig": {
+    "settings": {
+      "import/resolver": {
+        "alias": [
+            ["@", "./src"]
+        ],
+...
 
 > Tutorial
 https://reactjs.org/tutorial/tutorial.html
