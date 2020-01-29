@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { HashRouter as Router } from 'react-router-dom'
 import logo from 'assets/images/logo.svg'
 import 'assets/css/App.scss'
 import 'antd/dist/antd.css'

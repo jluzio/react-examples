@@ -36,6 +36,11 @@ export default class AppMenu extends React.Component {
             Home
           </Link>
         </Menu.Item>
+        <Menu.Item key="learning">
+          <Link to="/learning">
+            <Icon type="setting" /> Learning
+          </Link>
+        </Menu.Item>
         <Menu.Item key="examples">
           <Link to="/examples">
             <Icon type="setting" /> Examples
