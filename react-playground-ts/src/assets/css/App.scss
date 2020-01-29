@@ -1,8 +1,11 @@
+@import "functions";
+@import "variables";
+
 .App {
 }
 
 .App-logo {
-  height: 10vmin;
+  height: 32px;
   pointer-events: none;
 }
 
@@ -35,4 +38,29 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+@mixin container-width($key) {
+  @media (min-width: grid-breakpoint($key)) {
+      max-width: container-max-width($key);
+  }
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  align-self: center;
+  margin: auto;
+  @include container-width("sm");
+  @include container-width("md");
+  @include container-width("lg");
+  @include container-width("xl");
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+.full-height {
+  height: 100%;
 }

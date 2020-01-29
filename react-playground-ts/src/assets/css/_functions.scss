@@ -1,0 +1,7 @@
+@function grid-breakpoint($key) {
+  @return map-get($grid-breakpoints, $key);
+}
+
+@function container-max-width($key) {
+  @return map-get($container-max-widths, $key);
+}
