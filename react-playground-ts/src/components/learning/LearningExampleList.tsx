@@ -2,13 +2,14 @@ import React from 'react'
 import { Tabs } from 'antd'
 import StreamExample from './router/streams/StreamExample'
 import BlogExample from './props/blog/BlogExample'
-import SeasonsExample from './seasons/SeasonsExample'
+import SeasonExample from './season/SeasonExample'
+import './learning.scss'
 
 const { TabPane } = Tabs
 
 const LearningExampleList: React.FC = () => {
   return (
-    <div className="examples container">
+    <div className="learning-example-list container">
       <h2>Learning</h2>
       <Tabs defaultActiveKey="seasons">
         <TabPane key="stream" tab="Stream">
@@ -18,7 +19,7 @@ const LearningExampleList: React.FC = () => {
           <BlogExample />
         </TabPane>
         <TabPane key="seasons" tab="Seasons">
-          <SeasonsExample />
+          <SeasonExample />
         </TabPane>
       </Tabs>
     </div>

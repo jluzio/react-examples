@@ -1,0 +1,43 @@
+.learning-example-list, .learning-example {
+  height: 100%;
+}
+
+$season-winter-color: aliceblue;
+$season-summer-color: orange;
+
+.season-display {
+  display: flex;
+  justify-content: space-between;
+  height: 500px;
+  position: relative;
+
+  .text {
+    margin: auto;
+  }
+  .icon-left {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+  }
+  .icon-right {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+  }
+  .icon {
+    font-size: 3em;
+  }
+}
+
+.season-display.winter {
+  background-color: $season-winter-color;
+  .icon {
+    color: darken($color: $season-winter-color, $amount: 25);
+  }
+}
+.season-display.summer {
+  background-color: $season-summer-color;
+  .icon {
+    color: darken($color: $season-summer-color, $amount: 25);
+  }
+}

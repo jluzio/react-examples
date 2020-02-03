@@ -1,5 +1,8 @@
 /* eslint-disable react/prefer-stateless-function */
 import React from 'react'
+import Log from 'utils/Log'
+import Spinner from 'components/learning/common/Spinner'
+import SeasonDisplay from './SeasonDisplay'
 
 type Props = {}
 type State = {
@@ -7,10 +10,13 @@ type State = {
   positionError?: PositionError
 }
 
-class SeasonsExample extends React.Component<Props, State> {
+class SeasonExample extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {}
+  }
+
+  componentDidMount() {
     window.navigator.geolocation.getCurrentPosition(
       this.handlePositionSuccess,
       this.handlePositionError
@@ -18,14 +24,14 @@ class SeasonsExample extends React.Component<Props, State> {
   }
 
   handlePositionSuccess: PositionCallback = position => {
-    console.log('handlePositionSuccess: ', position)
+    Log.log('handlePositionSuccess: ', position)
     this.setState({
       position
     })
   }
 
   handlePositionError: PositionErrorCallback = positionError => {
-    console.log('handlePositionSuccess: ', positionError)
+    Log.log('handlePositionSuccess: ', positionError)
     this.setState({
       positionError
     })
@@ -33,16 +39,22 @@ class SeasonsExample extends React.Component<Props, State> {
 
   render() {
     const { position, positionError } = this.state
+    // condition rendering example 1
+    if (!position && !positionError) {
+      return <Spinner />
+    }
+
+    // condition rendering example 2
     return (
-      <div className="examples">
+      <div className="learning-example">
         <h2>SeasonsExample</h2>
-        <p>Position: {position ? JSON.stringify(position) : 'N/A'}</p>
-        <p>
-          PositionError: {positionError ? JSON.stringify(positionError) : 'N/A'}
-        </p>
+        {position ? (
+          <SeasonDisplay latitude={position.coords.latitude} />
+        ) : null}
+        {positionError ? <p>Error: {positionError?.message}</p> : null}
       </div>
     )
   }
 }
 
-export default SeasonsExample
+export default SeasonExample

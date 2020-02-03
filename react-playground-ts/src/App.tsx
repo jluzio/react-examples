@@ -11,7 +11,7 @@ const { Content, Header, Footer, Sider } = Layout
 const App: React.FC = () => {
   return (
     <Router>
-      <Layout className="full-height">
+      <Layout className="full-height layout">
         <Header>
           <AppHeader />
         </Header>

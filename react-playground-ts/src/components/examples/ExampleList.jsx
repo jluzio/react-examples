@@ -5,6 +5,7 @@ import { Tabs } from 'antd'
 import Game from './tic-tac-toe/Game'
 import CounterExamples from './state/CounterExamples'
 import Variables from './variables/Variables'
+import BlankExample from './BlankExample'
 import './examples.scss'
 
 const { TabPane } = Tabs
@@ -14,7 +15,10 @@ export default class ExampleList extends React.Component {
     return (
       <div className="examples container">
         <h2>Examples</h2>
-        <Tabs defaultActiveKey="1">
+        <Tabs defaultActiveKey="blank">
+          <TabPane key="blank" tab="Blank">
+            <BlankExample />
+          </TabPane>
           <TabPane key="game" tab="TicTacToe">
             <Game />
           </TabPane>
