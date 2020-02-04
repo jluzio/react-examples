@@ -67,6 +67,14 @@ https://github.com/StephenGrider
 https://github.com/StephenGrider/redux-code
 - starter: https://github.com/StephenGrider/ReduxSimpleStarter.git
 
+
+> Forms
+https://github.com/jaredpalmer/formik
+https://github.com/final-form/react-final-form
+https://github.com/redux-form/redux-form
+https://github.com/react-hook-form/react-hook-form
+etc
+
 > Misc
 function.bind() (to set the correct this value?)
 ex:

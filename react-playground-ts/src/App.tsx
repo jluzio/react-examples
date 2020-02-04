@@ -6,7 +6,7 @@ import { Layout } from 'antd'
 import AppHeader from './components/header/AppHeader'
 import AppRoutes from './routes/AppRoutes'
 
-const { Content, Header, Footer, Sider } = Layout
+const { Content, Header } = Layout
 
 const App: React.FC = () => {
   return (
