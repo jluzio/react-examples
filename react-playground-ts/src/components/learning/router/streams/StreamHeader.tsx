@@ -7,12 +7,12 @@ const StreamHeader: React.FC = () => {
     <PageHeader
       title="Streamer"
       extra={[
-        <Link to="/learning/streams" className="ant-btn">
+        <Link to="/learning/streams" key="streams_key" className="ant-btn">
           Streams
         </Link>
       ]}
     >
-      <Descriptions />
+      <Descriptions>test</Descriptions>
     </PageHeader>
   )
 }

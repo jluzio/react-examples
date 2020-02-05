@@ -1,5 +1,9 @@
-.learning-example-list, .learning-example {
+.learning-example-list {
   height: 100%;
+
+  .learning {
+    min-width: 50vw;
+  }
 }
 
 $season-winter-color: aliceblue;

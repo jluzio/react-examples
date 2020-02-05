@@ -1,10 +1,13 @@
 import React from 'react'
+import { Card } from 'antd'
 
 const BlankExample: React.FC = () => {
   return (
-    <div style={{ height: '100%', width: '100%', backgroundColor: 'black' }}>
-      test
-    </div>
+    <Card title="Blank" className="example">
+      <div style={{ height: '100%', width: '100%', backgroundColor: 'black' }}>
+        test
+      </div>
+    </Card>
   )
 }
 export default BlankExample

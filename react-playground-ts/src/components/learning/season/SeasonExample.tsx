@@ -1,7 +1,7 @@
-/* eslint-disable react/prefer-stateless-function */
 import Spinner from 'components/learning/common/Spinner'
 import React from 'react'
 import Log from 'utils/Log'
+import { Card } from 'antd'
 import SeasonDisplay from './SeasonDisplay'
 
 type Props = {}
@@ -56,12 +56,11 @@ class SeasonExample extends React.Component<Props, State> {
 
   render() {
     return (
-      <div className="learning-example">
-        <h2>SeasonsExample</h2>
+      <Card title="Seasons" className="learning">
         {this.renderLoading()}
-        {this.renderPositionError}
+        {this.renderPositionError()}
         {this.renderSeasonDisplay()}
-      </div>
+      </Card>
     )
   }
 

@@ -29,7 +29,7 @@ export default class ImageSearch extends React.Component<Props, State> {
   render() {
     const { results } = this.state
     return (
-      <Card>
+      <Card title="Image Search" className="learning">
         <SearchBar onSubmit={this.onSearchBarSubmit} />
         <ImageList images={results} />
       </Card>

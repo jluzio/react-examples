@@ -6,7 +6,7 @@
 /* eslint-disable react/sort-comp */
 /* eslint-disable max-classes-per-file */
 import React from 'react'
-import { Button } from 'antd'
+import { Button, Card } from 'antd'
 import Board from './Board'
 
 class GameState {
@@ -29,8 +29,7 @@ export default class Game extends React.Component {
   render() {
     const gameState = this.currentGameState()
     return (
-      <div className="example tictactoe">
-        <h3>Tic-tac-toe</h3>
+      <Card title="Tic-tac-toe" className="example tictactoe">
         <div className="game">
           <Board
             squares={gameState.squares}
@@ -43,7 +42,7 @@ export default class Game extends React.Component {
           {this.renderHistoryItem(this.state.history.length - 2, 'Previous')}
         </div>
         <div>{this.renderHistory()}</div>
-      </div>
+      </Card>
     )
   }
 

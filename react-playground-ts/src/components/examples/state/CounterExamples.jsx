@@ -4,7 +4,7 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react'
-import { Button } from 'antd'
+import { Button, Card } from 'antd'
 import CouterStateProps from './CounterStateProps'
 import CouterStateBasic from './CounterStateBasic'
 import CounterProps from './CounterProps'
@@ -20,8 +20,7 @@ export default class CounterExamples extends Component {
 
   render() {
     return (
-      <div className="example state">
-        <h3>State propagation examples</h3>
+      <Card title="State propagation examples" className="example state">
         <ul>
           <li>
             CountProps: <CounterProps count={this.state.count} />
@@ -48,7 +47,7 @@ export default class CounterExamples extends Component {
             Reset Count
           </Button>
         </div>
-      </div>
+      </Card>
     )
   }
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter, RouteComponentProps } from 'react-router-dom'
 import { Menu, Icon } from 'antd'
 import { ClickParam } from 'antd/lib/menu'
 import logo from 'assets/images/logo.svg'
@@ -9,15 +9,20 @@ const { Item } = Menu
 interface State {
   current: string
 }
-type Props = {}
+type LocalProps = {}
+type Props = RouteComponentProps<LocalProps>
 
 const defaultMenuKey = 'home'
 
-export default class AppMenu extends React.Component<Props, State> {
+class AppMenu extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
+
+    const { location } = this.props
+    const defaultTabName = location.pathname.substring(1)
+
     this.state = {
-      current: defaultMenuKey
+      current: defaultTabName
     }
   }
 
@@ -66,3 +71,5 @@ export default class AppMenu extends React.Component<Props, State> {
     )
   }
 }
+
+export default withRouter(AppMenu)

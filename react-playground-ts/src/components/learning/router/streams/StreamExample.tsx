@@ -6,6 +6,7 @@ import {
   RouteComponentProps,
   withRouter
 } from 'react-router-dom'
+import { Card } from 'antd'
 import StreamCreate from './StreamCreate'
 import StreamDelete from './StreamDelete'
 import StreamEdit from './StreamEdit'
@@ -20,7 +21,7 @@ const StreamExample: React.FC<RouteComponentProps> = (
   const rootComponent = match.url
   const path = (contextPath: string) => `${rootComponent}${contextPath}`
   return (
-    <div>
+    <Card title="Streams" className="learning">
       <StreamHeader />
       <Switch>
         <Route path={path('/streams/create')} component={StreamCreate} />
@@ -36,7 +37,7 @@ const StreamExample: React.FC<RouteComponentProps> = (
         <Link to={path('/streams/edit')}>Edit</Link>
         <Link to={path('/streams/show')}>Show</Link>
       </div>
-    </div>
+    </Card>
   )
 }
 

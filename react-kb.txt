@@ -75,6 +75,9 @@ https://github.com/redux-form/redux-form
 https://github.com/react-hook-form/react-hook-form
 etc
 
+> Training
+https://reacttraining.com/react-router/web/guides/quick-start
+
 > Misc
 function.bind() (to set the correct this value?)
 ex:
