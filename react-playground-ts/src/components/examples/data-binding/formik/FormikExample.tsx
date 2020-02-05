@@ -15,6 +15,9 @@ const FormikExample: React.FC = () => {
         <TabPane key="simplified" tab="Simplified">
           <FormikSimplified />
         </TabPane>
+        <TabPane key="more" tab="More">
+          ... TODO ...
+        </TabPane>
       </Tabs>
     </Card>
   )

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Formik } from 'formik'
-import { Input, Button, Form, Card } from 'antd'
+import { Input, Button, Form, Card, notification } from 'antd'
 
 const { Item } = Form
 
@@ -23,7 +23,10 @@ export default class FormikBasic extends React.Component {
           }}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
-              alert(JSON.stringify(values, null, 2))
+              notification.open({
+                message: 'Form submit',
+                description: JSON.stringify(values, null, 2)
+              })
               setSubmitting(false)
             }, 400)
           }}
