@@ -1,22 +1,25 @@
 import React from 'react'
 import { Formik, Field, ErrorMessage } from 'formik'
 import { Button, Form, Card, notification } from 'antd'
+import validators from './validators'
 
 const { Item } = Form
+interface Values {
+  email?: string
+  password?: string
+}
 
 export default class FormikSimplified extends React.Component {
   render() {
     return (
       <Card title="Simplified">
-        <Formik
-          initialValues={{ email: '', password: '' }}
+        <Formik<Values>
+          initialValues={{}}
           validate={values => {
             const errors: any = {}
-            if (!values.email) {
+            if (!validators.required(values.email)) {
               errors.email = 'Required'
-            } else if (
-              !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-            ) {
+            } else if (!validators.email(values.email)) {
               errors.email = 'Invalid email address'
             }
             return errors
