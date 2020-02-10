@@ -95,6 +95,7 @@
   "devDependencies": {
     "@types/faker": "^4.1.9",
     "@types/jest": "^24.9.1",
+    "@types/yup": "^0.26.30",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.9.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",

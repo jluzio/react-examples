@@ -1,6 +1,23 @@
+import * as yup from 'yup'
+
 export default class Validators {
-  static email = (v: string | null | undefined) =>
+  static email = (v: OptNull<string>) =>
     Validators.required(v) && /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(v)
 
-  static required = <T>(v: T | null | undefined): v is T => v != null
+  static required = <T>(v: OptNull<T>): v is T => v != null
+
+  static signupSchema = () =>
+    yup.object().shape({
+      email: yup
+        .string()
+        .min(2, 'Too Short')
+        .max(50, 'Too Long')
+        .email('Invalid email')
+        .required('Required'),
+      password: yup
+        .string()
+        .required('Required')
+        .min(2, 'Too Short')
+        .max(50, 'Too Long')
+    })
 }

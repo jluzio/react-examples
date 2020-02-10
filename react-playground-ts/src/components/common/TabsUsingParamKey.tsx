@@ -14,9 +14,11 @@ class TabsUsingParamKey<
 > extends React.Component<P, S, SS> {
   onChange = (activeKey: string) => {
     const { history, location, tabKey } = this.props
+    const searchParams = new URLSearchParams(location.search)
+    searchParams.set(tabKey, activeKey)
     history.push({
       pathname: location.pathname,
-      search: new URLSearchParams({ [tabKey]: activeKey }).toString()
+      search: searchParams.toString()
     })
   }
 

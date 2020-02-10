@@ -1,6 +1,7 @@
 import React from 'react'
 import { Formik, Field, ErrorMessage } from 'formik'
 import { Button, Form, Card, notification } from 'antd'
+import Log from 'utils/Log'
 import validators from './validators'
 
 const { Item } = Form
@@ -9,22 +10,23 @@ interface Values {
   password?: string
 }
 
+const validationSchema = validators.signupSchema()
+
 export default class FormikSimplified extends React.Component {
   render() {
     return (
       <Card title="Simplified">
         <Formik<Values>
-          initialValues={{}}
-          validate={values => {
-            const errors: any = {}
-            if (!validators.required(values.email)) {
-              errors.email = 'Required'
-            } else if (!validators.email(values.email)) {
-              errors.email = 'Invalid email address'
-            }
-            return errors
+          initialValues={{
+            email: '',
+            password: ''
           }}
+          validationSchema={validationSchema}
           onSubmit={(values, { setSubmitting }) => {
+            Log.log('submit', {
+              values,
+              state: this.state
+            })
             setTimeout(() => {
               notification.open({
                 message: 'Form submit',

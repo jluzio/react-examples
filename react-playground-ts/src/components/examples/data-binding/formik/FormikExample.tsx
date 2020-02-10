@@ -1,5 +1,6 @@
 import React from 'react'
 import { Tabs, Card } from 'antd'
+import TabsUsingParamKey from 'components/common/TabsUsingParamKey'
 import FormikBasic from './FormikBasic'
 import FormikSimplified from './FormikSimplified'
 
@@ -8,7 +9,7 @@ const { TabPane } = Tabs
 const FormikExample: React.FC = () => {
   return (
     <Card title="Formik" className="example">
-      <Tabs>
+      <TabsUsingParamKey tabKey="fe-key">
         <TabPane key="basic" tab="Basic">
           <FormikBasic />
         </TabPane>
@@ -18,7 +19,7 @@ const FormikExample: React.FC = () => {
         <TabPane key="more" tab="More">
           ... TODO ...
         </TabPane>
-      </Tabs>
+      </TabsUsingParamKey>
     </Card>
   )
 }
