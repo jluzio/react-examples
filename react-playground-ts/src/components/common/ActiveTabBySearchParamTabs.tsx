@@ -7,7 +7,7 @@ export interface Props extends RouteComponentProps<{}> {
   defaultTab?: string
 }
 
-class TabsUsingParamKey<
+class ActiveTabBySearchParamTabs<
   P extends Props = Props,
   S = {},
   SS = any
@@ -35,4 +35,4 @@ class TabsUsingParamKey<
   }
 }
 
-export default withRouter(TabsUsingParamKey)
+export default withRouter(ActiveTabBySearchParamTabs)

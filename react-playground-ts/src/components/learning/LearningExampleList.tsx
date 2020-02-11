@@ -1,6 +1,6 @@
 import React from 'react'
 import { Tabs } from 'antd'
-import TabsUsingParamKey from 'components/common/TabsUsingParamKey'
+import ActiveTabBySearchParamTabs from 'components/common/ActiveTabBySearchParamTabs'
 import StreamExample from './router/streams/StreamExample'
 import BlogExample from './props/blog/BlogExample'
 import SeasonExample from './season/SeasonExample'
@@ -13,7 +13,7 @@ const LearningExampleList: React.FC = () => {
   return (
     <div className="learning-example-list container">
       <h2>Learning</h2>
-      <TabsUsingParamKey tabKey="lel-key">
+      <ActiveTabBySearchParamTabs tabKey="lel-key">
         <TabPane key="stream" tab="Stream">
           <StreamExample />
         </TabPane>
@@ -26,7 +26,7 @@ const LearningExampleList: React.FC = () => {
         <TabPane key="imageSearch" tab="ImageSearch">
           <ImageSearch />
         </TabPane>
-      </TabsUsingParamKey>
+      </ActiveTabBySearchParamTabs>
     </div>
   )
 }

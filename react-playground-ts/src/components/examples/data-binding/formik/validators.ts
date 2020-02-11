@@ -10,14 +10,14 @@ export default class Validators {
     yup.object().shape({
       email: yup
         .string()
-        .min(2, 'Too Short')
-        .max(50, 'Too Long')
-        .email('Invalid email')
-        .required('Required'),
+        .min(2)
+        .max(50)
+        .email()
+        .required(),
       password: yup
         .string()
-        .required('Required')
-        .min(2, 'Too Short')
-        .max(50, 'Too Long')
+        .required()
+        .min(2)
+        .max(50)
     })
 }
