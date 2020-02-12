@@ -3,6 +3,7 @@ import { initReactI18next } from 'react-i18next'
 
 // the translations
 // (tip move them in a JSON file and import them)
+// default namespace is translation
 const resources: Resource = {
   en: {
     translation: {

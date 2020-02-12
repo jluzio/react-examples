@@ -11,6 +11,7 @@ import Game from './tic-tac-toe/Game'
 import Variables from './variables/Variables'
 import I18nExampleList from './i18n/I18nExampleList'
 import ValidatorExampleList from './validators/ValidatorExampleList'
+import RxjsExampleList from './rxjs/RxjsExampleList'
 
 const { TabPane } = Tabs
 
@@ -39,6 +40,9 @@ const ExampleList: React.FC = () => {
         </TabPane>
         <TabPane key="validators" tab="Validators">
           <ValidatorExampleList />
+        </TabPane>
+        <TabPane key="rxjs" tab="rxjs">
+          <RxjsExampleList />
         </TabPane>
       </ActiveTabBySearchParamTabs>
     </div>
