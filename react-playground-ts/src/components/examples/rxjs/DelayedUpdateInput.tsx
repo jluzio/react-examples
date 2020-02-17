@@ -7,22 +7,19 @@ import { Input } from 'antd'
 interface Props {
   value: string
   observer: PartialObserver<string>
-  validation?: (v: string) => boolean
 }
 interface State {
   value: string
   subject?: Subject<string>
   subscription?: Subscription
-  validation: (v: string) => boolean
 }
 
 class DelayedUpdateInput extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
-    const { value, validation } = this.props
+    const { value } = this.props
     this.state = {
-      value,
-      validation: validation ?? (() => true)
+      value
     }
   }
 
@@ -35,15 +32,11 @@ class DelayedUpdateInput extends React.Component<Props, State> {
   }
 
   onChange = (v: string) => {
-    const { subject, validation } = this.state
+    const { subject } = this.state
     this.setState({
       value: v
     })
-    if (validation(v)) {
-      subject?.next(v)
-    } else {
-      subject?.error('Validation failed')
-    }
+    subject?.next(v)
   }
 
   registerObservers() {

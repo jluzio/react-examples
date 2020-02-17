@@ -39,11 +39,7 @@ class DelayedUpdateInputExample extends React.Component<Props, State> {
       <div>
         <p>value: {value}</p>
         <p>error: {error}</p>
-        <DelayedUpdateInput
-          value={value}
-          observer={this.valueObserver()}
-          validation={v => v.length < 5}
-        />
+        <DelayedUpdateInput value={value} observer={this.valueObserver()} />
       </div>
     )
   }
