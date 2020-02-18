@@ -1,14 +1,15 @@
 import React from 'react'
 import { Card, Input, Form, List, Row, Col } from 'antd'
 import { BehaviorSubject, from, Subscription } from 'rxjs'
-import { ajax } from 'rxjs/ajax'
 import {
   map,
   switchMap,
   debounceTime,
   distinctUntilChanged,
-  filter
+  filter,
+  scan
 } from 'rxjs/operators'
+import { ajax } from 'rxjs/ajax'
 
 const { Item } = Form
 
@@ -20,7 +21,7 @@ interface State {
 }
 
 class AutocompleteExample extends React.Component<Props, State> {
-  term$!: BehaviorSubject<string>
+  termInput$!: BehaviorSubject<string>
 
   subscriptions$: Subscription[] = []
 
@@ -35,27 +36,29 @@ class AutocompleteExample extends React.Component<Props, State> {
 
   componentDidMount() {
     const { term } = this.state
-    this.term$ = new BehaviorSubject<string>(term)
+    this.termInput$ = new BehaviorSubject<string>(term)
 
-    this.term$.subscribe(v => {
+    this.termInput$.subscribe(v => {
       this.setState({
         term: v
       })
     })
 
-    const value$ = this.term$.pipe(
+    const throttledTermInput$ = this.termInput$.pipe(
       debounceTime(350),
       map(v => v),
       filter(v => v.length >= 2 || v.length === 0),
       distinctUntilChanged()
     )
-    const termsSubscription = value$.subscribe(v => {
-      const { terms } = this.state
-      this.setState({
-        terms: [...terms, v]
+
+    const termsSubscription = throttledTermInput$
+      .pipe(scan<string, string[]>((all, curr) => [...all, curr], []))
+      .subscribe(values => {
+        this.setState({
+          terms: values
+        })
       })
-    })
-    const namesSubscription = value$
+    const namesSubscription = throttledTermInput$
       .pipe(
         switchMap(value =>
           value
@@ -73,7 +76,7 @@ class AutocompleteExample extends React.Component<Props, State> {
   }
 
   componentWillUnmount() {
-    this.term$.unsubscribe()
+    this.termInput$.unsubscribe()
     this.subscriptions$.forEach(s => s.unsubscribe())
   }
 
@@ -85,19 +88,28 @@ class AutocompleteExample extends React.Component<Props, State> {
     return (
       <Card title="test">
         <Item>
-          <Input value={term} onChange={e => this.term$.next(e.target.value)} />
+          <Input
+            value={term}
+            onChange={e => this.termInput$.next(e.target.value)}
+          />
         </Item>
         <Row>
-          <Col span={16}>
+          <Col span={12}>
             <List
+              bordered
+              size="small"
+              pagination={{ pageSize: 10, hideOnSinglePage: true }}
               dataSource={names}
               renderItem={item => <List.Item>{item}</List.Item>}
             />
           </Col>
-          <Col span={8}>
+          <Col span={12}>
             <List
+              bordered
+              size="small"
+              pagination={{ pageSize: 10, hideOnSinglePage: true }}
               dataSource={terms}
-              renderItem={item => <List.Item>{item}</List.Item>}
+              renderItem={item => <List.Item>{item || 'null'}</List.Item>}
             />
           </Col>
         </Row>
