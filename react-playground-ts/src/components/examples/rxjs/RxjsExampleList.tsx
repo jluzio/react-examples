@@ -2,7 +2,7 @@ import React from 'react'
 import ActiveTabBySearchParamTabs from 'components/common/ActiveTabBySearchParamTabs'
 import { Tabs } from 'antd'
 import DelayedUpdateInputExample from './DelayedUpdateInputExample'
-import AutocompleteExample from './AutocompleteExample'
+import AutoCompleteExample from './AutoCompleteExample'
 
 const { TabPane } = Tabs
 
@@ -13,7 +13,7 @@ const RxjsExampleList: React.FC = () => {
         <DelayedUpdateInputExample />
       </TabPane>
       <TabPane key="autocomplete" tab="autocomplete">
-        <AutocompleteExample />
+        <AutoCompleteExample />
       </TabPane>
     </ActiveTabBySearchParamTabs>
   )

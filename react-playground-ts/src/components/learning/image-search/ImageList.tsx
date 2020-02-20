@@ -16,9 +16,10 @@ export default class ImageList extends React.Component<Props> {
         itemLayout="vertical"
         size="large"
         dataSource={images}
+        pagination={{ pageSize: 10, hideOnSinglePage: true }}
         renderItem={item => (
-          <Item key={item.url}>
-            <img src={item.url} alt="search result" />
+          <Item key={item.thumbnailUrl}>
+            <img src={item.thumbnailUrl} alt={item.title} />
           </Item>
         )}
       />
