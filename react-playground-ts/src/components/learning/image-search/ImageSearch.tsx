@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card } from 'antd'
-import { Subject, Subscription, Observable } from 'rxjs'
+import { Subject, Subscription, Observable, from } from 'rxjs'
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators'
 import { ajax } from 'rxjs/ajax'
 import ImageList from './ImageList'
@@ -10,6 +10,7 @@ import {
   ImageSearchFilter,
   JsonPlaceholderPhotos
 } from './models'
+import imageService from './image-service'
 
 type Props = {}
 interface State {
@@ -21,6 +22,8 @@ export default class ImageSearch extends React.Component<Props, State> {
 
   subscriptions: Subscription[] = []
 
+  imageService = imageService
+
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -29,10 +32,12 @@ export default class ImageSearch extends React.Component<Props, State> {
   }
 
   componentDidMount() {
+    // const resourceHandler = this.getImagesJsonPlaceholderAxios
+    const resourceHandler = this.getImagesJsonPlaceholder
     const throttledSearch$ = this.searchSubject.pipe(
       debounceTime(500),
       distinctUntilChanged(),
-      switchMap(query => this.getImagesJsonPlaceholder(query))
+      switchMap(query => resourceHandler(query))
     )
     const searchSubscription$ = throttledSearch$.subscribe(photos => {
       this.setState({
@@ -50,12 +55,16 @@ export default class ImageSearch extends React.Component<Props, State> {
     this.searchSubject.next(f.searchText)
   }
 
-  getImagesJsonPlaceholder = (
+  getImagesJsonPlaceholderObservableAjax = (
     query: string
   ): Observable<JsonPlaceholderPhotos> =>
     ajax.getJSON(
       `https://jsonplaceholder.typicode.com/photos?title_like=${query}`
     )
+
+  getImagesJsonPlaceholder = (
+    query: string
+  ): Observable<JsonPlaceholderPhotos> => from(this.imageService.photos(query))
 
   render() {
     const { results } = this.state
