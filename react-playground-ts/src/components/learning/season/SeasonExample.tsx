@@ -1,4 +1,4 @@
-import Spinner from 'components/learning/common/Spinner'
+import Spinner from 'components/common/Spinner'
 import React from 'react'
 import Log from 'utils/Log'
 import { Card } from 'antd'

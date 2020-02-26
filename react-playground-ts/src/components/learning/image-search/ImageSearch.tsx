@@ -1,8 +1,16 @@
 import React from 'react'
 import { Card } from 'antd'
 import { Subject, Subscription, Observable, from } from 'rxjs'
-import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators'
+import {
+  debounceTime,
+  distinctUntilChanged,
+  switchMap,
+  delay
+} from 'rxjs/operators'
 import { ajax } from 'rxjs/ajax'
+import { ResourceStatus } from 'models/core'
+import { resourceStatusOperator } from 'services/rx/operators'
+import ListContentLoader from 'components/common/ListContentLoader'
 import ImageList from './ImageList'
 import SearchBar from './SearchBar'
 import {
@@ -15,6 +23,7 @@ import imageService from './image-service'
 type Props = {}
 interface State {
   results: ImageResults
+  resourceStatus: ResourceStatus
 }
 
 export default class ImageSearch extends React.Component<Props, State> {
@@ -27,7 +36,8 @@ export default class ImageSearch extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
-      results: []
+      results: [],
+      resourceStatus: ResourceStatus.UNDEFINED
     }
   }
 
@@ -37,7 +47,14 @@ export default class ImageSearch extends React.Component<Props, State> {
     const throttledSearch$ = this.searchSubject.pipe(
       debounceTime(500),
       distinctUntilChanged(),
-      switchMap(query => resourceHandler(query))
+      switchMap(query =>
+        resourceHandler(query).pipe(
+          delay(1000),
+          resourceStatusOperator(status =>
+            this.setState({ resourceStatus: status })
+          )
+        )
+      )
     )
     const searchSubscription$ = throttledSearch$.subscribe(photos => {
       this.setState({
@@ -67,11 +84,15 @@ export default class ImageSearch extends React.Component<Props, State> {
   ): Observable<JsonPlaceholderPhotos> => from(this.imageService.photos(query))
 
   render() {
-    const { results } = this.state
+    const { results, resourceStatus } = this.state
     return (
       <Card title="Image Search" className="learning">
         <SearchBar onSubmit={this.handleSearchBarSubmit} />
-        <ImageList images={results} />
+        <p>Status: {resourceStatus}</p>
+        {resourceStatus === ResourceStatus.PENDING && <ListContentLoader />}
+        {resourceStatus === ResourceStatus.DEFINED && (
+          <ImageList images={results} />
+        )}
       </Card>
     )
   }

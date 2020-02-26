@@ -6,9 +6,14 @@ import { JsonPlaceholderPhotos } from './models'
 class ImageApi {
   api = imageApi
 
-  async photos(query: string): Promise<JsonPlaceholderPhotos> {
+  pageSize = 10
+
+  async photos(
+    query: string,
+    page: number = 1
+  ): Promise<JsonPlaceholderPhotos> {
     return this.api
-      .get(`/photos?title_like=${query}`)
+      .get(`/photos?title_like=${query}&_page=${page}&_limit=${this.pageSize}`)
       .then(response => response.data)
   }
 }
