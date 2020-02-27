@@ -17,7 +17,7 @@ const { TabPane } = Tabs
 
 const ExampleList: React.FC = () => {
   return (
-    <div className="example-list container">
+    <div className="example-list">
       <h2>Examples</h2>
       <ActiveTabBySearchParamTabs tabKey="el-key">
         <TabPane key="blank" tab="Blank">

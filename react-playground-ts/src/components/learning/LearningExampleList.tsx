@@ -1,17 +1,18 @@
 import React from 'react'
+import './learning.scss'
 import { Tabs } from 'antd'
 import ActiveTabBySearchParamTabs from 'components/common/ActiveTabBySearchParamTabs'
 import StreamExample from './router/streams/StreamExample'
 import BlogExample from './props/blog/BlogExample'
 import SeasonExample from './season/SeasonExample'
 import ImageSearch from './image-search/ImageSearch'
-import './learning.scss'
+import VideosExample from './videos/VideosExample'
 
 const { TabPane } = Tabs
 
 const LearningExampleList: React.FC = () => {
   return (
-    <div className="learning-example-list container">
+    <div className="learning-example-list">
       <h2>Learning</h2>
       <ActiveTabBySearchParamTabs tabKey="lel-key">
         <TabPane key="stream" tab="Stream">
@@ -25,6 +26,9 @@ const LearningExampleList: React.FC = () => {
         </TabPane>
         <TabPane key="imageSearch" tab="ImageSearch">
           <ImageSearch />
+        </TabPane>
+        <TabPane key="videos" tab="Videos">
+          <VideosExample />
         </TabPane>
       </ActiveTabBySearchParamTabs>
     </div>

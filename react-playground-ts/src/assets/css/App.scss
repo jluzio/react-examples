@@ -57,6 +57,16 @@
   @include container-width("xl");
 }
 
+.layout-content {
+  padding: 25px 50px;
+}
+
+.content {
+  min-height: 360px;
+  background-color: white;
+  padding: 24px;
+}
+
 html, body, #root {
   // height: 100%;
 }

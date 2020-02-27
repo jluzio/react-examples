@@ -63,8 +63,13 @@ class AppMenu extends React.Component<Props, State> {
           </Link>
         </Item>
         <Item key="bootstrap">
-          <Link to="/bootstrap">
+          <Link to="/page/bootstrap">
             <Icon type="setting" /> Bootstrap
+          </Link>
+        </Item>
+        <Item key="ant-design-layout">
+          <Link to="/page/ant-design-layout">
+            <Icon type="setting" /> Ant Design Layout
           </Link>
         </Item>
       </Menu>
