@@ -31,12 +31,14 @@ class VideoDisplay extends React.Component<Props, State> {
       .search(term)
       .then(response => {
         this.setState({
-          videoList: response.data.items
+          videoList: response.data.items,
+          video: undefined
         })
       })
       .catch(err => {
         this.setState({
-          videoList: []
+          videoList: [],
+          video: undefined
         })
         notification.error({
           message: err.toString()

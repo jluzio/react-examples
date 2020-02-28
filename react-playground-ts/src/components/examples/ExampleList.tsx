@@ -6,7 +6,7 @@ import React from 'react'
 import ActiveTabBySearchParamTabs from 'components/common/ActiveTabBySearchParamTabs'
 import BlankExample from './BlankExample'
 import FormikExample from './data-binding/formik/FormikExampleList'
-import CounterExamples from './state/CounterExamples'
+import StateExamples from './state/StateExamples'
 import Game from './tic-tac-toe/Game'
 import Variables from './variables/Variables'
 import I18nExampleList from './i18n/I18nExampleList'
@@ -26,8 +26,8 @@ const ExampleList: React.FC = () => {
         <TabPane key="game" tab="TicTacToe">
           <Game />
         </TabPane>
-        <TabPane key="counter" tab="Counter">
-          <CounterExamples />
+        <TabPane key="state" tab="State">
+          <StateExamples />
         </TabPane>
         <TabPane key="variables" tab="Variables">
           <Variables usernameId="var_uId" passwordId="var_pId" />
