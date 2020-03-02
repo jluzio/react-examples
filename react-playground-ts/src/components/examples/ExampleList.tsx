@@ -12,6 +12,7 @@ import Variables from './variables/Variables'
 import I18nExampleList from './i18n/I18nExampleList'
 import ValidatorExampleList from './validators/ValidatorExampleList'
 import RxjsExampleList from './rxjs/RxjsExampleList'
+import ErrorBoundaryExample from './error-boundary/ErrorBoundaryExample'
 
 const { TabPane } = Tabs
 
@@ -43,6 +44,9 @@ const ExampleList: React.FC = () => {
         </TabPane>
         <TabPane key="rxjs" tab="rxjs">
           <RxjsExampleList />
+        </TabPane>
+        <TabPane key="error-bound" tab="error-bound">
+          <ErrorBoundaryExample />
         </TabPane>
       </ActiveTabBySearchParamTabs>
     </div>
