@@ -1,6 +1,7 @@
 import React from 'react'
 import { Card } from 'antd'
-import BlogEntryList from './BlogEntryList'
+// import BlogEntryList from './DefaultBlogEntryList'
+import BlogEntryList from './CodeSplitBlogEntryList'
 
 const BlogExample: React.FC = () => {
   return (

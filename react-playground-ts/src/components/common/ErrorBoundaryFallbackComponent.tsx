@@ -25,11 +25,12 @@ class ErrorBoundary extends React.Component<Props, State> {
 
   render() {
     const { error, errorInfo } = this.props
+    const { showStack } = this.state
     return (
       <div>
         <h1>Error: {error.message}.</h1>
         <Button onClick={this.onToggleStack}>Toggle componentStack</Button>
-        <p>{errorInfo.componentStack}</p>
+        {showStack && <p>{errorInfo.componentStack}</p>}
       </div>
     )
   }

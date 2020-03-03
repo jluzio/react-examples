@@ -1,12 +1,8 @@
 import React from 'react'
 import { Comment, Avatar } from 'antd'
+import { BlogEntryData } from './models'
 
-interface BlogEntryProps {
-  author: string
-  datetime: string
-  avatar: string
-  content: string
-}
+interface BlogEntryProps extends BlogEntryData {}
 
 const BlogEntry: React.FC<BlogEntryProps> = (props: BlogEntryProps) => {
   const { author, avatar, content, datetime } = props

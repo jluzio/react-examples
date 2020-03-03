@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/destructuring-assignment */
 import React from 'react'
+import { Button } from 'antd'
 
 interface Props {}
 interface State {
@@ -12,21 +13,25 @@ class BuggyCounter extends React.Component<Props, State, State> {
   constructor(props: Props) {
     super(props)
     this.state = { counter: 0 }
-    this.handleClick = this.handleClick.bind(this)
   }
 
-  handleClick() {
+  handleClick = () => {
     this.setState(({ counter }) => ({
       counter: counter + 1
     }))
   }
 
   render() {
-    if (this.state.counter === 3) {
+    if (this.state.counter === 2) {
       // Simulate a JS error
       throw new Error('I crashed!')
     }
-    return <h1 onClick={this.handleClick}>{this.state.counter}</h1>
+    return (
+      <div>
+        <h1>{this.state.counter}</h1>
+        <Button onClick={this.handleClick}>Inc</Button>
+      </div>
+    )
   }
 }
 
