@@ -2,6 +2,7 @@ import React from 'react'
 import './learning.scss'
 import { Tabs } from 'antd'
 import ActiveTabBySearchParamTabs from 'components/common/ActiveTabBySearchParamTabs'
+import _ from 'lodash'
 import StreamExample from './router/streams/StreamExample'
 import BlogExample from './props/blog/BlogExample'
 import SeasonExample from './season/SeasonExample'
@@ -11,25 +12,31 @@ import VideosExample from './videos/VideosExample'
 const { TabPane } = Tabs
 
 const LearningExampleList: React.FC = () => {
+  const unsortedTabPanes = [
+    <TabPane key="stream" tab="Stream">
+      <StreamExample />
+    </TabPane>,
+    <TabPane key="blog" tab="Blog">
+      <BlogExample />
+    </TabPane>,
+    <TabPane key="seasons" tab="Seasons">
+      <SeasonExample />
+    </TabPane>,
+    <TabPane key="imageSearch" tab="ImageSearch">
+      <ImageSearch />
+    </TabPane>,
+    <TabPane key="videos" tab="Videos">
+      <VideosExample />
+    </TabPane>
+  ]
+  const tabPanes = _.sortBy(unsortedTabPanes, t =>
+    t.props.tab.toString().toLowerCase()
+  )
   return (
     <div className="learning-example-list">
       <h2>Learning</h2>
       <ActiveTabBySearchParamTabs tabKey="lel-key">
-        <TabPane key="stream" tab="Stream">
-          <StreamExample />
-        </TabPane>
-        <TabPane key="blog" tab="Blog">
-          <BlogExample />
-        </TabPane>
-        <TabPane key="seasons" tab="Seasons">
-          <SeasonExample />
-        </TabPane>
-        <TabPane key="imageSearch" tab="ImageSearch">
-          <ImageSearch />
-        </TabPane>
-        <TabPane key="videos" tab="Videos">
-          <VideosExample />
-        </TabPane>
+        {tabPanes}
       </ActiveTabBySearchParamTabs>
     </div>
   )

@@ -5,7 +5,7 @@ import React, { ErrorInfo, ComponentType } from 'react'
 import ErrorBoundaryFallbackComponent from './ErrorBoundaryFallbackComponent'
 
 interface Props {
-  FallbackComponent: ComponentType<any>
+  fallback: ComponentType<any>
 }
 interface State {
   error: Error | null
@@ -14,7 +14,7 @@ interface State {
 
 class ErrorBoundary extends React.Component<Props, State> {
   public static defaultProps: Partial<Props> = {
-    FallbackComponent: ErrorBoundaryFallbackComponent
+    fallback: ErrorBoundaryFallbackComponent
   }
 
   state: State = {
@@ -30,7 +30,7 @@ class ErrorBoundary extends React.Component<Props, State> {
   }
 
   render() {
-    const { children, FallbackComponent } = this.props
+    const { children, fallback: FallbackComponent } = this.props
     const { error, errorInfo } = this.state
     if (error) {
       // You can render any custom fallback UI
