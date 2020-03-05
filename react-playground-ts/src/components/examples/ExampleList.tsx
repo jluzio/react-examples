@@ -18,6 +18,7 @@ import ContextExample from './context/ContextExample'
 import RefExample from './refs/RefExample'
 import HocExample from './hoc/HocExample'
 import FragmentsExample from './fragments/FragmentsExample'
+import RenderPropsExample from './render-props/RenderPropsExample'
 
 const { TabPane } = Tabs
 
@@ -61,6 +62,9 @@ const ExampleList: React.FC = () => {
     </TabPane>,
     <TabPane key="fragments" tab="fragments">
       <FragmentsExample />
+    </TabPane>,
+    <TabPane key="render-props" tab="render-props">
+      <RenderPropsExample />
     </TabPane>
   ]
   const tabPanes = _.sortBy(unsortedTabPanes, t =>
