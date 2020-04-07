@@ -19,6 +19,7 @@ import RefExample from './refs/RefExample'
 import HocExample from './hoc/HocExample'
 import FragmentsExample from './fragments/FragmentsExample'
 import RenderPropsExample from './render-props/RenderPropsExample'
+import ReduxExampleList from './redux/ReduxExampleList'
 
 const { TabPane } = Tabs
 
@@ -65,6 +66,9 @@ const ExampleList: React.FC = () => {
     </TabPane>,
     <TabPane key="render-props" tab="render-props">
       <RenderPropsExample />
+    </TabPane>,
+    <TabPane key="redux" tab="redux">
+      <ReduxExampleList />
     </TabPane>
   ]
   const tabPanes = _.sortBy(unsortedTabPanes, t =>
