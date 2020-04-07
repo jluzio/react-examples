@@ -46,28 +46,28 @@ const ExampleList: React.FC = () => {
     <TabPane key="validators" tab="Validators">
       <ValidatorExampleList />
     </TabPane>,
-    <TabPane key="rxjs" tab="rxjs">
+    <TabPane key="rxjs" tab="RxJs">
       <RxjsExampleList />
     </TabPane>,
-    <TabPane key="error-bound" tab="error-bound">
+    <TabPane key="error-bound" tab="Error Bound">
       <ErrorBoundaryExample />
     </TabPane>,
-    <TabPane key="context" tab="context">
+    <TabPane key="context" tab="Context">
       <ContextExample />
     </TabPane>,
-    <TabPane key="ref" tab="ref">
+    <TabPane key="ref" tab="Ref">
       <RefExample />
     </TabPane>,
     <TabPane key="HOC" tab="HOC">
       <HocExample />
     </TabPane>,
-    <TabPane key="fragments" tab="fragments">
+    <TabPane key="fragments" tab="Fragments">
       <FragmentsExample />
     </TabPane>,
-    <TabPane key="render-props" tab="render-props">
+    <TabPane key="render-props" tab="Render Props">
       <RenderPropsExample />
     </TabPane>,
-    <TabPane key="redux" tab="redux">
+    <TabPane key="redux" tab="Redux">
       <ReduxExampleList />
     </TabPane>
   ]

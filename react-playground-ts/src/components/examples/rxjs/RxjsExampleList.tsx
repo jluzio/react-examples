@@ -2,7 +2,7 @@ import React from 'react'
 import ActiveTabBySearchParamTabs from 'components/common/ActiveTabBySearchParamTabs'
 import { Tabs } from 'antd'
 import DelayedUpdateInputExample from './DelayedUpdateInputExample'
-import AutoCompleteExample from './Auto-CompleteExample'
+import AutoCompleteExample from './AutoCompleteExample'
 
 const { TabPane } = Tabs
 
