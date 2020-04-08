@@ -10,6 +10,11 @@ npx create-react-app test --use-npm
 npx create-react-app my-app --template typescript
 https://create-react-app.dev/docs/adding-typescript/
 
+Some guide to type usage:
+https://github.com/piotrwitek/react-redux-typescript-guide
+Redux + Typescript:
+https://redux.js.org/recipes/usage-with-typescript
+
 > Community Starter kits
 https://www.reactjscn.com/community/starter-kits.html
 - other relevant? (need to investigate):
