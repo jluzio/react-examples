@@ -74,6 +74,7 @@ https://github.com/StephenGrider/redux-code
 
 > Redux
 https://redux.js.org/recipes/usage-with-typescript
+https://redux-toolkit.js.org/tutorials/basic-tutorial
 https://redux-toolkit.js.org/usage/usage-with-typescript
 
 
