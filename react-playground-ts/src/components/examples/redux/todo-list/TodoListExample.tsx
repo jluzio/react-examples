@@ -5,6 +5,7 @@ import { store } from './store'
 import TodoList from './TodoList'
 import VisibilityFilterList from './VisibilityFilterList'
 import AddTodo from './AddTodo'
+import ClickCounter from './ClickCounter'
 
 const TodoListExample: React.FC = () => {
   return (
@@ -13,6 +14,7 @@ const TodoListExample: React.FC = () => {
         <AddTodo />
         <TodoList />
         <VisibilityFilterList />
+        <ClickCounter />
       </Provider>
     </Card>
   )

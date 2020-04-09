@@ -2,13 +2,15 @@ import { combineReducers } from 'redux'
 import { configureStore } from '@reduxjs/toolkit'
 import { todoReducer } from './todo/reducers'
 import { visibilityFilterReducer } from './filter/reducers'
+import { counterReducer } from './counter/reducers'
 
 export * from './todo/actions'
 export * from './filter/actions'
 
 export const rootReducer = combineReducers({
   visibilityFilter: visibilityFilterReducer,
-  todos: todoReducer
+  todos: todoReducer,
+  counter: counterReducer
 })
 
 export type RootState = ReturnType<typeof rootReducer>

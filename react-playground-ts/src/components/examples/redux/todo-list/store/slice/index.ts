@@ -2,16 +2,25 @@ import { combineReducers } from 'redux'
 import { configureStore } from '@reduxjs/toolkit'
 import { todoSlice } from './todo'
 import { visibilityFilterSlice } from './filter'
+import { counterSlice } from './counter'
 
 // action creators
 const { addTodo, toggleTodo } = todoSlice.actions
 const { setVisibilityFilter } = visibilityFilterSlice.actions
-export { addTodo, toggleTodo, setVisibilityFilter }
+const { incrementCounter, decrementCounter } = counterSlice.actions
+export {
+  addTodo,
+  toggleTodo,
+  setVisibilityFilter,
+  incrementCounter,
+  decrementCounter
+}
 
 // reducer
 export const rootReducer = combineReducers({
   visibilityFilter: visibilityFilterSlice.reducer,
-  todos: todoSlice.reducer
+  todos: todoSlice.reducer,
+  counter: counterSlice.reducer
 })
 
 // state

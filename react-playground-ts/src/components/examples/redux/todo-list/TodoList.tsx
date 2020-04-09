@@ -11,8 +11,12 @@ const mapState = (state: RootState) => ({
   todos: state.todos,
   visibilityFilter: state.visibilityFilter
 })
+const loggingMapState = (state: RootState) => {
+  log.info('mapState')
+  return mapState(state)
+}
 const mapDispatch = { onToggleTodo: toggleTodo }
-const connector = connect(mapState, mapDispatch)
+const connector = connect(loggingMapState, mapDispatch)
 type ReduxProps = ConnectedProps<typeof connector>
 
 type Props = ReduxProps
@@ -29,6 +33,7 @@ class TodoList extends Component<Props> {
   }
 
   getVisibleTodos = (todos: Todo[], filter: VisibilityFilters) => {
+    console.log('getVisibleTodos')
     let completedFilter: boolean[]
     switch (filter) {
       case VisibilityFilters.SHOW_ACTIVE:
