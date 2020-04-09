@@ -4,7 +4,7 @@ import AppMenu from './AppMenu'
 
 const AppHeader: React.FC = () => {
   return (
-    <Row type="flex" justify="start">
+    <Row justify="start">
       <Col span={24}>
         <AppMenu />
       </Col>

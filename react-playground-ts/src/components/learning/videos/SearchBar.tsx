@@ -54,7 +54,7 @@ class SearchBar extends React.Component<Props, State> {
   render() {
     const { term } = this.state
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form onSubmitCapture={this.handleSubmit}>
         <Item>
           <Input
             value={term}

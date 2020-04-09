@@ -40,7 +40,7 @@ export default class FormikBasic extends React.Component {
             isSubmitting
             /* and other goodies */
           }) => (
-            <Form onSubmit={handleSubmit} layout="inline">
+            <Form onSubmitCapture={handleSubmit} layout="inline">
               <Item>
                 <Input
                   type="email"

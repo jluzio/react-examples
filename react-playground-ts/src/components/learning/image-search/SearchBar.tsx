@@ -40,7 +40,7 @@ export default class SearchBar extends React.Component<Props, State> {
     return (
       <Card>
         <Typography>Image Search</Typography>
-        <Form layout="inline" onSubmit={this.onSubmit}>
+        <Form layout="inline" onSubmitCapture={this.onSubmit}>
           <Item>
             <Input
               type="text"

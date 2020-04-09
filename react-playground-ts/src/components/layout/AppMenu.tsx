@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link, withRouter, RouteComponentProps } from 'react-router-dom'
-import { Menu, Icon } from 'antd'
+import { Menu } from 'antd'
+import { SettingOutlined } from '@ant-design/icons'
 import { ClickParam } from 'antd/lib/menu'
 import logo from 'assets/images/logo.svg'
 
@@ -49,27 +50,27 @@ class AppMenu extends React.Component<Props, State> {
         </Item>
         <Item key="home">
           <Link to="/">
-            <Icon type="setting" /> Home
+            <SettingOutlined /> Home
           </Link>
         </Item>
         <Item key="learning">
           <Link to="/learning">
-            <Icon type="setting" /> Learning
+            <SettingOutlined /> Learning
           </Link>
         </Item>
         <Item key="examples">
           <Link to="/examples">
-            <Icon type="setting" /> Examples
+            <SettingOutlined /> Examples
           </Link>
         </Item>
         <Item key="bootstrap">
           <Link to="/page/bootstrap">
-            <Icon type="setting" /> Bootstrap
+            <SettingOutlined /> Bootstrap
           </Link>
         </Item>
         <Item key="ant-design-layout">
           <Link to="/page/ant-design-layout">
-            <Icon type="setting" /> Ant Design Layout
+            <SettingOutlined /> Ant Design Layout
           </Link>
         </Item>
       </Menu>

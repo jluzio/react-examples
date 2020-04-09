@@ -1,7 +1,7 @@
 /* eslint-disable react/prefer-stateless-function */
 import React from 'react'
 import moment from 'moment'
-import { Icon } from 'antd'
+import { FireOutlined, CloudOutlined } from '@ant-design/icons'
 
 interface Props {
   latitude: number
@@ -16,6 +16,16 @@ type SeasonConfig = Record<
 >
 interface State {
   config: SeasonConfig
+}
+
+type SeasonIconProps = { type: Season; className?: string }
+const SeasonIcon: React.FC<SeasonIconProps> = (props: SeasonIconProps) => {
+  const { type, className } = props
+  return type === 'summer' ? (
+    <FireOutlined className={className} />
+  ) : (
+    <CloudOutlined className={className} />
+  )
 }
 
 class SeasonDisplay extends React.Component<Props, State> {
@@ -54,9 +64,9 @@ class SeasonDisplay extends React.Component<Props, State> {
     const seasonData = config[season]
     return (
       <div className={`season-display ${season}`}>
-        <Icon type={seasonData.iconName} className="icon icon-left" />
+        <SeasonIcon type={season} className="icon icon-left" />
         <p className="text">{seasonData.text}</p>
-        <Icon type={seasonData.iconName} className="icon icon-right" />
+        <SeasonIcon type={season} className="icon icon-right" />
       </div>
     )
   }

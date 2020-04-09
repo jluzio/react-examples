@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card } from 'antd'
+import { Card, Space } from 'antd'
 import { Provider } from 'react-redux'
 import { store } from './store'
 import TodoList from './TodoList'
@@ -14,7 +14,9 @@ const TodoListExample: React.FC = () => {
         <AddTodo />
         <TodoList />
         <VisibilityFilterList />
-        <ClickCounter />
+        <Space>
+          <ClickCounter />
+        </Space>
       </Provider>
     </Card>
   )

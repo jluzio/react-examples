@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react'
-import { Typography, Form, Icon, Input, Button, Card } from 'antd'
+import { Form, Input, Button, Card } from 'antd'
+import { LockOutlined, UserOutlined } from '@ant-design/icons'
 
 interface Props {
   usernameId: string
@@ -16,14 +17,14 @@ const Variables: React.FC<Props> = (props: Props) => {
         <Form.Item label="Username">
           <Input
             id={usernameId}
-            prefix={<Icon type="user" />}
+            prefix={<UserOutlined />}
             placeholder="Username"
           />
         </Form.Item>
         <Form.Item label="Password">
           <Input
             id={passwordId}
-            prefix={<Icon type="lock" />}
+            prefix={<LockOutlined />}
             placeholder="Password"
             type="password"
           />

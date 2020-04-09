@@ -101,7 +101,7 @@ export default class ValidatorBasic extends React.Component<{}, State> {
     })
     return (
       <Card title="Basic">
-        <Form onSubmit={this.onSubmit} layout="inline">
+        <Form onSubmitCapture={this.onSubmit} layout="inline">
           <Item>
             <Input
               type="email"

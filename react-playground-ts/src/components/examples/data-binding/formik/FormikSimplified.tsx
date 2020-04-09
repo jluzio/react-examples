@@ -37,7 +37,7 @@ export default class FormikSimplified extends React.Component {
           }}
         >
           {({ handleSubmit, isSubmitting }) => (
-            <Form onSubmit={handleSubmit} layout="inline">
+            <Form onSubmitCapture={handleSubmit} layout="inline">
               <Item>
                 <Field
                   type="email"

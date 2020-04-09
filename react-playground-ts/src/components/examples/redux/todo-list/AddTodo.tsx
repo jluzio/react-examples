@@ -41,7 +41,7 @@ class AddTodo extends Component<Props> {
         onSubmit={this.handleAddTodo}
       >
         {({ isSubmitting, handleSubmit }) => (
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmitCapture={handleSubmit}>
             <Item>
               <Field
                 type="text"
