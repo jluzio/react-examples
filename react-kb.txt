@@ -72,6 +72,10 @@ https://github.com/StephenGrider
 https://github.com/StephenGrider/redux-code
 - starter: https://github.com/StephenGrider/ReduxSimpleStarter.git
 
+> Redux
+https://redux.js.org/recipes/usage-with-typescript
+https://redux-toolkit.js.org/usage/usage-with-typescript
+
 
 > Forms
 https://github.com/jaredpalmer/formik

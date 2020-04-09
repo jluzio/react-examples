@@ -1,16 +1,20 @@
 import { combineReducers } from 'redux'
 import { configureStore } from '@reduxjs/toolkit'
-import { todoReducer } from './todo/reducers'
-import { visibilityFilterReducer } from './filter/reducers'
+import { todoSlice } from './todo'
+import { visibilityFilterSlice } from './filter'
 
-export * from './todo/actions'
-export * from './filter/actions'
+// action creators
+const { addTodo, toggleTodo } = todoSlice.actions
+const { setVisibilityFilter } = visibilityFilterSlice.actions
+export { addTodo, toggleTodo, setVisibilityFilter }
 
+// reducer
 export const rootReducer = combineReducers({
-  visibilityFilter: visibilityFilterReducer,
-  todos: todoReducer
+  visibilityFilter: visibilityFilterSlice.reducer,
+  todos: todoSlice.reducer
 })
 
+// state
 export type RootState = ReturnType<typeof rootReducer>
 
 const initialState: Partial<RootState> = {
@@ -21,6 +25,7 @@ const initialState: Partial<RootState> = {
   ]
 }
 
+// store
 export const store = configureStore({
   reducer: rootReducer,
   preloadedState: initialState
