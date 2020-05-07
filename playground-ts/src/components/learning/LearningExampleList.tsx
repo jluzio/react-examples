@@ -8,6 +8,7 @@ import BlogExample from './props/blog/BlogExample'
 import SeasonExample from './season/SeasonExample'
 import ImageSearch from './image-search/ImageSearch'
 import VideosExample from './videos/VideosExample'
+import ReduxExampleList from './redux/ReduxExampleList'
 
 const { TabPane } = Tabs
 
@@ -27,6 +28,9 @@ const LearningExampleList: React.FC = () => {
     </TabPane>,
     <TabPane key="videos" tab="Videos">
       <VideosExample />
+    </TabPane>,
+    <TabPane key="redux" tab="Redux">
+      <ReduxExampleList />
     </TabPane>
   ]
   const tabPanes = _.sortBy(unsortedTabPanes, t =>

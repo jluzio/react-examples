@@ -1,4 +1,4 @@
-import imageApi from './image-api'
+import imageApi from 'api/json-placeholder-api'
 import { JsonPlaceholderPhotos } from './models'
 
 // can also add other key params

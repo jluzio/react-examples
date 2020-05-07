@@ -10,7 +10,9 @@ const ApprovalCard: React.FC<Props> = (props: Props) => {
       {children}
       <div>
         <Button type="primary">Approve</Button>
-        <Button type="danger">Reject</Button>
+        <Button type="primary" danger>
+          Reject
+        </Button>
       </div>
     </Card>
   )
