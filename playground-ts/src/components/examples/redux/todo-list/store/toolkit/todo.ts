@@ -22,3 +22,7 @@ export const todoSlice = createSlice({
     }
   }
 })
+
+export const todoReducer = todoSlice.reducer
+
+export const todoActions = todoSlice.actions

@@ -21,7 +21,10 @@ export { postActions, userActions }
 export const store = configureStore({
   reducer: rootReducer,
   preloadedState: initialState,
-  middleware: [...getDefaultMiddleware(), loggingMiddleware]
+  middleware: [...getDefaultMiddleware(), loggingMiddleware],
+  devTools: {
+    name: 'Learning/Blog Store'
+  }
 })
 
 // DEV: getDefaultMiddleware() = [thunk, immutableStateInvariant, serializableStateInvariant]

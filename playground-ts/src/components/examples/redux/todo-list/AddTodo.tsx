@@ -1,17 +1,19 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react'
-import { Form, Input, Button } from 'antd'
+import { Form, Button } from 'antd'
 import log from 'utils/Log'
 import { connect, ConnectedProps } from 'react-redux'
 import { Formik, Field, useField, ErrorMessage } from 'formik'
 import { Todo } from './store/models'
-import { addTodo } from './store'
+import { todoActions } from './store'
 
 const { Item } = Form
 
-const mapState = () => ({})
-const mapDispatch = { onAddTodo: addTodo }
-const connector = connect(mapState, mapDispatch)
+const mapStateToProps = () => ({})
+const mapDispatchToProps = { onAddTodo: todoActions.addTodo }
+const connector = connect(mapStateToProps, mapDispatchToProps)
 type ReduxProps = ConnectedProps<typeof connector>
 
 type Props = ReduxProps

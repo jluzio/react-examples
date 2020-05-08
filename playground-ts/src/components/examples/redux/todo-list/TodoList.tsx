@@ -5,18 +5,18 @@ import log from 'utils/Log'
 import { connect, ConnectedProps } from 'react-redux'
 import { Todo, VisibilityFilters } from './store/models'
 import TodoListItem from './TodoListItem'
-import { RootState, toggleTodo } from './store'
+import { RootState, todoActions } from './store'
 
-const mapState = (state: RootState) => ({
+const mapStateToProps = (state: RootState) => ({
   todos: state.todos,
   visibilityFilter: state.visibilityFilter
 })
 const loggingMapState = (state: RootState) => {
   log.info('mapState')
-  return mapState(state)
+  return mapStateToProps(state)
 }
-const mapDispatch = { onToggleTodo: toggleTodo }
-const connector = connect(loggingMapState, mapDispatch)
+const mapDispatchToProps = { onToggleTodo: todoActions.toggleTodo }
+const connector = connect(loggingMapState, mapDispatchToProps)
 type ReduxProps = ConnectedProps<typeof connector>
 
 type Props = ReduxProps

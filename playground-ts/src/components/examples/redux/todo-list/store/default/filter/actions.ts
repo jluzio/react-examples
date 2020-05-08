@@ -1,14 +1,20 @@
 import { createAction } from '@reduxjs/toolkit'
 import { VisibilityFilters } from '../../models'
 
-const actionType = (type: string) => `filter/${type}`
+export enum FilterActionType {
+  SET_VISIBILITY_FILTER = 'filter/setVisibilityFilter'
+}
 
 /*
  * action creators
  */
-export const setVisibilityFilter = createAction<{ filter: VisibilityFilters }>(
-  actionType('setVisibilityFilter')
-)
+export const setVisibilityFilter = createAction<
+  { filter: VisibilityFilters },
+  FilterActionType.SET_VISIBILITY_FILTER
+>(FilterActionType.SET_VISIBILITY_FILTER)
 
-/** TODO: check if it's useful or not */
-export type FilterActions = ReturnType<typeof setVisibilityFilter>
+export type FilterActionReturnType = ReturnType<typeof setVisibilityFilter>
+
+export const filterActions = {
+  setVisibilityFilter
+}

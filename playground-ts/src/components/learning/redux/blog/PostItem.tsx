@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card, Row, Col, Avatar } from 'antd'
 import { UserOutlined } from '@ant-design/icons'
-import { Post } from './models'
+import { Post } from 'services/placeholder/models'
 import UserDetails from './UserDetails'
 
 type Props = {

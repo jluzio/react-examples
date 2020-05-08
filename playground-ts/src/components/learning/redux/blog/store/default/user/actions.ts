@@ -1,8 +1,8 @@
 /* eslint-disable import/prefer-default-export */
 import { Dispatch } from 'redux'
 import { PayloadAction } from '@reduxjs/toolkit'
-import { User } from '../../../models'
-import userService from '../../../services/user-service'
+import { User } from 'services/placeholder/models'
+import userService from 'services/placeholder/user-service'
 
 const setUsers = (users: User[]) =>
   ({

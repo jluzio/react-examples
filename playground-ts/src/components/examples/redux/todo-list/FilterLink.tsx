@@ -1,19 +1,17 @@
 import React, { PropsWithChildren } from 'react'
 import { connect, ConnectedProps } from 'react-redux'
 import { Button } from 'antd'
-import { RootState, setVisibilityFilter } from './store'
+import { RootState, filterActions } from './store'
 import { VisibilityFilters } from './store/models'
 
-const mapState = (state: RootState) => ({
+const mapStateToProps = (state: RootState) => ({
   currentFilter: state.visibilityFilter
 })
-
-const mapDispatch = {
+const mapDispatchToProps = {
   onSetVisibilityFilter: (filter: VisibilityFilters) =>
-    setVisibilityFilter({ filter })
+    filterActions.setVisibilityFilter({ filter })
 }
-
-const connector = connect(mapState, mapDispatch)
+const connector = connect(mapStateToProps, mapDispatchToProps)
 
 type OwnProps = {
   filter: VisibilityFilters

@@ -1,5 +1,5 @@
 import jsonPlaceholderApi from 'api/json-placeholder-api'
-import { Post } from '../models'
+import { Post } from './models'
 
 class PostService {
   private api = jsonPlaceholderApi

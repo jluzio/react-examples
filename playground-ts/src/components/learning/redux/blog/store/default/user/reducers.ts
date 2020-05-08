@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import { User } from '../../../models'
+import { User } from 'services/placeholder/models'
 import { UserActions } from './actions'
 
 export type UserState = User[]

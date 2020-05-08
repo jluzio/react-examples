@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import { Post } from '../../../models'
+import { Post } from 'services/placeholder/models'
 import { PostActions } from './actions'
 
 export type PostState = Post[]

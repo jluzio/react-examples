@@ -1,8 +1,8 @@
 /* eslint-disable import/prefer-default-export */
 import { Dispatch } from 'redux'
 import { PayloadAction } from '@reduxjs/toolkit'
-import { Post } from '../../../models'
-import postService from '../../../services/post-service'
+import { Post } from 'services/placeholder/models'
+import postService from 'services/placeholder/post-service'
 
 const setPosts = (posts: Post[]) =>
   ({

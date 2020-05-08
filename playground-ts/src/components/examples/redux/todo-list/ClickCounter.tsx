@@ -1,18 +1,16 @@
 import React, { PropsWithChildren } from 'react'
 import { connect, ConnectedProps } from 'react-redux'
 import { Button, Card } from 'antd'
-import { RootState, incrementCounter, decrementCounter } from './store'
+import { RootState, counterActions } from './store'
 
-const mapState = (state: RootState) => ({
+const mapStateToProps = (state: RootState) => ({
   counter: state.counter
 })
-
-const mapDispatch = {
-  onIncrementCounter: () => incrementCounter(),
-  onDecrementCounter: () => decrementCounter()
+const mapDispatchToProps = {
+  onIncrementCounter: counterActions.incrementCounter,
+  onDecrementCounter: counterActions.decrementCounter
 }
-
-const connector = connect(mapState, mapDispatch)
+const connector = connect(mapStateToProps, mapDispatchToProps)
 
 type OwnProps = {}
 type ReduxProps = ConnectedProps<typeof connector>

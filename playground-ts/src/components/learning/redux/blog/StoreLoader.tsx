@@ -2,9 +2,9 @@
 import React from 'react'
 import { connect, ConnectedProps } from 'react-redux'
 import { Button } from 'antd'
+import postService from 'services/placeholder/post-service'
+import userService from 'services/placeholder/user-service'
 import { RootState, postActions, userActions } from './store'
-import postService from './services/post-service'
-import userService from './services/user-service'
 
 const mapStateToProps = (state: RootState) => ({
   posts: state.posts,

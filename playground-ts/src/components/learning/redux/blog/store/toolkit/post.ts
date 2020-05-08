@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
-import { Post } from '../../models'
-import postService from '../../services/post-service'
+import postService from 'services/placeholder/post-service'
+import { Post } from 'services/placeholder/models'
 
 export type PostState = Post[]
 

@@ -1,14 +1,16 @@
-import { combineReducers } from 'redux'
-import { configureStore } from '@reduxjs/toolkit'
+import { combineReducers, createStore, applyMiddleware } from 'redux'
+import loggingMiddleware from 'utils/redux/logging-middleware'
+import thunk from 'redux-thunk'
+import { composeWithDevTools } from 'redux-devtools-extension'
 import { todoReducer } from './todo/reducers'
-import { visibilityFilterReducer } from './filter/reducers'
+import { filterReducer } from './filter/reducers'
 import { counterReducer } from './counter/reducers'
 
 export * from './todo/actions'
 export * from './filter/actions'
 
 export const rootReducer = combineReducers({
-  visibilityFilter: visibilityFilterReducer,
+  visibilityFilter: filterReducer,
   todos: todoReducer,
   counter: counterReducer
 })
@@ -23,10 +25,11 @@ const initialState: Partial<RootState> = {
   ]
 }
 
-export const store = configureStore({
-  reducer: rootReducer,
-  preloadedState: initialState
-})
+export const store = createStore(
+  rootReducer,
+  initialState,
+  composeWithDevTools(applyMiddleware(thunk, loggingMiddleware))
+)
 
 export type AppDispatch = typeof store.dispatch
 

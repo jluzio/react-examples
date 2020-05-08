@@ -6,6 +6,7 @@ import TodoList from './TodoList'
 import VisibilityFilterList from './VisibilityFilterList'
 import AddTodo from './AddTodo'
 import ClickCounter from './ClickCounter'
+import StoreLoader from './StoreLoader'
 
 const TodoListExample: React.FC = () => {
   return (
@@ -16,6 +17,9 @@ const TodoListExample: React.FC = () => {
         <VisibilityFilterList />
         <Space>
           <ClickCounter />
+        </Space>
+        <Space>
+          <StoreLoader />
         </Space>
       </Provider>
     </Card>
