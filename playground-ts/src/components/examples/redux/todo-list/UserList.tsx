@@ -32,7 +32,7 @@ const UserList: React.FC<Props> = (props: Props) => {
     })
   }
 
-  // using UserTag with id
+  // using UserTag with id to showcase reducers with OwnProps
   return (
     <Layout.Content>
       <Card
