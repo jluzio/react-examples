@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import { Dispatch } from 'redux'
+import { Dispatch, Action } from 'redux'
 import { PayloadAction } from '@reduxjs/toolkit'
 import { Post } from 'services/placeholder/models'
 import postService from 'services/placeholder/post-service'
@@ -16,7 +16,7 @@ const fetchPostsFullfiled = (posts: Post[]) =>
     payload: posts
   } as PayloadAction<Post[], 'FETCH_POSTS'>)
 
-const fetchPosts = () => async (dispatch: Dispatch) => {
+const fetchPosts = () => async (dispatch: Dispatch<Action<string>>) => {
   const response = await postService.getPosts()
   dispatch(fetchPostsFullfiled(response.data))
 }
@@ -24,7 +24,7 @@ const fetchPosts = () => async (dispatch: Dispatch) => {
 export const postActions = {
   setPosts,
   fetchPosts,
-  syncFetchPosts: fetchPostsFullfiled
+  fetchPostsFullfiled
 }
 
 export type PostActions =

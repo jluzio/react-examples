@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react'
 import { connect, ConnectedProps } from 'react-redux'
 import { RootState, userActions } from './store'

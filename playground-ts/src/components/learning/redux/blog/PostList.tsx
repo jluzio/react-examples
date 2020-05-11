@@ -1,14 +1,14 @@
 import React from 'react'
 import { connect, ConnectedProps } from 'react-redux'
 import { List } from 'antd'
-import { RootState, postActions } from './store'
+import { RootState, actions } from './store'
 import PostItem from './PostItem'
 
 const mapStateToProps = (state: RootState) => ({
   posts: state.posts
 })
 const mapDispatchToProps = {
-  onFetchPosts: postActions.fetchPosts
+  onFetchPosts: () => actions.fetchPostsAndUsers()
 }
 const connector = connect(mapStateToProps, mapDispatchToProps)
 type ReduxProps = ConnectedProps<typeof connector>

@@ -10,8 +10,8 @@ export function userReducer(
   action: UserActions
 ): UserState {
   switch (action.type) {
-    case 'FETCH_USERS':
-      return action.payload
+    case 'FETCH_USER':
+      return [...state, action.payload]
     case 'SET_USERS':
       return action.payload
     default:

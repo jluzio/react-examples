@@ -10,23 +10,23 @@ const setUsers = (users: User[]) =>
     payload: users
   } as PayloadAction<User[], 'SET_USERS'>)
 
-const syncFetchUsers = (users: User[]) =>
+const fetchUserFulfilled = (user: User) =>
   ({
-    type: 'FETCH_USERS',
-    payload: users
-  } as PayloadAction<User[], 'FETCH_USERS'>)
+    type: 'FETCH_USER',
+    payload: user
+  } as PayloadAction<User, 'FETCH_USER'>)
 
-const fetchUsers = () => async (dispatch: Dispatch) => {
-  const response = await userService.getUsers()
-  dispatch(syncFetchUsers(response.data))
+const fetchUser = (id: number) => async (dispatch: Dispatch) => {
+  const response = await userService.getUser(id)
+  dispatch(fetchUserFulfilled(response.data))
 }
 
 export const userActions = {
   setUsers,
-  fetchUsers,
-  syncFetchUsers
+  fetchUser,
+  fetchUserFulfilled
 }
 
 export type UserActions =
   | ReturnType<typeof setUsers>
-  | ReturnType<typeof syncFetchUsers>
+  | ReturnType<typeof fetchUserFulfilled>
