@@ -1,24 +1,24 @@
 import React from 'react'
-import { Card, Space } from 'antd'
+import { Card } from 'antd'
 import { Provider } from 'react-redux'
 import { store } from './store'
 import TodoList from './TodoList'
 import VisibilityFilterList from './VisibilityFilterList'
 import AddTodo from './AddTodo'
 import ClickCounter from './ClickCounter'
-import StoreLoader from './StoreLoader'
+import UserList from './UserList'
 
 const TodoListExample: React.FC = () => {
   return (
-    <Card title="TodoList">
+    <Card title="TodoList Store">
       <Provider store={store}>
-        <AddTodo />
-        <TodoList />
-        <VisibilityFilterList />
-        <Space direction="vertical">
-          <ClickCounter />
-          <StoreLoader />
-        </Space>
+        <Card title="Todos">
+          <AddTodo />
+          <TodoList />
+          <VisibilityFilterList />
+        </Card>
+        <ClickCounter />
+        <UserList />
       </Provider>
     </Card>
   )

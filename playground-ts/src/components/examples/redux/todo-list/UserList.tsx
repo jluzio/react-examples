@@ -1,7 +1,8 @@
 import React, { PropsWithChildren } from 'react'
 import { connect, ConnectedProps } from 'react-redux'
-import { Button, Card } from 'antd'
+import { Button, Card, Layout } from 'antd'
 import { RootState, userActions, todoActions } from './store'
+import UserDetails from './UserDetails'
 
 const mapStateToProps = (state: RootState) => ({
   users: state.users
@@ -18,7 +19,7 @@ type OwnProps = {}
 type ReduxProps = ConnectedProps<typeof connector>
 type Props = ReduxProps & PropsWithChildren<OwnProps>
 
-const StoreLoader: React.FC<Props> = (props: Props) => {
+const UserList: React.FC<Props> = (props: Props) => {
   const { onFetchUsers, users, onAddTodo } = props
   const onTodosForUsers = () => {
     users.forEach(user => {
@@ -32,14 +33,20 @@ const StoreLoader: React.FC<Props> = (props: Props) => {
   }
 
   return (
-    <Card title="Store Loader">
-      <Button onClick={onFetchUsers}>Fetch Users</Button>
-      <Button onClick={onTodosForUsers}>Create Todos for Users</Button>
-      {users && users.length > 0 && (
-        <div>Users: {users.map(u => u.name).join(', ')}</div>
-      )}
-    </Card>
+    <Layout.Content>
+      <Card
+        title="Users"
+        actions={[
+          <Button onClick={onFetchUsers}>Fetch Users</Button>,
+          <Button onClick={onTodosForUsers}>User Todos</Button>
+        ]}
+      >
+        {users.map(user => (
+          <UserDetails userId={user.id} key={user.id} />
+        ))}
+      </Card>
+    </Layout.Content>
   )
 }
 
-export default connector(StoreLoader)
+export default connector(UserList)

@@ -133,8 +133,12 @@ If something can be derived from either props or state, it probably shouldn’t 
 - Removing property: {...state, { propName: undefined }}
 ( lodash: _.omit(state, age) ) 
 
-
-
-
+- Mapping in component
+const mapStateToProps = (state: RootState, ownProps?: any) => ({
+  <key>: <state.data>
+})
+const mapDispatchToProps = {
+	<key>: <action_creator>
+}
 
 
