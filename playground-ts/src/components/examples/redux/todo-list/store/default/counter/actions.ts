@@ -8,3 +8,8 @@ const actionType = (type: string) => `counter/${type}`
 export const incrementCounter = createAction(actionType('increment'))
 
 export const decrementCounter = createAction(actionType('decrement'))
+
+export const counterActions = {
+  incrementCounter,
+  decrementCounter
+}

@@ -10,7 +10,7 @@ const setPosts = (posts: Post[]) =>
     payload: posts
   } as PayloadAction<Post[], 'SET_POSTS'>)
 
-const syncFetchPosts = (posts: Post[]) =>
+const fetchPostsFullfiled = (posts: Post[]) =>
   ({
     type: 'FETCH_POSTS',
     payload: posts
@@ -18,15 +18,15 @@ const syncFetchPosts = (posts: Post[]) =>
 
 const fetchPosts = () => async (dispatch: Dispatch) => {
   const response = await postService.getPosts()
-  dispatch(syncFetchPosts(response.data))
+  dispatch(fetchPostsFullfiled(response.data))
 }
 
 export const postActions = {
   setPosts,
   fetchPosts,
-  syncFetchPosts
+  syncFetchPosts: fetchPostsFullfiled
 }
 
 export type PostActions =
   | ReturnType<typeof setPosts>
-  | ReturnType<typeof syncFetchPosts>
+  | ReturnType<typeof fetchPostsFullfiled>

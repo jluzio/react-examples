@@ -19,10 +19,8 @@ const initialState: RootState = {
 
 export { postActions, userActions }
 
-export const store = createStore(
-  rootReducer,
-  initialState,
-  composeWithDevTools(applyMiddleware(thunk, loggingMiddleware))
-)
+const enhancers = composeWithDevTools(applyMiddleware(thunk))
+// const enhancers = composeWithDevTools(applyMiddleware(thunk, loggingMiddleware))
+export const store = createStore(rootReducer, initialState, enhancers)
 
 export default store

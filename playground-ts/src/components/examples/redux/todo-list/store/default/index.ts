@@ -5,14 +5,18 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { todoReducer } from './todo/reducers'
 import { filterReducer } from './filter/reducers'
 import { counterReducer } from './counter/reducers'
+import { userReducer } from './user/reducers'
 
 export * from './todo/actions'
 export * from './filter/actions'
+export * from './counter/actions'
+export * from './user/actions'
 
 export const rootReducer = combineReducers({
   visibilityFilter: filterReducer,
   todos: todoReducer,
-  counter: counterReducer
+  counter: counterReducer,
+  users: userReducer
 })
 
 export type RootState = ReturnType<typeof rootReducer>
@@ -25,11 +29,9 @@ const initialState: Partial<RootState> = {
   ]
 }
 
-export const store = createStore(
-  rootReducer,
-  initialState,
-  composeWithDevTools(applyMiddleware(thunk, loggingMiddleware))
-)
+const enhancers = composeWithDevTools(applyMiddleware(thunk))
+// const enhancers = composeWithDevTools(applyMiddleware(thunk, loggingMiddleware))
+export const store = createStore(rootReducer, initialState, enhancers)
 
 export type AppDispatch = typeof store.dispatch
 

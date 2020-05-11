@@ -15,10 +15,8 @@ const TodoListExample: React.FC = () => {
         <AddTodo />
         <TodoList />
         <VisibilityFilterList />
-        <Space>
+        <Space direction="vertical">
           <ClickCounter />
-        </Space>
-        <Space>
           <StoreLoader />
         </Space>
       </Provider>

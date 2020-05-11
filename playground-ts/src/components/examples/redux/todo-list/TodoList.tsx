@@ -12,7 +12,6 @@ const mapStateToProps = (state: RootState) => ({
   visibilityFilter: state.visibilityFilter
 })
 const loggingMapState = (state: RootState) => {
-  log.info('mapState')
   return mapStateToProps(state)
 }
 const mapDispatchToProps = { onToggleTodo: todoActions.toggleTodo }
@@ -25,15 +24,10 @@ class TodoList extends Component<Props> {
   handleTodoClick = (todo: Todo) => {
     const { onToggleTodo, todos } = this.props
     const index = todos.indexOf(todo)
-    log.info('handleTodoClick', {
-      todo,
-      index
-    })
     onToggleTodo({ index })
   }
 
   getVisibleTodos = (todos: Todo[], filter: VisibilityFilters) => {
-    console.log('getVisibleTodos')
     let completedFilter: boolean[]
     switch (filter) {
       case VisibilityFilters.SHOW_ACTIVE:

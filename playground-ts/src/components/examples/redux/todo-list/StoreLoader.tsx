@@ -7,7 +7,8 @@ const mapStateToProps = (state: RootState) => ({
   users: state.users
 })
 const mapDispatchToProps = {
-  onFetchUsers: userActions.fetchUsers,
+  // thunk async actions can clash with Event reuse, so using () => action
+  onFetchUsers: () => userActions.fetchUsers(),
   onAddTodo: todoActions.addTodo
 }
 
@@ -29,10 +30,14 @@ const StoreLoader: React.FC<Props> = (props: Props) => {
       })
     })
   }
+
   return (
     <Card title="Store Loader">
       <Button onClick={onFetchUsers}>Fetch Users</Button>
       <Button onClick={onTodosForUsers}>Create Todos for Users</Button>
+      {users && users.length > 0 && (
+        <div>Users: {users.map(u => u.name).join(', ')}</div>
+      )}
     </Card>
   )
 }
