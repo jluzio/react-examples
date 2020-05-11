@@ -2,7 +2,7 @@ import React, { PropsWithChildren } from 'react'
 import { connect, ConnectedProps } from 'react-redux'
 import { Button, Card, Layout } from 'antd'
 import { RootState, userActions, todoActions } from './store'
-import UserDetails from './UserDetails'
+import UserTag from './UserTag'
 
 const mapStateToProps = (state: RootState) => ({
   users: state.users
@@ -32,6 +32,7 @@ const UserList: React.FC<Props> = (props: Props) => {
     })
   }
 
+  // using UserTag with id
   return (
     <Layout.Content>
       <Card
@@ -42,7 +43,7 @@ const UserList: React.FC<Props> = (props: Props) => {
         ]}
       >
         {users.map(user => (
-          <UserDetails userId={user.id} key={user.id} />
+          <UserTag id={user.id} key={user.id} />
         ))}
       </Card>
     </Layout.Content>

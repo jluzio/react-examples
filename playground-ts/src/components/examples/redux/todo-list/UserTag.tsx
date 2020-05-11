@@ -4,11 +4,12 @@ import { Tag } from 'antd'
 import { RootState } from './store'
 
 type OwnProps = {
-  userId: number
+  id: number
 }
 
+// showcasing mappers with OwnProps
 const mapStateToProps = (state: RootState, ownProps?: OwnProps) => ({
-  user: state.users.find(u => u.id === ownProps?.userId)
+  user: state.users.find(user => user.id === ownProps?.id)
 })
 const mapDispatchToProps = {}
 
