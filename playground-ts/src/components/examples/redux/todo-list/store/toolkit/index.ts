@@ -8,6 +8,9 @@ import { userReducer, userActions } from './user'
 // action creators
 export { todoActions, filterActions, counterActions, userActions }
 
+// selectors
+export * from './selectors'
+
 // reducer
 export const rootReducer = combineReducers({
   visibilityFilter: filterReducer,

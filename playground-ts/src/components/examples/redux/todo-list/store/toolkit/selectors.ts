@@ -20,3 +20,7 @@ export const selectVisibleTodos = createSelector(
     }
   }
 )
+
+export const selectors = {
+  selectVisibleTodos
+}

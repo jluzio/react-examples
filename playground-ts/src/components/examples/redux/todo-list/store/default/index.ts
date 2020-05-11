@@ -7,10 +7,14 @@ import { filterReducer } from './filter/reducers'
 import { counterReducer } from './counter/reducers'
 import { userReducer } from './user/reducers'
 
+// action creators
 export * from './todo/actions'
 export * from './filter/actions'
 export * from './counter/actions'
 export * from './user/actions'
+
+// selectors
+export * from './selectors'
 
 export const rootReducer = combineReducers({
   visibilityFilter: filterReducer,

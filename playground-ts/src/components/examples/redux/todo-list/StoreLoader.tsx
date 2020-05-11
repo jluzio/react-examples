@@ -7,7 +7,7 @@ const mapStateToProps = (state: RootState) => ({
   users: state.users
 })
 const mapDispatchToProps = {
-  // thunk async actions can clash with Event reuse, so using () => action
+  // thunk async actions can clash with SyntheticEvent reuse, so using () => action
   onFetchUsers: () => userActions.fetchUsers(),
   onAddTodo: todoActions.addTodo
 }

@@ -5,10 +5,29 @@ import log from 'utils/Log'
 import { connect, ConnectedProps } from 'react-redux'
 import { Todo, VisibilityFilters } from './store/models'
 import TodoListItem from './TodoListItem'
-import { RootState, todoActions } from './store'
+import { RootState, todoActions, selectors } from './store'
+
+const { selectVisibleTodos } = selectors
+
+const getVisibleTodos = (todos: Todo[], filter: VisibilityFilters) => {
+  let completedFilter: boolean[]
+  switch (filter) {
+    case VisibilityFilters.SHOW_ACTIVE:
+      completedFilter = [false]
+      break
+    case VisibilityFilters.SHOW_COMPLETED:
+      completedFilter = [true]
+      break
+    default:
+      completedFilter = [true, false]
+  }
+  return todos.filter(t => completedFilter.includes(t.completed))
+}
 
 const mapStateToProps = (state: RootState) => ({
-  todos: state.todos,
+  todos: selectVisibleTodos
+    ? selectVisibleTodos(state)
+    : getVisibleTodos(state.todos, state.visibilityFilter),
   visibilityFilter: state.visibilityFilter
 })
 const loggingMapState = (state: RootState) => {
@@ -27,27 +46,11 @@ class TodoList extends Component<Props> {
     onToggleTodo({ index })
   }
 
-  getVisibleTodos = (todos: Todo[], filter: VisibilityFilters) => {
-    let completedFilter: boolean[]
-    switch (filter) {
-      case VisibilityFilters.SHOW_ACTIVE:
-        completedFilter = [false]
-        break
-      case VisibilityFilters.SHOW_COMPLETED:
-        completedFilter = [true]
-        break
-      default:
-        completedFilter = [true, false]
-    }
-    return todos.filter(t => completedFilter.includes(t.completed))
-  }
-
   render() {
-    const { todos, visibilityFilter } = this.props
-    const visibleTodos = this.getVisibleTodos(todos, visibilityFilter)
+    const { todos } = this.props
     return (
       <List
-        dataSource={visibleTodos}
+        dataSource={todos}
         renderItem={item => (
           <TodoListItem todo={item} onClick={this.handleTodoClick} />
         )}
