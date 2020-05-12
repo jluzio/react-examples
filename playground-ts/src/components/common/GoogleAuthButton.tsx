@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from 'antd'
-import { LoginOutlined, LogoutOutlined } from '@ant-design/icons'
+import { GoogleOutlined, LogoutOutlined } from '@ant-design/icons'
 import authApi from 'api/oauth2/google-oauth2-api'
 import { UserProfile } from 'api/oauth2/models'
 
@@ -53,7 +53,7 @@ class GoogleAuthButton extends React.Component<Props, State> {
     const { userProfile } = this.state
     if (!userProfile) {
       return (
-        <Button onClick={this.handleSignIn} icon={<LoginOutlined />}>
+        <Button onClick={this.handleSignIn} icon={<GoogleOutlined />}>
           Sign In
         </Button>
       )
