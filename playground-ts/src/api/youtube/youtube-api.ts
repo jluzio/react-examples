@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { youtube as YOUTUBE_KEY } from '../api-keys.json'
+import { youtube as YOUTUBE_KEY } from '../api-config.json'
 
 const DEFAULT_PARAMS = {
   key: YOUTUBE_KEY

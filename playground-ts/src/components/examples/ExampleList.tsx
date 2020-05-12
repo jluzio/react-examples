@@ -21,6 +21,7 @@ import FragmentsExample from './fragments/FragmentsExample'
 import RenderPropsExample from './render-props/RenderPropsExample'
 import ReduxExampleList from './redux/ReduxExampleList'
 import CacheExampleList from './cache/CacheExampleList'
+import OAuth2Example from './oauth2/OAuth2Example'
 
 const { TabPane } = Tabs
 
@@ -73,6 +74,9 @@ const ExampleList: React.FC = () => {
     </TabPane>,
     <TabPane key="cache" tab="Cache">
       <CacheExampleList />
+    </TabPane>,
+    <TabPane key="oauth2" tab="OAuth2">
+      <OAuth2Example />
     </TabPane>
   ]
   const tabPanes = _.sortBy(unsortedTabPanes, t =>
