@@ -22,8 +22,15 @@ const StreamExample: React.FC<RouteComponentProps> = (
   const { match } = props
   const rootComponent = match.url
   const path = (contextPath: string) => `${rootComponent}${contextPath}`
+  const cardActions = [
+    <Link to={path('/streams')}>List</Link>,
+    <Link to={path('/streams/create')}>Create</Link>,
+    <Link to={path('/streams/delete')}>Delete</Link>,
+    <Link to={path('/streams/edit')}>Edit</Link>,
+    <Link to={path('/streams/show')}>Show</Link>
+  ]
   return (
-    <Card title="Streamy" className="learning">
+    <Card title="Streamy" className="learning" actions={cardActions}>
       <Provider store={store}>
         <StreamHeader />
         <Switch>
@@ -33,13 +40,6 @@ const StreamExample: React.FC<RouteComponentProps> = (
           <Route path={path('/streams/show')} component={StreamShow} />
           <Route path={path('/streams')} component={StreamList} />
         </Switch>
-        <div>
-          <Link to={path('/streams')}>List</Link>
-          <Link to={path('/streams/create')}>Create</Link>
-          <Link to={path('/streams/delete')}>Delete</Link>
-          <Link to={path('/streams/edit')}>Edit</Link>
-          <Link to={path('/streams/show')}>Show</Link>
-        </div>
       </Provider>
     </Card>
   )
