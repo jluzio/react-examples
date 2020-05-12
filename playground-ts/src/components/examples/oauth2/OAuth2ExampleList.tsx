@@ -2,17 +2,17 @@ import React from 'react'
 import ActiveTabBySearchParamTabs from 'components/common/ActiveTabBySearchParamTabs'
 import { Tabs } from 'antd'
 import _ from 'lodash'
-import GoogleAuthExample from './GoogleAuthExample'
+import GoogleAuthProviderExample from './GoogleAuthExample'
 import OAuth2Example from './OAuth2Example'
 
 const { TabPane } = Tabs
 
 const OAuth2ExampleList: React.FC = () => {
   const unsortedTabPanes = [
-    <TabPane key="OAuth2" tab="OAuth2">
-      <GoogleAuthExample />
-    </TabPane>,
     <TabPane key="GoogleAuth" tab="GoogleAuth">
+      <GoogleAuthProviderExample />
+    </TabPane>,
+    <TabPane key="OAuth2" tab="OAuth2">
       <OAuth2Example />
     </TabPane>
   ]

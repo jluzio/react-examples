@@ -1,5 +1,4 @@
 /* eslint-disable class-methods-use-this */
-import _ from 'lodash'
 import { googleOAuth2 } from '../api-config.json'
 import { UserProfile } from './models'
 
@@ -14,38 +13,19 @@ class GoogleOAuth2Api {
     return window.gapi.auth2
   }
 
-  private async getGoogleAuth() {
-    const promise = new Promise<GoogleAuthResult>((resolve, reject) => {
+  async googleAuth() {
+    return new Promise<GoogleAuthResult>((resolve, reject) => {
+      const scopes = ['profile', 'email']
       this.gapi.load('auth2', () => {
         this.auth2.init({
-          client_id: googleOAuth2.clientId
+          client_id: googleOAuth2.clientId,
+          scope: scopes.join(' ')
         })
         const googleAuth = this.auth2.getAuthInstance()
         delete googleAuth.then
         resolve(googleAuth)
       })
     })
-    return promise
-  }
-
-  private getGoogleAuthMemoized = _.memoize(this.getGoogleAuth)
-
-  async googleAuth() {
-    return this.getGoogleAuthMemoized()
-  }
-
-  async signIn() {
-    const scopes = ['profile', 'email']
-    const googleAuth = await this.googleAuth()
-    const userAuth = await googleAuth.signIn({
-      scope: scopes.join(' ')
-    })
-    return userAuth
-  }
-
-  async signOut() {
-    const googleAuth = await this.googleAuth()
-    googleAuth.signOut()
   }
 
   toUserProfile = (googleUser: gapi.auth2.GoogleUser): UserProfile => {

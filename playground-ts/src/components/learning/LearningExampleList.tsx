@@ -3,7 +3,6 @@ import './learning.scss'
 import { Tabs } from 'antd'
 import ActiveTabBySearchParamTabs from 'components/common/ActiveTabBySearchParamTabs'
 import _ from 'lodash'
-import StreamExample from './router/streams/StreamExample'
 import BlogExample from './props/blog/BlogExample'
 import SeasonExample from './season/SeasonExample'
 import ImageSearch from './image-search/ImageSearch'
@@ -14,9 +13,6 @@ const { TabPane } = Tabs
 
 const LearningExampleList: React.FC = () => {
   const unsortedTabPanes = [
-    <TabPane key="stream" tab="Stream">
-      <StreamExample />
-    </TabPane>,
     <TabPane key="blog" tab="Blog">
       <BlogExample />
     </TabPane>,

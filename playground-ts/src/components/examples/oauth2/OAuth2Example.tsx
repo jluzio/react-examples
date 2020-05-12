@@ -3,7 +3,7 @@
 /* eslint-disable prefer-const */
 import React, { useState } from 'react'
 import { Button, Card, Descriptions, Avatar } from 'antd'
-import authApi from 'api/oauth2/google-oauth2-api'
+import authService from 'services/oauth2/google-oauth2-service'
 import { UserProfile } from 'api/oauth2/models'
 
 type Props = {}
@@ -25,17 +25,17 @@ class OAuth2Example extends React.Component<Props, State> {
 
   async componentDidMount() {
     this.handleUpdateUserProfile()
-    const googleAuth = await authApi.googleAuth()
+    const googleAuth = await authService.googleAuth
     googleAuth.isSignedIn.listen(this.handleUpdateUserProfile)
   }
 
   handleUpdateUserProfile = async () => {
-    const googleAuth = await authApi.googleAuth()
+    const googleAuth = await authService.googleAuth
     const isSignedIn = googleAuth.isSignedIn?.get() ?? false
     const googleUser = isSignedIn ? googleAuth.currentUser.get() : null
     this.setState({
       userData: googleUser,
-      userProfile: googleUser ? authApi.toUserProfile(googleUser) : null,
+      userProfile: googleUser ? authService.toUserProfile(googleUser) : null,
       signedIn: isSignedIn
     })
   }
@@ -43,14 +43,14 @@ class OAuth2Example extends React.Component<Props, State> {
   handleSignIn = async () => {
     const { signedIn } = this.state
     if (!signedIn) {
-      await authApi.signIn()
+      await authService.signIn()
     }
   }
 
   handleSignOut = async () => {
     const { signedIn } = this.state
     if (signedIn) {
-      await authApi.signOut()
+      await authService.signOut()
     }
   }
 
