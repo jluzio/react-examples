@@ -5,7 +5,7 @@ import React from 'react'
 
 import ExampleListTabbedCard from 'components/common/ExampleListTabbedCard'
 import BlankExample from './BlankExample'
-import FormikExample from './data-binding/formik/FormikExampleList'
+import DataBindingExampleList from './data-binding/DataBindingExampleList'
 import StateExamples from './state/StateExamples'
 import Game from './tic-tac-toe/Game'
 import Variables from './variables/Variables'
@@ -44,8 +44,8 @@ const ExampleList: React.FC = () => {
       <TabPane key="variables" tab="Variables">
         <Variables usernameId="var_uId" passwordId="var_pId" />
       </TabPane>
-      <TabPane key="formik" tab="Formik">
-        <FormikExample />
+      <TabPane key="databinding" tab="Data Binding">
+        <DataBindingExampleList />
       </TabPane>
       <TabPane key="i18n" tab="I18n">
         <I18nExampleList />

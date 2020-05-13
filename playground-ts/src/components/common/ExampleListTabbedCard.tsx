@@ -4,14 +4,13 @@ import React, { PropsWithChildren } from 'react'
 import _ from 'lodash'
 import ActiveTabBySearchParamTabs from './ActiveTabBySearchParamTabs'
 
-type Props = React.HTMLAttributes<{}> &
-  PropsWithChildren<{
-    title?: React.ReactNode
-    tabKey: string
-    defaultTab?: string
-    className?: string
-    sortTabsByName?: boolean
-  }>
+type Props = PropsWithChildren<{
+  title?: React.ReactNode
+  tabKey: string
+  defaultTab?: string
+  className?: string
+  sortTabsByName?: boolean
+}>
 
 const ExampleList: React.FC<Props> = (props: Props) => {
   const {
@@ -22,11 +21,12 @@ const ExampleList: React.FC<Props> = (props: Props) => {
     className,
     sortTabsByName
   } = props
-  const unsortedTabPanes = children as any[]
-  const tabPanes =
-    sortTabsByName ?? true
-      ? _.sortBy(unsortedTabPanes, t => t.props.tab.toString().toLowerCase())
-      : unsortedTabPanes
+  let tabPanes: React.ReactNode = children
+  if (Array.isArray(children) && (sortTabsByName ?? true)) {
+    tabPanes = _.sortBy(children, (t: React.ReactElement) =>
+      t.props.tab.toString().toLowerCase()
+    )
+  }
   return (
     <Card title={title} className={className}>
       <ActiveTabBySearchParamTabs tabKey={tabKey} defaultTab={defaultTab}>
