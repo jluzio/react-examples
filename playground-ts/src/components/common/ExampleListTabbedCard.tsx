@@ -10,14 +10,23 @@ type Props = React.HTMLAttributes<{}> &
     tabKey: string
     defaultTab?: string
     className?: string
+    sortTabsByName?: boolean
   }>
 
 const ExampleList: React.FC<Props> = (props: Props) => {
-  const { children, title, tabKey, defaultTab, className } = props
+  const {
+    children,
+    title,
+    tabKey,
+    defaultTab,
+    className,
+    sortTabsByName
+  } = props
   const unsortedTabPanes = children as any[]
-  const tabPanes = _.sortBy(unsortedTabPanes, t =>
-    t.props.tab.toString().toLowerCase()
-  )
+  const tabPanes =
+    sortTabsByName ?? true
+      ? _.sortBy(unsortedTabPanes, t => t.props.tab.toString().toLowerCase())
+      : unsortedTabPanes
   return (
     <Card title={title} className={className}>
       <ActiveTabBySearchParamTabs tabKey={tabKey} defaultTab={defaultTab}>
