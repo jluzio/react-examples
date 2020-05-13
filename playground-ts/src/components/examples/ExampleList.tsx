@@ -3,8 +3,7 @@ import './examples.scss'
 import { Tabs } from 'antd'
 import React from 'react'
 
-import ActiveTabBySearchParamTabs from 'components/common/ActiveTabBySearchParamTabs'
-import _ from 'lodash'
+import ExampleListTabbedCard from 'components/common/ExampleListTabbedCard'
 import BlankExample from './BlankExample'
 import FormikExample from './data-binding/formik/FormikExampleList'
 import StateExamples from './state/StateExamples'
@@ -22,73 +21,72 @@ import RenderPropsExample from './render-props/RenderPropsExample'
 import ReduxExampleList from './redux/ReduxExampleList'
 import CacheExampleList from './cache/CacheExampleList'
 import OAuth2ExampleList from './oauth2/OAuth2ExampleList'
+import MiscExample from './misc/MiscExample'
 
 const { TabPane } = Tabs
 
 const ExampleList: React.FC = () => {
-  const unsortedTabPanes = [
-    <TabPane key="blank" tab="Blank">
-      <BlankExample />
-    </TabPane>,
-    <TabPane key="game" tab="TicTacToe">
-      <Game />
-    </TabPane>,
-    <TabPane key="state" tab="State">
-      <StateExamples />
-    </TabPane>,
-    <TabPane key="variables" tab="Variables">
-      <Variables usernameId="var_uId" passwordId="var_pId" />
-    </TabPane>,
-    <TabPane key="formik" tab="Formik">
-      <FormikExample />
-    </TabPane>,
-    <TabPane key="i18n" tab="I18n">
-      <I18nExampleList />
-    </TabPane>,
-    <TabPane key="validators" tab="Validators">
-      <ValidatorExampleList />
-    </TabPane>,
-    <TabPane key="rxjs" tab="RxJs">
-      <RxjsExampleList />
-    </TabPane>,
-    <TabPane key="error-bound" tab="Error Bound">
-      <ErrorBoundaryExample />
-    </TabPane>,
-    <TabPane key="context" tab="Context">
-      <ContextExample />
-    </TabPane>,
-    <TabPane key="ref" tab="Ref">
-      <RefExample />
-    </TabPane>,
-    <TabPane key="HOC" tab="HOC">
-      <HocExample />
-    </TabPane>,
-    <TabPane key="fragments" tab="Fragments">
-      <FragmentsExample />
-    </TabPane>,
-    <TabPane key="render-props" tab="Render Props">
-      <RenderPropsExample />
-    </TabPane>,
-    <TabPane key="redux" tab="Redux">
-      <ReduxExampleList />
-    </TabPane>,
-    <TabPane key="cache" tab="Cache">
-      <CacheExampleList />
-    </TabPane>,
-    <TabPane key="oauth2" tab="OAuth2">
-      <OAuth2ExampleList />
-    </TabPane>
-  ]
-  const tabPanes = _.sortBy(unsortedTabPanes, t =>
-    t.props.tab.toString().toLowerCase()
-  )
   return (
-    <div className="example-list">
-      <h2>Examples</h2>
-      <ActiveTabBySearchParamTabs tabKey="el-key">
-        {tabPanes}
-      </ActiveTabBySearchParamTabs>
-    </div>
+    <ExampleListTabbedCard
+      title="Examples"
+      tabKey="ex-key"
+      className="example-list"
+    >
+      <TabPane key="blank" tab="Blank">
+        <BlankExample />
+      </TabPane>
+      <TabPane key="game" tab="TicTacToe">
+        <Game />
+      </TabPane>
+      <TabPane key="state" tab="State">
+        <StateExamples />
+      </TabPane>
+      <TabPane key="variables" tab="Variables">
+        <Variables usernameId="var_uId" passwordId="var_pId" />
+      </TabPane>
+      <TabPane key="formik" tab="Formik">
+        <FormikExample />
+      </TabPane>
+      <TabPane key="i18n" tab="I18n">
+        <I18nExampleList />
+      </TabPane>
+      <TabPane key="validators" tab="Validators">
+        <ValidatorExampleList />
+      </TabPane>
+      <TabPane key="rxjs" tab="RxJs">
+        <RxjsExampleList />
+      </TabPane>
+      <TabPane key="error-bound" tab="Error Bound">
+        <ErrorBoundaryExample />
+      </TabPane>
+      <TabPane key="context" tab="Context">
+        <ContextExample />
+      </TabPane>
+      <TabPane key="ref" tab="Ref">
+        <RefExample />
+      </TabPane>
+      <TabPane key="HOC" tab="HOC">
+        <HocExample />
+      </TabPane>
+      <TabPane key="fragments" tab="Fragments">
+        <FragmentsExample />
+      </TabPane>
+      <TabPane key="render-props" tab="Render Props">
+        <RenderPropsExample />
+      </TabPane>
+      <TabPane key="redux" tab="Redux">
+        <ReduxExampleList />
+      </TabPane>
+      <TabPane key="cache" tab="Cache">
+        <CacheExampleList />
+      </TabPane>
+      <TabPane key="oauth2" tab="OAuth2">
+        <OAuth2ExampleList />
+      </TabPane>
+      <TabPane key="misc" tab="Misc">
+        <MiscExample />
+      </TabPane>
+    </ExampleListTabbedCard>
   )
 }
 

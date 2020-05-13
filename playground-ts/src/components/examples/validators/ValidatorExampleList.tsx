@@ -1,22 +1,20 @@
 import React from 'react'
-import { Card, Tabs } from 'antd'
-import ActiveTabBySearchParamTabs from 'components/common/ActiveTabBySearchParamTabs'
+import { Tabs } from 'antd'
+import ExampleListTabbedCard from 'components/common/ExampleListTabbedCard'
 import ValidatorBasic from './ValidatorBasic'
 
 const { TabPane } = Tabs
 
 const ValidatorExampleList: React.FC = () => {
   return (
-    <Card title="Validators" className="example">
-      <ActiveTabBySearchParamTabs tabKey="val-key">
-        <TabPane key="basic" tab="Basic">
-          <ValidatorBasic />
-        </TabPane>
-        <TabPane key="more" tab="More">
-          ... TODO ...
-        </TabPane>
-      </ActiveTabBySearchParamTabs>
-    </Card>
+    <ExampleListTabbedCard title="Validators" tabKey="val-key">
+      <TabPane key="basic" tab="Basic">
+        <ValidatorBasic />
+      </TabPane>
+      <TabPane key="more" tab="More">
+        ... TODO ...
+      </TabPane>
+    </ExampleListTabbedCard>
   )
 }
 
