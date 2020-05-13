@@ -31,6 +31,7 @@ class GoogleOAuth2Api {
   toUserProfile = (googleUser: gapi.auth2.GoogleUser): UserProfile => {
     const basicProfile = googleUser.getBasicProfile()
     return {
+      id: basicProfile.getId(),
       email: basicProfile.getEmail(),
       name: basicProfile.getName(),
       imageUrl: basicProfile.getImageUrl()

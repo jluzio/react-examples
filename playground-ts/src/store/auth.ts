@@ -10,12 +10,12 @@ import { UserProfile } from 'api/oauth2/models'
 
 export interface AuthState {
   signedIn: boolean
-  userProfile?: UserProfile
+  userProfile: UserProfile | null
 }
 
 const initialState: AuthState = {
   signedIn: false,
-  userProfile: undefined
+  userProfile: null
 }
 
 export const authSlice = createSlice({
@@ -32,7 +32,7 @@ export const authSlice = createSlice({
     signOut: state => {
       const signInData: Partial<AuthState> = {
         signedIn: false,
-        userProfile: undefined
+        userProfile: null
       }
       return { ...state, ...signInData }
     }
