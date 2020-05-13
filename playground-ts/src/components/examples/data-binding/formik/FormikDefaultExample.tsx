@@ -1,14 +1,14 @@
 import React from 'react'
 import { Formik } from 'formik'
-import { Input, Button, Form, notification } from 'antd'
-import validators from './validators'
+import { Input, Button, Form } from 'antd'
+import { validators } from '../validators'
 import { LoginFormValues } from '../models'
-
-const { Item } = Form
+import { defaultFormLayout } from '../constants'
+import { notifyFormValues } from '../debug'
 
 type Values = LoginFormValues
 
-export default class FormikBasic extends React.Component {
+export default class FormikDefaultExample extends React.Component {
   render() {
     return (
       <Formik
@@ -23,11 +23,8 @@ export default class FormikBasic extends React.Component {
           return errors
         }}
         onSubmit={(values, { setSubmitting }) => {
+          notifyFormValues(values)
           setTimeout(() => {
-            notification.open({
-              message: 'Form submit',
-              description: JSON.stringify(values, null, 2)
-            })
             setSubmitting(false)
           }, 400)
         }}
@@ -42,8 +39,12 @@ export default class FormikBasic extends React.Component {
           isSubmitting
           /* and other goodies */
         }) => (
-          <Form onSubmitCapture={handleSubmit} layout="inline">
-            <Item>
+          <Form
+            onSubmitCapture={handleSubmit}
+            labelCol={defaultFormLayout.form?.labelCol}
+            wrapperCol={defaultFormLayout.form?.wrapperCol}
+          >
+            <Form.Item label="Email">
               <Input
                 type="email"
                 name="email"
@@ -53,10 +54,9 @@ export default class FormikBasic extends React.Component {
                 value={values.email}
               />
               {errors.email && touched.email && errors.email}
-            </Item>
-            <Item>
-              <Input
-                type="password"
+            </Form.Item>
+            <Form.Item label="Password">
+              <Input.Password
                 name="password"
                 placeholder="Password"
                 onChange={handleChange}
@@ -64,12 +64,14 @@ export default class FormikBasic extends React.Component {
                 value={values.password}
               />
               {errors.password && touched.password && errors.password}
-            </Item>
-            <Item>
+            </Form.Item>
+            <Form.Item
+              wrapperCol={defaultFormLayout.formActionsItemProps?.wrapperCol}
+            >
               <Button type="primary" htmlType="submit" disabled={isSubmitting}>
                 Submit
               </Button>
-            </Item>
+            </Form.Item>
           </Form>
         )}
       </Formik>

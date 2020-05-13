@@ -1,14 +1,14 @@
 import React from 'react'
-import { Form, Button } from 'antd'
-import { useForm, ErrorMessage } from 'react-hook-form'
+import { Form, Button, Input, InputNumber } from 'antd'
+import { useForm, ErrorMessage, Controller } from 'react-hook-form'
 import { SignupFormValues } from '../models'
 import { defaultFormLayout } from '../constants'
 import { notifyFormValues } from '../debug'
 
 type Values = SignupFormValues
 
-const RhfBasicExample: React.FC = () => {
-  const { register, handleSubmit, errors } = useForm<Values>({
+const RhfCustomInputControllerExample: React.FC = () => {
+  const { handleSubmit, errors, control } = useForm<Values>({
     defaultValues: {
       email: '',
       name: '',
@@ -26,53 +26,64 @@ const RhfBasicExample: React.FC = () => {
       wrapperCol={defaultFormLayout.form?.wrapperCol}
     >
       <Form.Item label="Email">
-        <input
+        <Controller
+          as={<Input type="email" />}
           name="email"
-          type="email"
-          ref={register({
+          control={control}
+          rules={{
             required: 'required',
-            minLength: { value: 8, message: 'minLength' },
-            pattern: { value: /.+@.+/, message: 'pattern' }
-          })}
-          className="ant-input"
-          placeholder="email"
+            minLength: {
+              value: 8,
+              message: 'minLength'
+            },
+            pattern: {
+              value: /.+@.+/,
+              message: 'pattern'
+            }
+          }}
         />
         <ErrorMessage errors={errors} name="email" />
       </Form.Item>
       <Form.Item label="Name">
-        <input
+        <Controller
+          as={<Input />}
           name="name"
-          type="text"
-          ref={register({
-            minLength: { value: 4, message: 'minLength' }
-          })}
-          className="ant-input"
-          placeholder="name"
+          control={control}
+          rules={{
+            minLength: {
+              value: 4,
+              message: 'minLength'
+            }
+          }}
         />
         <ErrorMessage errors={errors} name="name" />
       </Form.Item>
       <Form.Item label="Age">
-        <input
+        <Controller
+          as={<InputNumber />}
           name="age"
-          type="number"
-          ref={register({
-            min: { value: 16, message: 'min' }
-          })}
-          className="ant-input"
-          placeholder="age"
+          control={control}
+          rules={{
+            min: {
+              value: 16,
+              message: 'min'
+            }
+          }}
         />
         <ErrorMessage errors={errors} name="age" />
       </Form.Item>
       <Form.Item label="Password">
-        <input
+        <Controller
+          as={<Input.Password />}
           name="password"
-          type="password"
-          ref={register({
+          control={control}
+          rules={{
             required: 'required',
-            minLength: { value: 4, message: 'minLength' }
-          })}
-          className="ant-input"
-          placeholder="password"
+            minLength: {
+              value: 4,
+              message: 'minLength'
+            }
+          }}
         />
         <ErrorMessage errors={errors} name="password" />
       </Form.Item>
@@ -87,4 +98,4 @@ const RhfBasicExample: React.FC = () => {
   )
 }
 
-export default RhfBasicExample
+export default RhfCustomInputControllerExample

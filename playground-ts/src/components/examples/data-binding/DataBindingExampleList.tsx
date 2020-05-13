@@ -5,6 +5,7 @@ import FormikExampleList from './formik/FormikExampleList'
 import ReactHookFormExampleList from './react-hook-form/ReactHookFormExampleList'
 import ReduxFormExampleList from './redux-form/ReduxFormExampleList'
 import AntDesignExampleList from './ant-design/AntDesignExampleList'
+import ValidationExampleList from './validation/ValidationExampleList'
 
 const { TabPane } = Tabs
 
@@ -21,6 +22,9 @@ const DataBindingExampleList: React.FC = () => (
     </TabPane>
     <TabPane key="adf" tab="Ant Design">
       <AntDesignExampleList />
+    </TabPane>
+    <TabPane key="val" tab="Validation">
+      <ValidationExampleList />
     </TabPane>
   </ExampleListTabbedCard>
 )

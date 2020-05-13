@@ -1,16 +1,15 @@
 import React from 'react'
 import { Formik, Field, ErrorMessage } from 'formik'
-import { Button, Form, notification } from 'antd'
+import { Button, Form } from 'antd'
 import Log from 'utils/Log'
-import validators from './validators'
 import { LoginFormValues } from '../models'
+import { defaultFormLayout } from '../constants'
+import { validators } from '../validators'
+import { notifyFormValues } from '../debug'
 
-const { Item } = Form
 type Values = LoginFormValues
 
-const validationSchema = validators.signupSchema()
-
-export default class FormikSimplified extends React.Component {
+export default class FormikValidationYup extends React.Component {
   render() {
     return (
       <Formik<Values>
@@ -18,24 +17,33 @@ export default class FormikSimplified extends React.Component {
           email: '',
           password: ''
         }}
-        validationSchema={validationSchema}
+        validate={values => {
+          const errors: any = {}
+          if (!validators.required(values.email)) {
+            errors.email = 'Required'
+          } else if (!validators.email(values.email)) {
+            errors.email = 'Invalid email address'
+          }
+          return errors
+        }}
         onSubmit={(values, { setSubmitting }) => {
           Log.log('submit', {
             values,
             state: this.state
           })
+          notifyFormValues(values)
           setTimeout(() => {
-            notification.open({
-              message: 'Form submit',
-              description: JSON.stringify(values, null, 2)
-            })
             setSubmitting(false)
           }, 400)
         }}
       >
         {({ handleSubmit, isSubmitting }) => (
-          <Form onSubmitCapture={handleSubmit} layout="inline">
-            <Item>
+          <Form
+            onSubmitCapture={handleSubmit}
+            labelCol={defaultFormLayout.form?.labelCol}
+            wrapperCol={defaultFormLayout.form?.wrapperCol}
+          >
+            <Form.Item label="Email">
               <Field
                 type="email"
                 name="email"
@@ -43,8 +51,8 @@ export default class FormikSimplified extends React.Component {
                 placeholder="Email"
               />
               <ErrorMessage name="email" component="div" />
-            </Item>
-            <Item>
+            </Form.Item>
+            <Form.Item label="Password">
               <Field
                 type="password"
                 name="password"
@@ -52,12 +60,14 @@ export default class FormikSimplified extends React.Component {
                 placeholder="Password"
               />
               <ErrorMessage name="password" component="div" />
-            </Item>
-            <Item>
+            </Form.Item>
+            <Form.Item
+              wrapperCol={defaultFormLayout.formActionsItemProps?.wrapperCol}
+            >
               <Button type="primary" htmlType="submit" disabled={isSubmitting}>
                 Submit
               </Button>
-            </Item>
+            </Form.Item>
           </Form>
         )}
       </Formik>

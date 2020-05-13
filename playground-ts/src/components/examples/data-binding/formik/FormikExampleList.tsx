@@ -1,22 +1,23 @@
 import React from 'react'
 import { Tabs } from 'antd'
 import ExampleListTabbedCard from 'components/common/ExampleListTabbedCard'
-import FormikBasic from './FormikBasic'
-import FormikSimplified from './FormikSimplified'
+import FormikDefaultExample from './FormikDefaultExample'
+import FormikValidationSchemaExample from './FormikValidationSchemaExample'
+import FormikFieldExample from './FormikFieldExample'
 
 const { TabPane } = Tabs
 
 const FormikExampleList: React.FC = () => {
   return (
     <ExampleListTabbedCard title="Formik" tabKey="fe-key">
-      <TabPane key="basic" tab="Basic">
-        <FormikBasic />
+      <TabPane key="default" tab="Default">
+        <FormikDefaultExample />
       </TabPane>
-      <TabPane key="simplified" tab="Simplified">
-        <FormikSimplified />
+      <TabPane key="field" tab="Field">
+        <FormikFieldExample />
       </TabPane>
-      <TabPane key="more" tab="More">
-        ... TODO ...
+      <TabPane key="val-schema" tab="Validation Schema">
+        <FormikValidationSchemaExample />
       </TabPane>
     </ExampleListTabbedCard>
   )

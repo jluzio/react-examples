@@ -3,16 +3,15 @@ import { Form, Button, notification, Input, InputNumber } from 'antd'
 import { Store } from 'antd/lib/form/interface'
 import { ValidateErrorEntity } from 'rc-field-form/lib/interface'
 import { SignupFormValues } from '../models'
+import { defaultFormLayout } from '../constants'
+import { notifyFormValues } from '../debug'
 
 type Values = SignupFormValues
 
 const AdBasicExample: React.FC = () => {
   const handleFinish = (valuesAsStore: Store) => {
     const values = valuesAsStore as Values
-    notification.open({
-      message: 'Form submit',
-      description: JSON.stringify(values, null, 2)
-    })
+    notifyFormValues(values)
   }
   const handleFinishFailed = (error: ValidateErrorEntity) => {
     notification.open({
@@ -28,12 +27,12 @@ const AdBasicExample: React.FC = () => {
       onFinishFailed={err => handleFinishFailed(err)}
       initialValues={
         {
-          email: 'e',
-          name: 'n'
+          email: '',
+          name: ''
         } as Partial<Values>
       }
-      labelCol={{ span: 4 }}
-      wrapperCol={{ span: 16 }}
+      labelCol={defaultFormLayout.form?.labelCol}
+      wrapperCol={defaultFormLayout.form?.wrapperCol}
     >
       <Form.Item
         label="Email"
@@ -71,7 +70,9 @@ const AdBasicExample: React.FC = () => {
         <Input.Password />
       </Form.Item>
 
-      <Form.Item wrapperCol={{ offset: 4, span: 16 }}>
+      <Form.Item
+        wrapperCol={defaultFormLayout.formActionsItemProps?.wrapperCol}
+      >
         <Button type="primary" htmlType="submit">
           Submit
         </Button>
