@@ -8,9 +8,13 @@ import { ValidateStatus } from 'antd/lib/form/FormItem'
 import transformations from 'services/validation/transformations'
 import {
   hasValidationErrors,
-  getValidationMessages
+  getValidationMessages,
+  ValidationErrors
 } from 'services/validation/validation-errors'
-import eventHandlers from 'services/validation/event-handlers'
+import eventHandlers, {
+  handleFieldUpdate
+} from 'services/validation/event-handlers'
+import _ from 'lodash'
 import { SignupFormValues } from '../models'
 import { defaultFormLayout } from '../constants'
 import { notifyFormValues } from '../debug'
@@ -38,18 +42,19 @@ const validationSchema = yup.object<SignupFormValues>().shape({
 
 type Props = {}
 type State = {
-  validationErrors: yup.ValidationError[] | undefined
+  validationErrors: ValidationErrors
 }
 
 class YupExample extends React.Component<Props, State> {
   formRef = React.createRef<FormInstance>()
 
   state: State = {
-    validationErrors: undefined
+    validationErrors: []
   }
 
   handleFinish = (valuesAsStore: Store) => {
     const values = valuesAsStore as Values
+    // const values = this.formRef.current?.getFieldsValue()
     notifyFormValues(values)
     validationSchema
       .validate(values, { abortEarly: false })
@@ -89,6 +94,22 @@ class YupExample extends React.Component<Props, State> {
       })
   }
 
+  handleFieldChangeEvent = (e: React.ChangeEvent<HTMLInputElement>) =>
+    eventHandlers.handleFieldChangeEvent(
+      e,
+      validationSchema,
+      this.setFieldValidationErrors
+    )
+
+  setFieldValidationErrors = (errors: ValidationErrors, path: string) => {
+    const { validationErrors } = this.state
+    const newValidationErrors = [
+      ...validationErrors.filter(ve => ve.path !== path),
+      ...errors
+    ]
+    this.setState({ validationErrors: newValidationErrors })
+  }
+
   validate() {
     const values = this.formRef.current?.getFieldsValue()
     validationSchema
@@ -125,6 +146,7 @@ class YupExample extends React.Component<Props, State> {
         wrapperCol={defaultFormLayout.form?.wrapperCol}
       >
         <Form.Item
+          name="email"
           label="Email"
           hasFeedback
           help={getValidationMessages('email', validationErrors)}
@@ -133,36 +155,54 @@ class YupExample extends React.Component<Props, State> {
           <Input
             name="email"
             autoComplete="off"
-            onChange={e =>
-              eventHandlers.handleChangeEvent(e, validationSchema, errors =>
-                this.setState({ validationErrors: errors })
-              )
-            }
+            onChange={this.handleFieldChangeEvent}
           />
         </Form.Item>
         <Form.Item
+          name="name"
           label="Name"
           hasFeedback
           help={getValidationMessages('name', validationErrors)}
           validateStatus={validationStatus('name')}
         >
-          <Input name="name" autoComplete="off" />
+          <Input
+            name="name"
+            onChange={this.handleFieldChangeEvent}
+            autoComplete="off"
+          />
         </Form.Item>
         <Form.Item
+          name="age"
           label="Age"
           hasFeedback
           help={getValidationMessages('age', validationErrors)}
           validateStatus={validationStatus('age')}
         >
-          <InputNumber name="age" autoComplete="off" />
+          <InputNumber
+            name="age"
+            onChange={value =>
+              handleFieldUpdate(
+                value,
+                'age',
+                validationSchema,
+                this.setFieldValidationErrors
+              )
+            }
+            autoComplete="off"
+          />
         </Form.Item>
         <Form.Item
+          name="password"
           label="Password"
           hasFeedback
           help={getValidationMessages('password', validationErrors)}
           validateStatus={validationStatus('password')}
         >
-          <Input.Password name="password" autoComplete="off" />
+          <Input.Password
+            name="password"
+            onChange={this.handleFieldChangeEvent}
+            autoComplete="off"
+          />
         </Form.Item>
         <Form.Item
           wrapperCol={defaultFormLayout.formActionsItemProps?.wrapperCol}

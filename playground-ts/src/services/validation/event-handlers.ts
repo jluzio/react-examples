@@ -6,33 +6,44 @@ type HTMLDataElement =
   | HTMLSelectElement
   | HTMLTextAreaElement
 
-export const handleUpdate = (
+export type FieldValidationErrorsSetter = (
+  errors: yup.ValidationError[],
+  path: string
+) => void
+
+export const handleFieldUpdate = (
   value: any,
   path: string,
   validationSchema: yup.Schema<any>,
-  setValidationErrors: (errors: yup.ValidationError[]) => void
+  setFieldValidationErrors: FieldValidationErrorsSetter
 ) => {
-  validationSchema
-    .validateAt(path, value)
+  yup
+    .reach(validationSchema, path)
+    .validate(value)
     .then(() => {
-      setValidationErrors([])
+      setFieldValidationErrors([], path)
     })
     .catch((error: yup.ValidationError) => {
-      setValidationErrors(error.inner)
+      const fieldError: yup.ValidationError = { ...error, path }
+      setFieldValidationErrors([fieldError], path)
     })
 }
 
-export const handleChangeEvent = (
+export const handleFieldChangeEvent = (
   event: React.ChangeEvent<HTMLDataElement>,
   validationSchema: yup.Schema<any>,
-  setValidationErrors: (errors: yup.ValidationError[]) => void
+  setFieldValidationErrors: FieldValidationErrorsSetter
 ) => {
-  console.log('handleChangeEvent', event)
   const { name, value } = event.target
-  return handleUpdate(value, name, validationSchema, setValidationErrors)
+  return handleFieldUpdate(
+    value,
+    name,
+    validationSchema,
+    setFieldValidationErrors
+  )
 }
 
 export default {
-  handleUpdate,
-  handleChangeEvent
+  handleFieldUpdate,
+  handleFieldChangeEvent
 }
