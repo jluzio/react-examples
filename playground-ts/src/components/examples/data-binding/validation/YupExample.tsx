@@ -1,15 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Form, Button, notification, Input, InputNumber } from 'antd'
 import { Store } from 'antd/lib/form/interface'
 import { ValidateErrorEntity } from 'rc-field-form/lib/interface'
 import * as yup from 'yup'
 import { FormInstance } from 'antd/lib/form'
 import { ValidateStatus } from 'antd/lib/form/FormItem'
+import transformations from 'services/validation/transformations'
 import {
-  transformations,
-  getValidationMessages,
-  hasValidationErrors
-} from 'services/validators/validators'
+  hasValidationErrors,
+  getValidationMessages
+} from 'services/validation/validation-errors'
+import eventHandlers from 'services/validation/event-handlers'
 import { SignupFormValues } from '../models'
 import { defaultFormLayout } from '../constants'
 import { notifyFormValues } from '../debug'
@@ -35,28 +36,38 @@ const validationSchema = yup.object<SignupFormValues>().shape({
   age: yup.number().min(16)
 })
 
-const YupExample: React.FC = () => {
-  const formRef = React.createRef<FormInstance>()
-  const [validationErrors, setValidationErrors] = useState<
-    yup.ValidationError[] | undefined
-  >()
+type Props = {}
+type State = {
+  validationErrors: yup.ValidationError[] | undefined
+}
 
-  const handleFinish = (valuesAsStore: Store) => {
+class YupExample extends React.Component<Props, State> {
+  formRef = React.createRef<FormInstance>()
+
+  state: State = {
+    validationErrors: undefined
+  }
+
+  handleFinish = (valuesAsStore: Store) => {
     const values = valuesAsStore as Values
     notifyFormValues(values)
     validationSchema
       .validate(values, { abortEarly: false })
       .then(validatedValues => {
         notifyFormValues(validatedValues, 'ValidatedValues')
-        setValidationErrors([])
+        this.setState({
+          validationErrors: []
+        })
       })
       .catch((validationError: yup.ValidationError) => {
         console.log('validation error', validationError)
-        setValidationErrors(validationError.inner)
+        this.setState({
+          validationErrors: validationError.inner
+        })
       })
   }
 
-  const handleFinishFailed = (error: ValidateErrorEntity) => {
+  handleFinishFailed = (error: ValidateErrorEntity) => {
     notification.open({
       message: 'Error',
       description: `Error in fields: ${error.errorFields
@@ -65,8 +76,8 @@ const YupExample: React.FC = () => {
     })
   }
 
-  const handleTestFormValues = async () => {
-    const values = formRef.current?.getFieldsValue()
+  handleTestFormValues = async () => {
+    const values = this.formRef.current?.getFieldsValue()
     notifyFormValues(values, 'Values')
     validationSchema
       .validate(values, { abortEarly: false })
@@ -78,69 +89,92 @@ const YupExample: React.FC = () => {
       })
   }
 
-  const validationStatus = (path: string): ValidateStatus =>
-    hasValidationErrors(path, validationErrors) ? 'error' : 'success'
+  validate() {
+    const values = this.formRef.current?.getFieldsValue()
+    validationSchema
+      .validate(values, { abortEarly: false })
+      .then(validatedValues => {
+        this.setState({
+          validationErrors: []
+        })
+      })
+      .catch((validationError: yup.ValidationError) => {
+        this.setState({
+          validationErrors: validationError.inner
+        })
+      })
+  }
 
-  return (
-    <Form
-      onFinish={handleFinish}
-      onFinishFailed={err => handleFinishFailed(err)}
-      initialValues={
-        {
-          email: '',
-          name: undefined
-        } as Partial<Values>
-      }
-      ref={formRef}
-      labelCol={defaultFormLayout.form?.labelCol}
-      wrapperCol={defaultFormLayout.form?.wrapperCol}
-    >
-      <Form.Item
-        label="Email"
-        name="email"
-        hasFeedback
-        help={getValidationMessages('email', validationErrors)}
-        validateStatus={validationStatus('email')}
+  render() {
+    const { validationErrors } = this.state
+    const validationStatus = (path: string): ValidateStatus =>
+      hasValidationErrors(path, validationErrors) ? 'error' : 'success'
+
+    return (
+      <Form
+        onFinish={this.handleFinish}
+        onFinishFailed={err => this.handleFinishFailed(err)}
+        initialValues={
+          {
+            email: '',
+            name: undefined
+          } as Partial<Values>
+        }
+        ref={this.formRef}
+        labelCol={defaultFormLayout.form?.labelCol}
+        wrapperCol={defaultFormLayout.form?.wrapperCol}
       >
-        <Input />
-      </Form.Item>
-      <Form.Item
-        label="Name"
-        name="name"
-        hasFeedback
-        help={getValidationMessages('name', validationErrors)}
-        validateStatus={validationStatus('name')}
-      >
-        <Input />
-      </Form.Item>
-      <Form.Item
-        label="Age"
-        name="age"
-        hasFeedback
-        help={getValidationMessages('age', validationErrors)}
-        validateStatus={validationStatus('age')}
-      >
-        <InputNumber />
-      </Form.Item>
-      <Form.Item
-        label="Password"
-        name="password"
-        hasFeedback
-        help={getValidationMessages('password', validationErrors)}
-        validateStatus={validationStatus('password')}
-      >
-        <Input.Password />
-      </Form.Item>
-      <Form.Item
-        wrapperCol={defaultFormLayout.formActionsItemProps?.wrapperCol}
-      >
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
-        <Button onClick={handleTestFormValues}>Test Values</Button>
-      </Form.Item>
-    </Form>
-  )
+        <Form.Item
+          label="Email"
+          hasFeedback
+          help={getValidationMessages('email', validationErrors)}
+          validateStatus={validationStatus('email')}
+        >
+          <Input
+            name="email"
+            autoComplete="off"
+            onChange={e =>
+              eventHandlers.handleChangeEvent(e, validationSchema, errors =>
+                this.setState({ validationErrors: errors })
+              )
+            }
+          />
+        </Form.Item>
+        <Form.Item
+          label="Name"
+          hasFeedback
+          help={getValidationMessages('name', validationErrors)}
+          validateStatus={validationStatus('name')}
+        >
+          <Input name="name" autoComplete="off" />
+        </Form.Item>
+        <Form.Item
+          label="Age"
+          hasFeedback
+          help={getValidationMessages('age', validationErrors)}
+          validateStatus={validationStatus('age')}
+        >
+          <InputNumber name="age" autoComplete="off" />
+        </Form.Item>
+        <Form.Item
+          label="Password"
+          hasFeedback
+          help={getValidationMessages('password', validationErrors)}
+          validateStatus={validationStatus('password')}
+        >
+          <Input.Password name="password" autoComplete="off" />
+        </Form.Item>
+        <Form.Item
+          wrapperCol={defaultFormLayout.formActionsItemProps?.wrapperCol}
+        >
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
+          <Button onClick={this.handleTestFormValues}>Test Values</Button>
+        </Form.Item>
+      </Form>
+    )
+  }
 }
 
 export default YupExample

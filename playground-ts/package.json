@@ -74,6 +74,7 @@
     ],
     "rules": {
       "semi": 0,
+      "no-unused-vars": "off",
       "react/state-in-constructor": "off",
       "react/jsx-filename-extension": [
         1,

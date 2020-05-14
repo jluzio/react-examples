@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import * as yup from 'yup'
-import { transformations } from 'services/validators/validators'
+import transformations from 'services/validation/transformations'
 import { SignupFormValues, LoginFormValues } from './models'
 
 const fieldValidations = {
