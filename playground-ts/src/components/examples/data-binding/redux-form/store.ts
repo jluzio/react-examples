@@ -1,21 +1,16 @@
-import { authActions, authReducer } from 'store/auth'
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import { reducer as formReducer } from 'redux-form'
 
-export const rootReducer = combineReducers({
-  auth: authReducer
+const rootReducer = combineReducers({
+  form: formReducer
 })
 
 export type RootState = ReturnType<typeof rootReducer>
 
-export { authActions }
-export const actions = {
-  ...authActions
-}
-
 export const store = configureStore({
   reducer: rootReducer,
   devTools: {
-    name: 'Learning / Streamy'
+    name: 'Examples / Redux Form'
   }
 })
 

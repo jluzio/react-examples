@@ -36,7 +36,7 @@ export const store = configureStore({
   reducer: rootReducer,
   preloadedState: initialState,
   devTools: {
-    name: 'Examples/TodoList Store'
+    name: 'Examples / TodoList'
   }
 })
 

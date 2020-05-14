@@ -1,10 +1,23 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react'
 import { reduxForm, Field, InjectedFormProps } from 'redux-form'
-import { Form, Input, InputNumber, Button } from 'antd'
+import { Form, Button } from 'antd'
+import { email, maxLength, required, minLength, max, min } from './validators'
 import { SignupFormValues } from '../models'
 import { defaultFormLayout } from '../constants'
+import { renderFormItem } from './InputRenderers'
+import { notifyFormValues } from '../debug'
 
 type OwnProps = {}
+
+// validation functions have to be outside component
+const minLength3 = minLength(3)
+const min16 = min(16)
+
+const submit = (values: SignupFormValues) => {
+  notifyFormValues(values)
+  return Promise.resolve()
+}
 
 type Props = InjectedFormProps<SignupFormValues, OwnProps>
 const SignupForm: React.FC<Props> = (props: Props) => {
@@ -15,29 +28,47 @@ const SignupForm: React.FC<Props> = (props: Props) => {
   }
 
   return (
-    <Form onSubmitCapture={handleSubmit}>
-      <Form.Item name="email" label="Email">
-        <Input name="email" autoComplete="off" />
-      </Form.Item>
-      <Form.Item name="name" label="Name">
-        <Input name="name" autoComplete="off" />
-      </Form.Item>
-      <Form.Item name="age" label="Age">
-        <InputNumber name="age" autoComplete="off" />
-      </Form.Item>
-      <Form.Item name="password" label="Password">
-        <Input.Password name="password" />
-      </Form.Item>
+    <Form
+      onSubmitCapture={handleSubmit(submit)}
+      labelCol={defaultFormLayout.form?.labelCol}
+      wrapperCol={defaultFormLayout.form?.wrapperCol}
+    >
+      <Field
+        name="email"
+        label="Email"
+        type="email"
+        component={renderFormItem}
+        validate={[required, minLength3, email]}
+      />
+      <Field
+        name="name"
+        type="text"
+        label="Name"
+        component={renderFormItem}
+        validate={[minLength3]}
+      />
+      <Field
+        name="age"
+        type="number"
+        label="Age"
+        component={renderFormItem}
+        validate={[min16]}
+      />
+      <Field
+        name="password"
+        type="password"
+        label="Password"
+        component={renderFormItem}
+        validate={[required, minLength3]}
+      />
       <Form.Item
         wrapperCol={defaultFormLayout.formActionsItemProps?.wrapperCol}
       >
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" disabled={submitting}>
           Submit
         </Button>
         <Button onClick={handleTestFormValues}>Test Values</Button>
       </Form.Item>
-      <div>test data</div>
-      <div>test data</div>
     </Form>
   )
 }

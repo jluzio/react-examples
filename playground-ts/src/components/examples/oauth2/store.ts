@@ -15,7 +15,7 @@ export const actions = {
 export const store = configureStore({
   reducer: rootReducer,
   devTools: {
-    name: 'GoogleAuthExample store'
+    name: 'Examples / GoogleAuthExample'
   }
 })
 

@@ -14,7 +14,7 @@ export const store = configureStore({
   preloadedState: initialState,
   // middleware: [...getDefaultMiddleware(), loggingMiddleware],
   devTools: {
-    name: 'Learning/Blog Store'
+    name: 'Learning / Blog'
   }
 })
 
