@@ -95,7 +95,6 @@ const YupExample: React.FC = () => {
       labelCol={defaultFormLayout.form?.labelCol}
       wrapperCol={defaultFormLayout.form?.wrapperCol}
     >
-      <div>TODO: name validation correctly and feedback</div>
       <Form.Item
         label="Email"
         name="email"
