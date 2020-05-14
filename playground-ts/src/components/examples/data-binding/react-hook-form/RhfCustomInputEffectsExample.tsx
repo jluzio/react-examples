@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { Form, Button, Input, InputNumber } from 'antd'
 import { useForm, ErrorMessage } from 'react-hook-form'
+import _ from 'lodash'
 import { SignupFormValues } from '../models'
 import { defaultFormLayout } from '../constants'
 import { notifyFormValues } from '../debug'
@@ -19,6 +20,9 @@ const RhfCustomInputEffectsExample: React.FC = () => {
   const handleFormSubmit = handleSubmit(values => {
     notifyFormValues(values)
   })
+
+  const toNumber = (value: number | string | undefined): number | undefined =>
+    typeof value === 'string' ? _.parseInt(value) : value
 
   register({})
 
@@ -82,7 +86,9 @@ const RhfCustomInputEffectsExample: React.FC = () => {
         <ErrorMessage errors={errors} name="name" />
       </Form.Item>
       <Form.Item label="Age">
-        <InputNumber onChange={value => setValue('age', value, true)} />
+        <InputNumber
+          onChange={value => setValue('age', toNumber(value), true)}
+        />
         <ErrorMessage errors={errors} name="age" />
       </Form.Item>
       <Form.Item label="Password">

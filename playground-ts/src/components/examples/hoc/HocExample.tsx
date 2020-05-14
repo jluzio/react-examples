@@ -1,4 +1,5 @@
 import React from 'react'
+import { Form } from 'antd'
 import SearchInput from './SearchInput'
 
 interface Props {}
@@ -22,7 +23,11 @@ class HocExample extends React.Component<Props, State> {
 
   render() {
     const { term } = this.state
-    return <SearchInput term={term} onTermChange={this.onTermChange} />
+    return (
+      <Form.Item label="Logged Search Term">
+        <SearchInput term={term} onTermChange={this.onTermChange} />
+      </Form.Item>
+    )
   }
 }
 

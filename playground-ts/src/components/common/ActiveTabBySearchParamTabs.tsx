@@ -7,11 +7,7 @@ export interface Props extends RouteComponentProps<{}> {
   defaultTab?: string
 }
 
-class ActiveTabBySearchParamTabs<
-  P extends Props = Props,
-  S = {},
-  SS = any
-> extends React.Component<P, S, SS> {
+class ActiveTabBySearchParamTabs extends React.Component<Props> {
   onChange = (activeKey: string) => {
     const { history, location, tabKey } = this.props
     const searchParams = new URLSearchParams(location.search)
