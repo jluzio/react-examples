@@ -1,28 +1,7 @@
+/* eslint-disable import/prefer-default-export */
 import * as yup from 'yup'
+import { transformations } from 'services/validators/validators'
 import { SignupFormValues, LoginFormValues } from './models'
-
-export const required = <T>(v: OptNull<T>): v is T => v != null
-
-export const optionalValidation = <T>(
-  value: OptNull<T>,
-  validator: (v: T) => boolean
-) => value == null || validator(value)
-
-export const email = (value: OptNull<string>) =>
-  optionalValidation(value, v =>
-    /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(v)
-  )
-
-export const validators = {
-  required,
-  optionalValidation,
-  email
-}
-
-export const transformations = {
-  emptyStringToUndefined: (value: OptNull<string>) =>
-    value && value.length ? value : undefined
-}
 
 const fieldValidations = {
   email: yup

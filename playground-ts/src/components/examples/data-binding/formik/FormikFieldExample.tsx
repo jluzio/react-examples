@@ -2,9 +2,9 @@ import React from 'react'
 import { Formik, Field, ErrorMessage } from 'formik'
 import { Button, Form } from 'antd'
 import Log from 'utils/Log'
+import { validators } from 'services/validators/validators'
 import { LoginFormValues } from '../models'
 import { defaultFormLayout } from '../constants'
-import { validators } from '../validators'
 import { notifyFormValues } from '../debug'
 
 type Values = LoginFormValues

@@ -4,10 +4,15 @@ import { Store } from 'antd/lib/form/interface'
 import { ValidateErrorEntity } from 'rc-field-form/lib/interface'
 import * as yup from 'yup'
 import { FormInstance } from 'antd/lib/form'
+import { ValidateStatus } from 'antd/lib/form/FormItem'
+import {
+  transformations,
+  getValidationMessages,
+  hasValidationErrors
+} from 'services/validators/validators'
 import { SignupFormValues } from '../models'
 import { defaultFormLayout } from '../constants'
 import { notifyFormValues } from '../debug'
-import { validators, transformations } from '../validators'
 
 type Values = SignupFormValues
 
@@ -20,9 +25,9 @@ const validationSchema = yup.object<SignupFormValues>().shape({
     .max(50),
   name: yup
     .string()
+    .transform(transformations.emptyStringToUndefined)
     .min(4)
-    .max(50)
-    .transform(transformations.emptyStringToUndefined),
+    .max(50),
   password: yup
     .string()
     .required()
@@ -32,7 +37,7 @@ const validationSchema = yup.object<SignupFormValues>().shape({
 
 const YupExample: React.FC = () => {
   const formRef = React.createRef<FormInstance>()
-  const [validations, setValidations] = useState<
+  const [validationErrors, setValidationErrors] = useState<
     yup.ValidationError[] | undefined
   >()
 
@@ -43,10 +48,11 @@ const YupExample: React.FC = () => {
       .validate(values, { abortEarly: false })
       .then(validatedValues => {
         notifyFormValues(validatedValues, 'ValidatedValues')
+        setValidationErrors([])
       })
       .catch((validationError: yup.ValidationError) => {
         console.log('validation error', validationError)
-        setValidations([validationError])
+        setValidationErrors(validationError.inner)
       })
   }
 
@@ -72,6 +78,9 @@ const YupExample: React.FC = () => {
       })
   }
 
+  const validationStatus = (path: string): ValidateStatus =>
+    hasValidationErrors(path, validationErrors) ? 'error' : 'success'
+
   return (
     <Form
       onFinish={handleFinish}
@@ -87,16 +96,40 @@ const YupExample: React.FC = () => {
       wrapperCol={defaultFormLayout.form?.wrapperCol}
     >
       <div>TODO: name validation correctly and feedback</div>
-      <Form.Item label="Email" name="email" hasFeedback>
+      <Form.Item
+        label="Email"
+        name="email"
+        hasFeedback
+        help={getValidationMessages('email', validationErrors)}
+        validateStatus={validationStatus('email')}
+      >
         <Input />
       </Form.Item>
-      <Form.Item label="Name" name="name" hasFeedback>
+      <Form.Item
+        label="Name"
+        name="name"
+        hasFeedback
+        help={getValidationMessages('name', validationErrors)}
+        validateStatus={validationStatus('name')}
+      >
         <Input />
       </Form.Item>
-      <Form.Item label="Age" name="age" hasFeedback>
+      <Form.Item
+        label="Age"
+        name="age"
+        hasFeedback
+        help={getValidationMessages('age', validationErrors)}
+        validateStatus={validationStatus('age')}
+      >
         <InputNumber />
       </Form.Item>
-      <Form.Item label="Password" name="password" hasFeedback>
+      <Form.Item
+        label="Password"
+        name="password"
+        hasFeedback
+        help={getValidationMessages('password', validationErrors)}
+        validateStatus={validationStatus('password')}
+      >
         <Input.Password />
       </Form.Item>
       <Form.Item
