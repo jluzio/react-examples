@@ -51,6 +51,12 @@ class DebugSessionModal extends React.Component<Props, State> {
     })
   }
 
+  handleEnterKey = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      this.confirm()
+    }
+  }
+
   render() {
     const { debugSession } = this.state
     const { visible } = this.props
@@ -72,6 +78,7 @@ class DebugSessionModal extends React.Component<Props, State> {
               autoFocus
               value={debugSession}
               onChange={e => this.setDebugSession(e.target.value)}
+              onKeyDown={this.handleEnterKey}
             />
           </Form.Item>
         </Form>
