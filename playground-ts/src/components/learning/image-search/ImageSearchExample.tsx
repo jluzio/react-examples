@@ -26,7 +26,7 @@ interface State {
   resourceStatus: ResourceStatus
 }
 
-export default class ImageSearch extends React.Component<Props, State> {
+export default class ImageSearchExample extends React.Component<Props, State> {
   searchSubject = new Subject<string>()
 
   subscriptions: Subscription[] = []

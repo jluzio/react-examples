@@ -27,19 +27,49 @@ class StreamCreate extends React.Component {
         onSubmit={this.handleSubmit}
         validationSchema={streamCreateValidationSchema}
       >
-        {({ submitForm }) => (
+        {({
+          submitForm,
+          handleChange,
+          handleBlur,
+          errors,
+          dirty,
+          touched,
+          values
+        }) => (
           <Form
             onSubmitCapture={submitForm}
             labelCol={defaultFormLayout.form?.labelCol}
             wrapperCol={defaultFormLayout.form?.wrapperCol}
           >
-            <Form.Item label="Title">
-              <Input name="title" autoComplete="off" />
-              <ErrorMessage name="title" />
+            <Form.Item
+              label="Title"
+              help={<ErrorMessage name="title" />}
+              validateStatus={
+                touched.description && errors.title ? 'error' : undefined
+              }
+            >
+              <Input
+                name="title"
+                value={values.title}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                autoComplete="off"
+              />
             </Form.Item>
-            <Form.Item label="Description">
-              <Input name="description" autoComplete="off" />
-              <ErrorMessage name="description" />
+            <Form.Item
+              label="Description"
+              help={<ErrorMessage name="description" />}
+              validateStatus={
+                touched.description && errors.description ? 'error' : undefined
+              }
+            >
+              <Input
+                name="description"
+                value={values.description}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                autoComplete="off"
+              />
             </Form.Item>
             <Form.Item
               wrapperCol={defaultFormLayout.formActionsItemProps?.wrapperCol}

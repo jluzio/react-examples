@@ -1,4 +1,4 @@
-import { BlogEntryData } from 'components/learning/props/blog/models'
+import { BlogEntryData } from 'components/learning/props-blog/models'
 import faker from 'faker'
 
 class FakerService {

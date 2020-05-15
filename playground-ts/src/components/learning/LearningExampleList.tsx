@@ -2,11 +2,13 @@ import React from 'react'
 import './learning.scss'
 import { Tabs } from 'antd'
 import ExampleListTabbedCard from 'components/common/ExampleListTabbedCard'
-import BlogExample from './props/blog/BlogExample'
-import SeasonExample from './season/SeasonExample'
-import ImageSearch from './image-search/ImageSearch'
+import PropsBlogExample from './props-blog/BlogExample'
+import SeasonExample from './state-season/SeasonExample'
+import ImageSearch from './image-search/ImageSearchExample'
 import VideosExample from './videos/VideosExample'
-import ReduxExampleList from './redux/ReduxExampleList'
+import ReduxSongsExample from './redux-songs/SongsExample'
+import ReduxBlogExample from './redux-blog/BlogExample'
+import StreamsExample from './streams/StreamsExample'
 
 const { TabPane } = Tabs
 
@@ -17,8 +19,8 @@ const LearningExampleList: React.FC = () => {
       tabKey="l"
       className="learning-example-list"
     >
-      <TabPane key="blog" tab="Blog">
-        <BlogExample />
+      <TabPane key="props-blog" tab="Props Blog">
+        <PropsBlogExample />
       </TabPane>
       <TabPane key="seasons" tab="Seasons">
         <SeasonExample />
@@ -29,8 +31,14 @@ const LearningExampleList: React.FC = () => {
       <TabPane key="videos" tab="Videos">
         <VideosExample />
       </TabPane>
-      <TabPane key="redux" tab="Redux">
-        <ReduxExampleList />
+      <TabPane key="redux-blog" tab="Redux Blog">
+        <ReduxBlogExample />
+      </TabPane>
+      <TabPane key="redux-songs" tab="Redux Songs">
+        <ReduxSongsExample />
+      </TabPane>
+      <TabPane key="streams" tab="Stream">
+        <StreamsExample />
       </TabPane>
     </ExampleListTabbedCard>
   )

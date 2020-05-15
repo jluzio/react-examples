@@ -8,7 +8,7 @@ export const fieldValidations = {
 }
 
 export const streamFieldValidations = {
-  title: fieldValidations.title.required().min(4),
+  title: fieldValidations.title.required().min(5),
   description: fieldValidations.description.required()
 }
 
