@@ -40,14 +40,13 @@ const makeCounter = <P extends InjectedCounterProps>(
 
     render() {
       const { value } = this.state
-      return (
-        <Component
-          {...(this.props as P)}
-          value={value}
-          onIncrement={this.increment}
-          onDecrement={this.decrement}
-        />
-      )
+      const allProps: P = {
+        ...this.props,
+        value,
+        onIncrement: this.increment,
+        onDecrement: this.decrement
+      } as P
+      return <Component {...allProps} />
     }
   }
 

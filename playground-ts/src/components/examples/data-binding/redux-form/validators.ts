@@ -1,8 +1,5 @@
 import validators from 'services/validation/validators'
-import _ from 'lodash'
-
-const toNumber = (value: string | number) =>
-  typeof value === 'string' ? _.parseInt(value) : value
+import validationMessages from 'services/validation/validation-messages'
 
 const validationRule = <T>(
   validator: (value: T) => boolean,
@@ -10,35 +7,32 @@ const validationRule = <T>(
 ) => (value: T) => (validator(value) ? undefined : message)
 
 export const required = validationRule(
-  (value: any) => value != null,
-  'Required'
+  validators.required,
+  validationMessages.required()
 )
 
-export const maxLength = (limit: number) =>
-  validationRule(
-    (value: string) => value == null || value.length < limit,
-    `Must be ${limit} characters or less`
-  )
+export const min = (limit: number) =>
+  validationRule(validators.min(limit), validationMessages.min(limit))
+
+export const max = (limit: number) =>
+  validationRule(validators.max(limit), validationMessages.max(limit))
 
 export const minLength = (limit: number) =>
   validationRule(
-    (value: string) => value == null || value.length > limit,
-    `Must be ${limit} characters or more`
+    validators.minLength(limit),
+    validationMessages.minLength(limit)
   )
 
-export const max = (limit: number) =>
+export const maxLength = (limit: number) =>
   validationRule(
-    (value: number | string) => value == null || toNumber(value) < limit,
-    `Must be ${limit} or less`
+    validators.maxLength(limit),
+    validationMessages.maxLength(limit)
   )
 
-export const min = (limit: number) =>
-  validationRule(
-    (value: number | string) => value == null || toNumber(value) > limit,
-    `Must be ${limit} or more`
-  )
-
-export const email = validationRule(validators.email, 'Email')
+export const email = validationRule(
+  validators.email,
+  validationMessages.email()
+)
 
 export default {
   required,

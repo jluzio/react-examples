@@ -1,12 +1,20 @@
-> Starter kits
+### Starter kits
 https://create-react-app.dev/
 https://github.com/facebook/create-react-app
-
 npx create-react-app test
 or
 npx create-react-app test --use-npm
+--- Community Starter kits
+https://www.reactjscn.com/community/starter-kits.html
+- other relevant? (need to investigate):
+ - react-boilerplate (community maintained) :https://github.com/react-boilerplate/react-boilerplate
 
-> Typescript
+
+### Style Guide
+https://github.com/airbnb/javascript/tree/master/react
+
+
+### Typescript
 npx create-react-app my-app --template typescript
 https://create-react-app.dev/docs/adding-typescript/
 
@@ -15,12 +23,28 @@ https://github.com/piotrwitek/react-redux-typescript-guide
 Redux + Typescript:
 https://redux.js.org/recipes/usage-with-typescript
 
-> Community Starter kits
-https://www.reactjscn.com/community/starter-kits.html
-- other relevant? (need to investigate):
- - react-boilerplate (community maintained) :https://github.com/react-boilerplate/react-boilerplate
+### Forms
+https://github.com/jaredpalmer/formik
+https://github.com/final-form/react-final-form
+https://github.com/redux-form/redux-form
+https://github.com/react-hook-form/react-hook-form
+etc
 
-> ESLint + Prettier
+
+### Tutorial
+https://reacttraining.com/react-router/web/guides/quick-start
+https://reactjs.org/tutorial/tutorial.html
+current: https://reactjs.org/tutorial/tutorial.html#lifting-state-up
+state info: https://reactjs.org/docs/lifting-state-up.html
+
+### Course
+https://github.com/StephenGrider
+https://github.com/StephenGrider/redux-code
+- starter: https://github.com/StephenGrider/ReduxSimpleStarter.git
+
+
+### Config
+--- ESLint + Prettier
 https://medium.com/@pppped/extend-create-react-app-with-airbnbs-eslint-config-prettier-flow-and-react-testing-library-96627e9a9672
 1)
 npm i eslint-config-airbnb eslint-config-prettier eslint-plugin-jsx-a11y eslint-plugin-prettier prettier --save-dev
@@ -28,7 +52,7 @@ npm i eslint-config-airbnb eslint-config-prettier eslint-plugin-jsx-a11y eslint-
 yarn add -D eslint-config-airbnb eslint-config-prettier eslint-plugin-jsx-a11y eslint-plugin-prettier prettier
 2) etc/.eslintrc
 
-> Absolute imports
+--- Absolute imports
 https://medium.com/hackernoon/absolute-imports-with-create-react-app-4c6cfb66c35d
 - tsconfig.json
  1: compilerOptions / baseUrl : 
@@ -62,38 +86,14 @@ https://medium.com/hackernoon/absolute-imports-with-create-react-app-4c6cfb66c35
         ],
 ...
 
-> Tutorial
-https://reactjs.org/tutorial/tutorial.html
-current: https://reactjs.org/tutorial/tutorial.html#lifting-state-up
-state info: https://reactjs.org/docs/lifting-state-up.html
 
-> Course
-https://github.com/StephenGrider
-https://github.com/StephenGrider/redux-code
-- starter: https://github.com/StephenGrider/ReduxSimpleStarter.git
-
-> Redux
-https://redux.js.org/recipes/usage-with-typescript
-https://redux-toolkit.js.org/tutorials/basic-tutorial
-https://redux-toolkit.js.org/usage/usage-with-typescript
+### Lifting State Up - Lessons Learned
+There should be a single “source of truth” for any data that changes in a React application. Usually, the state is first added to the component that needs it for rendering. Then, if other components also need it, you can lift it up to their closest common ancestor. Instead of trying to sync the state between different components, you should rely on the top-down data flow.
+Lifting state involves writing more “boilerplate” code than two-way binding approaches, but as a benefit, it takes less work to find and isolate bugs. Since any state “lives” in some component and that component alone can change it, the surface area for bugs is greatly reduced. Additionally, you can implement any custom logic to reject or transform user input.
+If something can be derived from either props or state, it probably shouldn’t be in the state. For example, instead of storing both celsiusValue and fahrenheitValue, we store just the last edited temperature and its scale. The value of the other input can always be calculated from them in the render() method. This lets us clear or apply rounding to the other field without losing any precision in the user input.
 
 
-> Forms
-https://github.com/jaredpalmer/formik
-https://github.com/final-form/react-final-form
-https://github.com/redux-form/redux-form
-https://github.com/react-hook-form/react-hook-form
-etc
-
-> Training
-https://reacttraining.com/react-router/web/guides/quick-start
-
->>> Rules
-
-> Style Guide
-https://github.com/airbnb/javascript/tree/master/react
-
-> Misc
+### Code Utils
 function.bind() (to set the correct this value?)
 ex:
 class Calculator extends React.Component {
@@ -106,39 +106,3 @@ class Calculator extends React.Component {
     this.setState({scale: 'c', temperature});
   }
 }
-
-Lifting State Up - Lessons Learned
-There should be a single “source of truth” for any data that changes in a React application. Usually, the state is first added to the component that needs it for rendering. Then, if other components also need it, you can lift it up to their closest common ancestor. Instead of trying to sync the state between different components, you should rely on the top-down data flow.
-
-Lifting state involves writing more “boilerplate” code than two-way binding approaches, but as a benefit, it takes less work to find and isolate bugs. Since any state “lives” in some component and that component alone can change it, the surface area for bugs is greatly reduced. Additionally, you can implement any custom logic to reject or transform user input.
-
-If something can be derived from either props or state, it probably shouldn’t be in the state. For example, instead of storing both celsiusValue and fahrenheitValue, we store just the last edited temperature and its scale. The value of the other input can always be calculated from them in the render() method. This lets us clear or apply rounding to the other field without losing any precision in the user input.
-
-> Reducers:
-- Must not return undefined
-- Reducers must be pure, ie not use use other data or produce side-effects in other data
-- Must not mutate directly old state, in order to be picked up by change detection, and wont propagate new state for re-render ( if (newState !== oldState) return newState else return oldState )
-
---- Mutating tips ---
--- Array
-- Remove element: state.filter(remainingElementsPredicate) 
--// element => element !== targetElement
-// etc
-- Add element: [...state, newElement]
-- Replacing element: state.map(el => matchEl(el) ? newElement : el)
-
--- Object
-- Update property: {...state, { propName: value }}
-- Adding property: {...state, { newPropName: value }}
-- Removing property: {...state, { propName: undefined }}
-( lodash: _.omit(state, age) ) 
-
-- Mapping in component
-const mapStateToProps = (state: RootState, ownProps?: any) => ({
-  <key>: <state.data>
-})
-const mapDispatchToProps = {
-	<key>: <action_creator>
-}
-
-

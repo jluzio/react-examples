@@ -5,7 +5,11 @@ import { Form, Button } from 'antd'
 import { email, maxLength, required, minLength, max, min } from './validators'
 import { SignupFormValues } from '../models'
 import { defaultFormLayout } from '../constants'
-import { renderFormItem } from './InputRenderers'
+import {
+  createRenderFormItem,
+  InputFieldInput,
+  InputNumberFieldInput
+} from './InputRenderers'
 import { notifyFormValues } from '../debug'
 
 type OwnProps = {}
@@ -18,6 +22,9 @@ const submit = (values: SignupFormValues) => {
   notifyFormValues(values)
   return Promise.resolve()
 }
+
+const renderInputFieldInput = createRenderFormItem(InputFieldInput)
+const renderInputNumberFieldInput = createRenderFormItem(InputNumberFieldInput)
 
 type Props = InjectedFormProps<SignupFormValues, OwnProps>
 const SignupForm: React.FC<Props> = (props: Props) => {
@@ -37,28 +44,28 @@ const SignupForm: React.FC<Props> = (props: Props) => {
         name="email"
         label="Email"
         type="email"
-        component={renderFormItem}
+        component={renderInputFieldInput}
         validate={[required, minLength3, email]}
       />
       <Field
         name="name"
         type="text"
         label="Name"
-        component={renderFormItem}
+        component={renderInputFieldInput}
         validate={[minLength3]}
       />
       <Field
         name="age"
         type="number"
         label="Age"
-        component={renderFormItem}
+        component={renderInputNumberFieldInput}
         validate={[min16]}
       />
       <Field
         name="password"
         type="password"
         label="Password"
-        component={renderFormItem}
+        component={renderInputFieldInput}
         validate={[required, minLength3]}
       />
       <Form.Item

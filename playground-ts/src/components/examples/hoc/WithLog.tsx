@@ -15,8 +15,8 @@ export function withLog<P extends LogProps>(Component: React.ComponentType<P>) {
     render() {
       // Issue found at 2020/05/14: https://github.com/microsoft/TypeScript/issues/35858
       // Casting as workaround
-      const props: P = { ...this.props, log: Log } as P
-      return <Component {...props} />
+      const allProps: P = { ...this.props, log: Log } as P
+      return <Component {...allProps} />
     }
   }
 

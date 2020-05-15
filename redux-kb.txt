@@ -1,0 +1,43 @@
+### DevTools Debug session
+Add debug_session param, use store by interface and then refresh url to reload all store state
+http://localhost:3000?debug_session=<session_id>
+
+
+### Guides
+https://redux.js.org/recipes/usage-with-typescript
+https://redux-toolkit.js.org/tutorials/basic-tutorial
+https://redux-toolkit.js.org/usage/usage-with-typescript
+https://redux.js.org/recipes/usage-with-typescript
+https://github.com/piotrwitek/react-redux-typescript-guide
+
+
+### Redux Forms
+https://github.com/redux-form/redux-form
+
+
+### Reducers:
+- Must not return undefined
+- Reducers must be pure, ie not use use other data or produce side-effects in other data
+- Must not mutate directly old state, in order to be picked up by change detection, and wont propagate new state for re-render ( if (newState !== oldState) return newState else return oldState )
+
+### Mutating tips
+-- Array
+- Remove element: state.filter(remainingElementsPredicate) 
+-// element => element !== targetElement
+// etc
+- Add element: [...state, newElement]
+- Replacing element: state.map(el => matchEl(el) ? newElement : el)
+
+-- Object
+- Update property: {...state, { propName: value }}
+- Adding property: {...state, { newPropName: value }}
+- Removing property: {...state, { propName: undefined }}
+( lodash: _.omit(state, age) ) 
+
+- Mapping in component
+const mapStateToProps = (state: RootState, ownProps?: any) => ({
+  <key>: <state.data>
+})
+const mapDispatchToProps = {
+	<key>: <action_creator>
+}
