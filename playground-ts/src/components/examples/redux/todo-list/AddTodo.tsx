@@ -5,7 +5,7 @@ import React, { Component } from 'react'
 import { Form, Button } from 'antd'
 import log from 'utils/Log'
 import { connect, ConnectedProps } from 'react-redux'
-import { Formik, Field, useField, ErrorMessage } from 'formik'
+import { Formik, Field, useField, ErrorMessage, FormikHelpers } from 'formik'
 import { Todo } from './store/models'
 import { todoActions } from './store'
 
@@ -28,12 +28,12 @@ const initialValues: Values = {
 }
 
 class AddTodo extends Component<Props> {
-  handleAddTodo = (todo: Todo) => {
+  handleAddTodo = (todo: Todo, actions: FormikHelpers<Todo>) => {
     const { onAddTodo } = this.props
-    log.info('handleAddTodo', {
-      todo
-    })
-    onAddTodo({ todo })
+    if (todo.text) {
+      onAddTodo({ todo })
+    }
+    actions.setSubmitting(false)
   }
 
   render() {
