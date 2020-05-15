@@ -2,6 +2,7 @@
 import React from 'react'
 import { reduxForm, Field, InjectedFormProps } from 'redux-form'
 import { Form, Button } from 'antd'
+import { notifyFormValues } from 'components/debug/debug-notifications'
 import { email, maxLength, required, minLength, max, min } from './validators'
 import { SignupFormValues } from '../models'
 import { defaultFormLayout } from '../constants'
@@ -10,7 +11,6 @@ import {
   InputFieldInput,
   InputNumberFieldInput
 } from './InputRenderers'
-import { notifyFormValues } from '../debug'
 
 type OwnProps = {}
 

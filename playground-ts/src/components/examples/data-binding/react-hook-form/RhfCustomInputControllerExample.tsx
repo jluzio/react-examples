@@ -1,9 +1,9 @@
 import React from 'react'
 import { Form, Button, Input, InputNumber } from 'antd'
 import { useForm, ErrorMessage, Controller } from 'react-hook-form'
+import { notifyFormValues } from 'components/debug/debug-notifications'
 import { SignupFormValues } from '../models'
 import { defaultFormLayout } from '../constants'
-import { notifyFormValues } from '../debug'
 
 type Values = SignupFormValues
 
@@ -27,7 +27,7 @@ const RhfCustomInputControllerExample: React.FC = () => {
     >
       <Form.Item label="Email">
         <Controller
-          as={<Input type="email" />}
+          as={<Input type="email" autoComplete="off" />}
           name="email"
           control={control}
           rules={{
@@ -46,7 +46,7 @@ const RhfCustomInputControllerExample: React.FC = () => {
       </Form.Item>
       <Form.Item label="Name">
         <Controller
-          as={<Input />}
+          as={<Input autoComplete="off" />}
           name="name"
           control={control}
           rules={{
@@ -60,7 +60,7 @@ const RhfCustomInputControllerExample: React.FC = () => {
       </Form.Item>
       <Form.Item label="Age">
         <Controller
-          as={<InputNumber />}
+          as={<InputNumber autoComplete="off" />}
           name="age"
           control={control}
           rules={{
@@ -74,7 +74,7 @@ const RhfCustomInputControllerExample: React.FC = () => {
       </Form.Item>
       <Form.Item label="Password">
         <Controller
-          as={<Input.Password />}
+          as={<Input.Password autoComplete="off" />}
           name="password"
           control={control}
           rules={{

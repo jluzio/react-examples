@@ -2,9 +2,9 @@ import React, { useEffect } from 'react'
 import { Form, Button, Input, InputNumber } from 'antd'
 import { useForm, ErrorMessage } from 'react-hook-form'
 import _ from 'lodash'
+import { notifyFormValues } from 'components/debug/debug-notifications'
 import { SignupFormValues } from '../models'
 import { defaultFormLayout } from '../constants'
-import { notifyFormValues } from '../debug'
 
 type Values = SignupFormValues
 
@@ -78,22 +78,28 @@ const RhfCustomInputEffectsExample: React.FC = () => {
         <Input
           type="email"
           onChange={e => setValue('email', e.target.value, true)}
+          autoComplete="off"
         />
         <ErrorMessage errors={errors} name="email" />
       </Form.Item>
       <Form.Item label="Name">
-        <Input onChange={e => setValue('name', e.target.value, true)} />
+        <Input
+          onChange={e => setValue('name', e.target.value, true)}
+          autoComplete="off"
+        />
         <ErrorMessage errors={errors} name="name" />
       </Form.Item>
       <Form.Item label="Age">
         <InputNumber
           onChange={value => setValue('age', toNumber(value), true)}
+          autoComplete="off"
         />
         <ErrorMessage errors={errors} name="age" />
       </Form.Item>
       <Form.Item label="Password">
         <Input.Password
           onChange={e => setValue('password', e.target.value, true)}
+          autoComplete="off"
         />
         <ErrorMessage errors={errors} name="password" />
       </Form.Item>

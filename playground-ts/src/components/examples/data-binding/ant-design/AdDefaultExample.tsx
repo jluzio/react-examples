@@ -2,9 +2,9 @@ import React from 'react'
 import { Form, Button, notification, Input, InputNumber } from 'antd'
 import { Store } from 'antd/lib/form/interface'
 import { ValidateErrorEntity } from 'rc-field-form/lib/interface'
+import { notifyFormValues } from 'components/debug/debug-notifications'
 import { SignupFormValues } from '../models'
 import { defaultFormLayout } from '../constants'
-import { notifyFormValues } from '../debug'
 
 type Values = SignupFormValues
 

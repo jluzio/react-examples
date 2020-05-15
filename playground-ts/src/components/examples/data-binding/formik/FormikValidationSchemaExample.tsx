@@ -1,10 +1,10 @@
 import React from 'react'
 import { Formik, ErrorMessage } from 'formik'
 import { Button, Form, Input, InputNumber } from 'antd'
+import { notifyFormValues } from 'components/debug/debug-notifications'
 import { validationSchemas } from '../validators'
 import { SignupFormValues } from '../models'
 import { defaultFormLayout } from '../constants'
-import { notifyFormValues } from '../debug'
 
 type Values = SignupFormValues
 
@@ -14,7 +14,6 @@ export default class FormikValidationSchemaExample extends React.Component {
   handleTestFormValues = async (values: Values) => {
     notifyFormValues(values, 'Values')
     validationSchemas.signup
-      .strip(true)
       .validate(values)
       .then(validatedData => {
         notifyFormValues(validatedData, 'ValidatedData')

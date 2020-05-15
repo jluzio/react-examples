@@ -14,7 +14,7 @@ const LearningExampleList: React.FC = () => {
   return (
     <ExampleListTabbedCard
       title="Learning"
-      tabKey="lel-key"
+      tabKey="l"
       className="learning-example-list"
     >
       <TabPane key="blog" tab="Blog">

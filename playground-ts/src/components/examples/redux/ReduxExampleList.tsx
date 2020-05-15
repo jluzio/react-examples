@@ -7,7 +7,7 @@ const { TabPane } = Tabs
 
 const ReduxExampleList: React.FC = () => {
   return (
-    <ExampleListTabbedCard tabKey="rdx-key">
+    <ExampleListTabbedCard tabKey="rdx-k">
       <TabPane key="todo" tab="ToDo">
         <TodoListExample />
       </TabPane>

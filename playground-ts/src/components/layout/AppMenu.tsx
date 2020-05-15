@@ -1,14 +1,12 @@
 import React from 'react'
 import { Link, withRouter, RouteComponentProps } from 'react-router-dom'
 import * as history from 'history'
-import { Menu, Modal, Form, Input } from 'antd'
+import { Menu } from 'antd'
 import { SettingOutlined } from '@ant-design/icons'
 import { ClickParam } from 'antd/lib/menu'
 import logo from 'assets/images/logo.svg'
 import historyService from 'services/history-service'
 import DebugSessionModal from './DebugSessionModal'
-
-const { Item } = Menu
 
 interface State {
   current: string
@@ -65,6 +63,7 @@ class AppMenu extends React.Component<Props, State> {
   render() {
     const { current, debugSessionModalVisible } = this.state
     const { location } = this.props
+    const menuIcon = <SettingOutlined />
     return (
       <>
         <Menu
@@ -73,41 +72,35 @@ class AppMenu extends React.Component<Props, State> {
           selectedKeys={[current]}
           mode="horizontal"
         >
-          <Item key="logo">
+          <Menu.Item>
             <Link to={this.getLink('/')}>
               <img src={logo} className="ant-menu-item App-logo" alt="logo" />
             </Link>
-          </Item>
-          <Item key="home">
-            <Link to={this.getLink('/')}>
-              <SettingOutlined /> Home
-            </Link>
-          </Item>
-          <Item key="learning">
-            <Link to={this.getLink('/learning')}>
-              <SettingOutlined /> Learning
-            </Link>
-          </Item>
-          <Item key="examples">
-            <Link to={this.getLink('/examples')}>
-              <SettingOutlined /> Examples
-            </Link>
-          </Item>
-          <Item key="debugSession">
+          </Menu.Item>
+          <Menu.Item key="home">
+            <Link to={this.getLink('/')}>{menuIcon} Home</Link>
+          </Menu.Item>
+          <Menu.Item key="learning">
+            <Link to={this.getLink('/learning')}>{menuIcon} Learning</Link>
+          </Menu.Item>
+          <Menu.Item key="examples">
+            <Link to={this.getLink('/examples')}>{menuIcon} Examples</Link>
+          </Menu.Item>
+          <Menu.Item key="debugSession">
             <Link to={location} onClick={this.handleOpenDebugSessionModalClick}>
-              <SettingOutlined /> Debug Session
+              {menuIcon} Debug Session
             </Link>
-          </Item>
-          <Item key="bootstrap">
+          </Menu.Item>
+          <Menu.Item key="bootstrap">
             <Link to={this.getLink('/page/bootstrap')}>
-              <SettingOutlined /> Bootstrap
+              {menuIcon} Bootstrap
             </Link>
-          </Item>
-          <Item key="ant-design-layout">
+          </Menu.Item>
+          <Menu.Item key="ant-design-layout">
             <Link to={this.getLink('/page/ant-design-layout')}>
-              <SettingOutlined /> Ant Design Layout
+              {menuIcon} Ant Design Layout
             </Link>
-          </Item>
+          </Menu.Item>
         </Menu>
         <DebugSessionModal
           visible={debugSessionModalVisible}

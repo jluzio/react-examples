@@ -10,10 +10,10 @@ const StreamHeader: React.FC = () => {
     <PageHeader
       title="Streamer"
       extra={[
-        <Link to="/learning/streams" key="streams_key" className="ant-btn">
+        <Link key="streams" to="/learning/streams" className="ant-btn">
           Streams
         </Link>,
-        <GoogleAuthByStore authSelector={authSelector} />
+        <GoogleAuthByStore key="auth" authSelector={authSelector} />
       ]}
     />
   )

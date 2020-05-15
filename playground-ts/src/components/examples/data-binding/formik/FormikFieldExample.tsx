@@ -3,9 +3,9 @@ import { Formik, Field, ErrorMessage } from 'formik'
 import { Button, Form } from 'antd'
 import Log from 'utils/Log'
 import validators from 'services/validation/validators'
+import { notifyFormValues } from 'components/debug/debug-notifications'
 import { LoginFormValues } from '../models'
 import { defaultFormLayout } from '../constants'
-import { notifyFormValues } from '../debug'
 
 type Values = LoginFormValues
 

@@ -2,9 +2,9 @@ import React from 'react'
 import { Formik } from 'formik'
 import { Input, Button, Form } from 'antd'
 import validators from 'services/validation/validators'
+import { notifyFormValues } from 'components/debug/debug-notifications'
 import { LoginFormValues } from '../models'
 import { defaultFormLayout } from '../constants'
-import { notifyFormValues } from '../debug'
 
 type Values = LoginFormValues
 

@@ -1,9 +1,9 @@
 import React from 'react'
 import { Form, Button } from 'antd'
 import { useForm, ErrorMessage } from 'react-hook-form'
+import { notifyFormValues } from 'components/debug/debug-notifications'
 import { SignupFormValues } from '../models'
 import { defaultFormLayout } from '../constants'
-import { notifyFormValues } from '../debug'
 
 type Values = SignupFormValues
 
