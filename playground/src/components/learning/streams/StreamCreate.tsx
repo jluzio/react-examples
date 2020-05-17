@@ -53,6 +53,7 @@ class StreamCreate extends React.Component {
                 value={values.title}
                 onChange={handleChange}
                 onBlur={handleBlur}
+                autoFocus
                 autoComplete="off"
               />
             </Form.Item>
