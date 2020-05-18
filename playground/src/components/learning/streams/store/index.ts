@@ -1,15 +1,19 @@
 import { authActions, authReducer } from 'store/auth'
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 
+import { streamReducer, streamActions } from './stream'
+
 export const rootReducer = combineReducers({
-  auth: authReducer
+  auth: authReducer,
+  streams: streamReducer
 })
 
 export type RootState = ReturnType<typeof rootReducer>
 
-export { authActions }
+export { authActions, streamActions }
 export const actions = {
-  ...authActions
+  ...authActions,
+  ...streamActions
 }
 
 export const store = configureStore({

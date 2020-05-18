@@ -2,22 +2,35 @@ import React from 'react'
 import { Formik, FormikHelpers, ErrorMessage } from 'formik'
 import { Form, Input, Button } from 'antd'
 import { notifyFormValues } from 'components/debug/debug-notifications'
+import { connect, ConnectedProps } from 'react-redux'
 import { StreamCreateData } from './models'
 import { streamCreateValidationSchema } from './validations'
 import { defaultFormLayout } from './constants'
+import { RootState, actions } from './store'
 
 const initialValues: StreamCreateData = {
   title: '',
   description: ''
 }
 
-class StreamCreate extends React.Component {
+const mapStateToProps = (state: RootState) => ({})
+const mapDispatchToProps = {
+  onCreateStream: actions.createStream
+}
+const connector = connect(mapStateToProps, mapDispatchToProps)
+type ReduxProps = ConnectedProps<typeof connector>
+
+type Props = ReduxProps
+class StreamCreate extends React.Component<Props> {
   handleSubmit = (
     values: StreamCreateData,
     { setSubmitting }: FormikHelpers<StreamCreateData>
   ) => {
     notifyFormValues(values)
     setSubmitting(false)
+    const { onCreateStream } = this.props
+    console.log(onCreateStream)
+    onCreateStream(values)
   }
 
   render() {
@@ -86,4 +99,4 @@ class StreamCreate extends React.Component {
   }
 }
 
-export default StreamCreate
+export default connector(StreamCreate)
