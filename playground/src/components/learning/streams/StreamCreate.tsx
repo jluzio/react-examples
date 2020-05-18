@@ -3,9 +3,9 @@ import { Formik, FormikHelpers, ErrorMessage } from 'formik'
 import { Form, Input, Button } from 'antd'
 import { notifyFormValues } from 'components/debug/debug-notifications'
 import { connect, ConnectedProps } from 'react-redux'
-import { StreamCreateData } from './models'
-import { streamCreateValidationSchema } from './validations'
-import { defaultFormLayout } from './constants'
+import { StreamCreateData } from './data/models'
+import { streamCreateValidationSchema } from './data/validations'
+import { defaultFormLayout } from './data/constants'
 import { RootState, actions } from './store'
 
 const initialValues: StreamCreateData = {

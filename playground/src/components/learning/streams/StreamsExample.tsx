@@ -16,38 +16,57 @@ import StreamHeader from './StreamHeader'
 import StreamList from './StreamList'
 import StreamShow from './StreamShow'
 import store from './store'
+import * as routes from './utils/routes'
 
-const StreamExample: React.FC<RouteComponentProps> = (
-  props: RouteComponentProps
-) => {
-  const { match, location } = props
-  const rootComponent = match.url
-  const path = (contextPath: string) => `${rootComponent}${contextPath}`
-  const toLocation = (contextPath: string): LocationDescriptorObject => ({
-    pathname: path(contextPath),
-    search: location.search
-  })
-  const cardActions = [
-    <Link to={toLocation('/streams')}>List</Link>,
-    <Link to={toLocation('/streams/create')}>Create</Link>,
-    <Link to={toLocation('/streams/delete')}>Delete</Link>,
-    <Link to={toLocation('/streams/edit')}>Edit</Link>,
-    <Link to={toLocation('/streams/show')}>Show</Link>
-  ]
-  return (
-    <Card title="Streamy" className="learning" actions={cardActions}>
-      <Provider store={store}>
-        <StreamHeader />
-        <Switch>
-          <Route path={path('/streams/create')} component={StreamCreate} />
-          <Route path={path('/streams/delete')} component={StreamDelete} />
-          <Route path={path('/streams/edit')} component={StreamEdit} />
-          <Route path={path('/streams/show')} component={StreamShow} />
-          <Route path={path('/streams')} component={StreamList} />
-        </Switch>
-      </Provider>
-    </Card>
-  )
+class StreamExample extends React.Component<RouteComponentProps> {
+  toLocation = (toContextLocation: LocationDescriptorObject) => {
+    const { location: currentLocation } = this.props
+    return routes.getLocationPreservingSearch(
+      toContextLocation,
+      currentLocation
+    )
+  }
+
+  getPath = (contextPath: string) => {
+    const { location: currentLocation } = this.props
+    return routes.getPath(contextPath, currentLocation)
+  }
+
+  render() {
+    const cardActions = [
+      <Link to={this.toLocation({ pathname: '/streams' })}>List</Link>,
+      <Link to={this.toLocation({ pathname: '/streams/create' })}>Create</Link>,
+      <Link to={this.toLocation({ pathname: '/streams/delete' })}>Delete</Link>,
+      <Link to={this.toLocation({ pathname: '/streams/edit' })}>Edit</Link>,
+      <Link to={this.toLocation({ pathname: '/streams/show' })}>Show</Link>
+    ]
+    return (
+      <Card title="Streamy" className="learning" actions={cardActions}>
+        <Provider store={store}>
+          <StreamHeader />
+          <Switch>
+            <Route
+              path={this.getPath('/streams/create')}
+              component={StreamCreate}
+            />
+            <Route
+              path={this.getPath('/streams/delete')}
+              component={StreamDelete}
+            />
+            <Route
+              path={this.getPath('/streams/edit')}
+              component={StreamEdit}
+            />
+            <Route
+              path={this.getPath('/streams/show')}
+              component={StreamShow}
+            />
+            <Route path={this.getPath('/streams')} component={StreamList} />
+          </Switch>
+        </Provider>
+      </Card>
+    )
+  }
 }
 
 export default withRouter(StreamExample)

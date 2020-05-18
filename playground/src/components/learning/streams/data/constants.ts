@@ -15,3 +15,5 @@ export const defaultFormLayout: FormLayoutProps = {
     wrapperCol: { offset: 4, span: 16 }
   }
 }
+
+export const BASE_PATH = '/streams'

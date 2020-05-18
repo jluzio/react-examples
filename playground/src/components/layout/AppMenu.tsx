@@ -5,7 +5,7 @@ import { Menu } from 'antd'
 import { SettingOutlined } from '@ant-design/icons'
 import { ClickParam } from 'antd/lib/menu'
 import logo from 'assets/images/logo.svg'
-import historyService from 'services/history-service'
+import historyService from 'services/history/history-service'
 import DebugSessionModal from './DebugSessionModal'
 
 interface State {

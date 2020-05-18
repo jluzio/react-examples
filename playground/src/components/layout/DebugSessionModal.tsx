@@ -3,7 +3,7 @@ import React from 'react'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { Modal, Form, Input } from 'antd'
 import { ModalProps } from 'antd/lib/modal'
-import historyService from 'services/history-service'
+import historyService from 'services/history/history-service'
 
 interface State {
   debugSession: string
