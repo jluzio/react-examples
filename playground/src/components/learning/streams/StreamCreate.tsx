@@ -3,6 +3,7 @@ import { Formik, FormikHelpers, ErrorMessage } from 'formik'
 import { Form, Input, Button } from 'antd'
 import { notifyFormValues } from 'components/debug/debug-notifications'
 import { connect, ConnectedProps } from 'react-redux'
+import { Link, withRouter, RouteComponentProps } from 'react-router-dom'
 import { StreamCreateData } from './data/models'
 import { streamCreateValidationSchema } from './data/validations'
 import { defaultFormLayout } from './data/constants'
@@ -20,7 +21,7 @@ const mapDispatchToProps = {
 const connector = connect(mapStateToProps, mapDispatchToProps)
 type ReduxProps = ConnectedProps<typeof connector>
 
-type Props = ReduxProps
+type Props = ReduxProps & RouteComponentProps
 class StreamCreate extends React.Component<Props> {
   handleSubmit = (
     values: StreamCreateData,
@@ -29,11 +30,11 @@ class StreamCreate extends React.Component<Props> {
     notifyFormValues(values)
     setSubmitting(false)
     const { onCreateStream } = this.props
-    console.log(onCreateStream)
     onCreateStream(values)
   }
 
   render() {
+    const { history } = this.props
     return (
       <Formik<StreamCreateData>
         initialValues={{ ...initialValues }}
@@ -89,7 +90,10 @@ class StreamCreate extends React.Component<Props> {
               wrapperCol={defaultFormLayout.formActionsItemProps?.wrapperCol}
             >
               <Button type="primary" htmlType="submit">
-                Submit
+                Save
+              </Button>
+              <Button htmlType="submit" onClick={() => history.goBack()}>
+                Cancel
               </Button>
             </Form.Item>
           </Form>
@@ -99,4 +103,4 @@ class StreamCreate extends React.Component<Props> {
   }
 }
 
-export default connector(StreamCreate)
+export default connector(withRouter(StreamCreate))

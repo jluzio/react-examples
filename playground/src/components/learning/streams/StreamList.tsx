@@ -3,7 +3,12 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect, ConnectedProps } from 'react-redux'
 import { List, Card, Avatar, Button } from 'antd'
-import { CameraOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons'
+import {
+  CameraOutlined,
+  DeleteOutlined,
+  EditOutlined,
+  FormOutlined
+} from '@ant-design/icons'
 import { RouteComponentProps, withRouter } from 'react-router'
 import { LocationDescriptorObject } from 'history'
 import { RootState, actions } from './store'
@@ -29,21 +34,18 @@ class StreamList extends React.Component<Props> {
   }
 
   toLocation = (toContextLocation: LocationDescriptorObject) => {
-    const { location: currentLocation } = this.props
-    return routes.getLocationPreservingSearch(
-      toContextLocation,
-      currentLocation
-    )
+    const { location } = this.props
+    return routes.getLocationPreservingSearch(toContextLocation, location)
   }
 
   getPath = (contextPath: string) => {
-    const { location: currentLocation } = this.props
-    return routes.getPath(contextPath, currentLocation)
+    const { location } = this.props
+    return routes.getPath(contextPath, location)
   }
 
   renderStreamActions(stream: Stream) {
     const { userId } = this.props
-    if (stream.userId === userId) {
+    if (userId && stream.userId === userId) {
       return [
         <Link to={this.toLocation({ pathname: `/streams/edit/${stream.id}` })}>
           <Button type="primary" icon={<EditOutlined />}>
@@ -53,8 +55,22 @@ class StreamList extends React.Component<Props> {
         <Link
           to={this.toLocation({ pathname: `/streams/delete/${stream.id}` })}
         >
-          <Button type="primary" icon={<DeleteOutlined />}>
+          <Button type="primary" danger icon={<DeleteOutlined />}>
             Delete
+          </Button>
+        </Link>
+      ]
+    }
+    return []
+  }
+
+  renderListActions() {
+    const { userId } = this.props
+    if (userId) {
+      return [
+        <Link to={this.toLocation({ pathname: `/streams/create` })}>
+          <Button type="primary" icon={<FormOutlined />}>
+            Create
           </Button>
         </Link>
       ]
@@ -77,7 +93,7 @@ class StreamList extends React.Component<Props> {
   render() {
     const { streams } = this.props
     return (
-      <Card title="Streams">
+      <Card title="Streams" actions={this.renderListActions()}>
         <List
           dataSource={streams}
           renderItem={stream => this.renderStream(stream)}

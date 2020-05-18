@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import _ from 'lodash'
+import history from 'router/history'
 import { StreamCreateData, Stream } from '../data/models'
 import streamService from '../services/stream-service'
 import { AsyncThunkConfig } from './thunk-config'
@@ -31,6 +32,7 @@ const createStream = createAsyncThunk<
     userId: state.auth.userProfile?.id
   }
   const response = await streamService.create(finalCreateData)
+  history.goBack()
   return response.data
 })
 

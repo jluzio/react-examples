@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react'
-import { HashRouter as Router } from 'react-router-dom'
+import AppRouter from './router/AppRouter'
 import Routes from './routes/RootRoutes'
 // import 'services/i18n/i18n-basic'
 import 'services/i18n/i18n'
@@ -7,11 +7,11 @@ import 'services/validation/yup-config'
 
 const App: React.FC = () => {
   return (
-    <Router>
+    <AppRouter>
       <Suspense fallback={<div>Loading...</div>}>
         <Routes />
       </Suspense>
-    </Router>
+    </AppRouter>
   )
 }
 

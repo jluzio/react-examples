@@ -20,28 +20,18 @@ import * as routes from './utils/routes'
 
 class StreamExample extends React.Component<RouteComponentProps> {
   toLocation = (toContextLocation: LocationDescriptorObject) => {
-    const { location: currentLocation } = this.props
-    return routes.getLocationPreservingSearch(
-      toContextLocation,
-      currentLocation
-    )
+    const { location } = this.props
+    return routes.getLocationPreservingSearch(toContextLocation, location)
   }
 
   getPath = (contextPath: string) => {
-    const { location: currentLocation } = this.props
-    return routes.getPath(contextPath, currentLocation)
+    const { location } = this.props
+    return routes.getPath(contextPath, location)
   }
 
   render() {
-    const cardActions = [
-      <Link to={this.toLocation({ pathname: '/streams' })}>List</Link>,
-      <Link to={this.toLocation({ pathname: '/streams/create' })}>Create</Link>,
-      <Link to={this.toLocation({ pathname: '/streams/delete' })}>Delete</Link>,
-      <Link to={this.toLocation({ pathname: '/streams/edit' })}>Edit</Link>,
-      <Link to={this.toLocation({ pathname: '/streams/show' })}>Show</Link>
-    ]
     return (
-      <Card title="Streamy" className="learning" actions={cardActions}>
+      <Card title="Streamy" className="learning">
         <Provider store={store}>
           <StreamHeader />
           <Switch>
@@ -62,6 +52,7 @@ class StreamExample extends React.Component<RouteComponentProps> {
               component={StreamShow}
             />
             <Route path={this.getPath('/streams')} component={StreamList} />
+            <Route path="/" component={StreamList} />
           </Switch>
         </Provider>
       </Card>
