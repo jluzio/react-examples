@@ -1,11 +1,11 @@
 import { LocationDescriptorObject } from 'history'
-import contextLocationService from 'services/history/context-location-service'
+import historyService from 'services/history/history-service'
 import { BASE_PATH } from '../data/constants'
 
 export const getPath = (
   contextRoute: string,
   location: LocationDescriptorObject
-) => `${contextLocationService.getRootPath(BASE_PATH, location)}${contextRoute}`
+) => `${historyService.getRootPath(BASE_PATH, location)}${contextRoute}`
 
 export const getLocationPreservingSearch = (
   toContextLocation: LocationDescriptorObject,
@@ -13,8 +13,5 @@ export const getLocationPreservingSearch = (
 ): LocationDescriptorObject => {
   const toLocation: LocationDescriptorObject = { ...toContextLocation }
   toLocation.pathname = getPath(toContextLocation.pathname!, currentLocation)
-  return contextLocationService.getLocationPreservingSearch(
-    toLocation,
-    currentLocation
-  )
+  return historyService.getLocationPreservingSearch(toLocation, currentLocation)
 }
