@@ -14,7 +14,7 @@ import { LocationDescriptorObject } from 'history'
 import { RootState, actions } from './store'
 import selectors from './store/selectors'
 import { Stream } from './data/models'
-import * as routes from './utils/routes'
+import { locations } from './utils/routes'
 
 const mapStateToProps = (state: RootState) => ({
   streams: selectors.getStreamsList(state),
@@ -33,28 +33,16 @@ class StreamList extends React.Component<Props> {
     onListStreams()
   }
 
-  toLocation = (toContextLocation: LocationDescriptorObject) => {
-    const { location } = this.props
-    return routes.getLocationPreservingSearch(toContextLocation, location)
-  }
-
-  getPath = (contextPath: string) => {
-    const { location } = this.props
-    return routes.getPath(contextPath, location)
-  }
-
   renderStreamActions(stream: Stream) {
     const { userId } = this.props
     if (userId && stream.userId === userId) {
       return [
-        <Link to={this.toLocation({ pathname: `/streams/edit/${stream.id}` })}>
+        <Link to={locations.edit(stream.id)}>
           <Button type="primary" icon={<EditOutlined />}>
             Edit
           </Button>
         </Link>,
-        <Link
-          to={this.toLocation({ pathname: `/streams/delete/${stream.id}` })}
-        >
+        <Link to={locations.delete(stream.id)}>
           <Button type="primary" danger icon={<DeleteOutlined />}>
             Delete
           </Button>
@@ -68,7 +56,7 @@ class StreamList extends React.Component<Props> {
     const { userId } = this.props
     if (userId) {
       return [
-        <Link to={this.toLocation({ pathname: `/streams/create` })}>
+        <Link to={locations.create()}>
           <Button type="primary" icon={<FormOutlined />}>
             Create
           </Button>
@@ -83,7 +71,7 @@ class StreamList extends React.Component<Props> {
       <List.Item key={stream.id} actions={this.renderStreamActions(stream)}>
         <List.Item.Meta
           avatar={<Avatar icon={<CameraOutlined />} />}
-          title={stream.title}
+          title={<Link to={locations.show(stream.id)}>{stream.title}</Link>}
           description={stream.description}
         />
       </List.Item>
