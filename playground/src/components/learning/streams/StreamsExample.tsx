@@ -7,16 +7,23 @@ import {
 } from 'react-router-dom'
 import { Card } from 'antd'
 import { Provider } from 'react-redux'
+import history from 'router/history'
 import StreamCreate from './StreamCreate'
 import StreamDelete from './StreamDelete'
 import StreamEdit from './StreamEdit'
 import StreamHeader from './StreamHeader'
 import StreamList from './StreamList'
 import StreamShow from './StreamShow'
-import store from './store'
+import store, { actions } from './store'
 import { getRoutes } from './routes'
 
 class StreamExample extends React.Component<RouteComponentProps> {
+  componentDidMount() {
+    history.listen(() =>
+      store.dispatch(actions.resetStreamStatus({ rootOnly: true }))
+    )
+  }
+
   render() {
     const routes = getRoutes()
     return (

@@ -7,31 +7,45 @@ import {
   CameraOutlined,
   DeleteOutlined,
   EditOutlined,
-  FormOutlined,
-  CloseCircleOutlined
+  FormOutlined
 } from '@ant-design/icons'
 import { RouteComponentProps, withRouter } from 'react-router'
 import { LocationDescriptorObject } from 'history'
-import { RootState, actions } from './store'
+import { RootState, actions, AppDispatch } from './store'
 import selectors from './store/selectors'
 import { Stream } from './data/models'
 import { locations } from './routes'
+import StatusErrors from './StatusErrors'
 
 const mapStateToProps = (state: RootState) => ({
   streams: selectors.getStreamsList(state),
-  streamStatus: selectors.getStreamStatus(state),
   userId: selectors.getUserId(state)
 })
 const mapDispatchToProps = {
-  onListStreams: actions.listStreams
+  onListStreams: actions.listStreams,
+  onResetStreamStatus: actions.resetStreamStatus
 }
+// demonstration on how to map multiple actions on a single handler
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const mapDispatchToPropsUsingDispatch = (dispatch: AppDispatch) => ({
+  onListStreams: () => {
+    dispatch(actions.resetStreamStatus({ rootOnly: true }))
+    dispatch(actions.listStreams())
+  }
+})
+
 const connector = connect(mapStateToProps, mapDispatchToProps)
 type ReduxProps = ConnectedProps<typeof connector>
 
 type Props = ReduxProps & RouteComponentProps
 class StreamList extends React.Component<Props> {
   async componentDidMount() {
-    const { onListStreams } = this.props
+    this.listStreams()
+  }
+
+  listStreams() {
+    const { onListStreams, onResetStreamStatus } = this.props
+    onResetStreamStatus({ rootOnly: true })
     onListStreams()
   }
 
@@ -81,7 +95,7 @@ class StreamList extends React.Component<Props> {
   }
 
   render() {
-    const { streams, streamStatus } = this.props
+    const { streams } = this.props
     return (
       <Card title="Streams" actions={this.renderListActions()}>
         <List
@@ -89,19 +103,10 @@ class StreamList extends React.Component<Props> {
           renderItem={stream => this.renderStream(stream)}
           pagination={{ pageSize: 10 }}
         />
-        {streamStatus?.errors.length > 0 && (
-          <Result
-            status="error"
-            title="Submission Failed"
-            subTitle={streamStatus.errors.map(e => e.message).join(', ')}
-            extra={[
-              <Button type="primary" key="console">
-                Go Console
-              </Button>,
-              <Button key="buy">Buy Again</Button>
-            ]}
-          />
-        )}
+        <StatusErrors
+          errorsSelector={selectors.getStreamStatusErrors}
+          onRetry={() => this.listStreams()}
+        />
       </Card>
     )
   }

@@ -23,6 +23,8 @@ export const getStreamByMatchProps = createSelector(
   (streams, id) => (id != null ? streams[id] : null)
 )
 export const getStreamStatus = (state: RootState) => state.streams.status
+export const getStreamStatusErrors = (state: RootState) =>
+  state.streams.status?.errors
 
 export const getAuth = (state: RootState) => state.auth
 export const getUserProfile = createSelector(
@@ -37,6 +39,7 @@ export default {
   getStreamsList,
   getStreamByMatchProps,
   getStreamStatus,
+  getStreamStatusErrors,
   getAuth,
   getUserId
 }

@@ -1,5 +1,10 @@
 import { authActions, authReducer } from 'store/auth'
-import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import {
+  combineReducers,
+  configureStore,
+  ThunkDispatch,
+  AnyAction
+} from '@reduxjs/toolkit'
 
 import { streamReducer, streamActions } from './stream'
 
@@ -22,5 +27,7 @@ export const store = configureStore({
     name: 'Learning / Streamy'
   }
 })
+
+export type AppDispatch = ThunkDispatch<{}, {}, AnyAction>
 
 export default store

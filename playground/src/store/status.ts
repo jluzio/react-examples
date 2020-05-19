@@ -1,10 +1,15 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction, AnyAction, Action } from '@reduxjs/toolkit'
 import { StatusType, ErrorLike, ActionStatus } from './models'
 
 export type StatusState = StatusType & {
   statusByRequestId: { [key: string]: StatusType }
 }
 export type StatusPayload = ActionStatus
+export type ResetStatusPayload =
+  | undefined
+  | {
+      rootOnly?: boolean
+    }
 
 const initialState: StatusState = {
   pending: false,
@@ -67,13 +72,20 @@ export const statusSlice = createSlice({
       return setStatus(
         state,
         getStatusTypeReducer(
-          true,
+          false,
           action.payload.error ? [action.payload.error] : []
         ),
         action.payload.meta?.requestId
       )
     },
-    reset: () => initialState
+    reset: (state, action: PayloadAction<ResetStatusPayload>) =>
+      action.payload?.rootOnly ?? false
+        ? {
+            ...state,
+            pending: false,
+            errors: []
+          }
+        : initialState
   }
 })
 

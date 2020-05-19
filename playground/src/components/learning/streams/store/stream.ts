@@ -1,7 +1,12 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 import _ from 'lodash'
 import { ActionStatus } from 'store/models'
-import { StatusState, statusReducer, statusActions } from 'store/status'
+import {
+  StatusState,
+  statusReducer,
+  statusActions,
+  ResetStatusPayload
+} from 'store/status'
 import { StreamCreateData, Stream } from '../data/models'
 import streamService from '../services/stream-service'
 import { AsyncThunkConfig } from './thunk-config'
@@ -92,39 +97,14 @@ const fulfilledReducer = <P>(
     status: statusReducer(state.status, statusActions.fulfilled(action))
   }
 }
-const valuesReducer = (state: StreamState, values: StreamMap): StreamState => ({
-  ...state,
-  values
-})
-const valuesReducer2 = (
-  values: StreamMap
-): ((state: StreamState) => StreamState) => state => ({
-  ...state,
-  values
-})
-const valuesStateReducer = (
-  values: StreamMap
-): ((state: StreamState) => StreamState) => state => ({
-  ...state,
-  values
-})
-const fulfilledValuesReducer = <P>(
-  reducer: (
-    state: StreamState,
-    action: PayloadAction<P> & ActionStatus
-  ) => StreamState
-) => (
-  state: StreamState,
-  action: PayloadAction<P> & ActionStatus
-): StreamState => fulfilledReducer(reducer(state, action), action)
 
 export const streamSlice = createSlice({
   name: 'stream',
   initialState,
   reducers: {
-    resetStatus: state => ({
+    resetStreamStatus: (state, action: PayloadAction<ResetStatusPayload>) => ({
       ...state,
-      status: statusReducer(state.status, statusActions.reset())
+      status: statusReducer(state.status, statusActions.reset(action.payload))
     })
   },
   extraReducers: {

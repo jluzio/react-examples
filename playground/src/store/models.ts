@@ -1,4 +1,4 @@
-import { SerializedError } from '@reduxjs/toolkit'
+import { SerializedError, ThunkDispatch, AnyAction } from '@reduxjs/toolkit'
 
 export type ErrorLike = SerializedError
 
@@ -19,3 +19,5 @@ export type ActionStatus<A = any, E = ErrorLike> = {
   meta?: ActionMeta<A>
   error?: E
 }
+
+export type AppThunkDispatch = ThunkDispatch<{}, {}, AnyAction>
