@@ -9,12 +9,19 @@ import { Stream } from './data/models'
 import { streamCreateValidationSchema } from './data/validations'
 import { defaultFormLayout } from './data/constants'
 import { RootState, actions } from './store'
+import { getStreamByMatchProps } from './store/selectors'
 import { RouteIdParams } from './routes'
 
 type RouteProps = RouteComponentProps<RouteIdParams>
 
+const emptyStream: Stream = {
+  description: '',
+  id: 0,
+  title: '',
+  userId: ''
+}
 const mapStateToProps = (state: RootState, props: RouteProps) => ({
-  stream: state.streams[_.parseInt(props.match.params.id)]
+  stream: getStreamByMatchProps(state, props)
 })
 const mapDispatchToProps = {
   onGetStream: actions.getStream,
@@ -43,7 +50,7 @@ class StreamEdit extends React.Component<Props> {
     const { history, stream } = this.props
     return (
       <Formik<Stream>
-        initialValues={{ ...stream }}
+        initialValues={stream ?? emptyStream}
         enableReinitialize
         onSubmit={this.handleSubmit}
         validationSchema={streamCreateValidationSchema}

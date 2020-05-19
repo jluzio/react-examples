@@ -2,12 +2,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect, ConnectedProps } from 'react-redux'
-import { List, Card, Avatar, Button } from 'antd'
+import { List, Card, Avatar, Button, Result } from 'antd'
 import {
   CameraOutlined,
   DeleteOutlined,
   EditOutlined,
-  FormOutlined
+  FormOutlined,
+  CloseCircleOutlined
 } from '@ant-design/icons'
 import { RouteComponentProps, withRouter } from 'react-router'
 import { LocationDescriptorObject } from 'history'
@@ -18,6 +19,7 @@ import { locations } from './routes'
 
 const mapStateToProps = (state: RootState) => ({
   streams: selectors.getStreamsList(state),
+  streamStatus: selectors.getStreamStatus(state),
   userId: selectors.getUserId(state)
 })
 const mapDispatchToProps = {
@@ -79,7 +81,7 @@ class StreamList extends React.Component<Props> {
   }
 
   render() {
-    const { streams } = this.props
+    const { streams, streamStatus } = this.props
     return (
       <Card title="Streams" actions={this.renderListActions()}>
         <List
@@ -87,6 +89,19 @@ class StreamList extends React.Component<Props> {
           renderItem={stream => this.renderStream(stream)}
           pagination={{ pageSize: 10 }}
         />
+        {streamStatus?.errors.length > 0 && (
+          <Result
+            status="error"
+            title="Submission Failed"
+            subTitle={streamStatus.errors.map(e => e.message).join(', ')}
+            extra={[
+              <Button type="primary" key="console">
+                Go Console
+              </Button>,
+              <Button key="buy">Buy Again</Button>
+            ]}
+          />
+        )}
       </Card>
     )
   }
