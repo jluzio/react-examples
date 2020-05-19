@@ -17,6 +17,7 @@ const mapStateToProps = (state: RootState, props: RouteProps) => ({
   stream: state.streams[_.parseInt(props.match.params.id)]
 })
 const mapDispatchToProps = {
+  onGetStream: actions.getStream,
   onUpdateStream: actions.updateStream
 }
 const connector = connect(mapStateToProps, mapDispatchToProps)
@@ -24,6 +25,13 @@ type ReduxProps = ConnectedProps<typeof connector>
 
 type Props = ReduxProps & RouteProps
 class StreamEdit extends React.Component<Props> {
+  componentDidMount() {
+    const { stream, onGetStream, match } = this.props
+    if (!stream) {
+      onGetStream(_.parseInt(match.params.id))
+    }
+  }
+
   handleSubmit = (values: Stream, { setSubmitting }: FormikHelpers<Stream>) => {
     notifyFormValues(values)
     setSubmitting(false)
@@ -36,6 +44,7 @@ class StreamEdit extends React.Component<Props> {
     return (
       <Formik<Stream>
         initialValues={{ ...stream }}
+        enableReinitialize
         onSubmit={this.handleSubmit}
         validationSchema={streamCreateValidationSchema}
       >
