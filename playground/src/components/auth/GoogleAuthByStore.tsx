@@ -24,6 +24,11 @@ class GoogleAuthByStore extends React.Component<Props> {
   async componentDidMount() {
     const currentUser = await authService.currentUser()
     currentUser.listen(this.handleUpdateUser)
+
+    const googleUser = currentUser?.get()
+    if (googleUser) {
+      this.handleUpdateUser(googleUser)
+    }
   }
 
   handleSignInClick = () => authService.signIn()
