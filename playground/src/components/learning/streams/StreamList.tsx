@@ -14,7 +14,7 @@ import { LocationDescriptorObject } from 'history'
 import { RootState, actions } from './store'
 import selectors from './store/selectors'
 import { Stream } from './data/models'
-import { locations } from './utils/routes'
+import { locations } from './routes'
 
 const mapStateToProps = (state: RootState) => ({
   streams: selectors.getStreamsList(state),

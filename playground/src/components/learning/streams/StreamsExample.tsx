@@ -14,7 +14,7 @@ import StreamHeader from './StreamHeader'
 import StreamList from './StreamList'
 import StreamShow from './StreamShow'
 import store from './store'
-import { getRoutes } from './utils/routes'
+import { getRoutes } from './routes'
 
 class StreamExample extends React.Component<RouteComponentProps> {
   render() {

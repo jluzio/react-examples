@@ -12,6 +12,10 @@ export const getRoutes = () => ({
   delete: `${ROOT_RESOURCE_PATH}/delete/:id`
 })
 
+export type RouteIdParams = {
+  id: string
+}
+
 const getLocation = (pathname: string): LocationDescriptorObject =>
   historyService.getLocationPreservingSearch({ pathname }, history.location)
 

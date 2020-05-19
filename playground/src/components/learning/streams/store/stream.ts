@@ -4,6 +4,7 @@ import history from 'router/history'
 import { StreamCreateData, Stream } from '../data/models'
 import streamService from '../services/stream-service'
 import { AsyncThunkConfig } from './thunk-config'
+import { locations } from '../routes'
 
 export type StreamState = {
   [key: number]: Stream
@@ -32,7 +33,8 @@ const createStream = createAsyncThunk<
     userId: state.auth.userProfile?.id
   }
   const response = await streamService.create(finalCreateData)
-  history.goBack()
+  // TODO: figure correct place for redirect (component / action creator / ?)
+  // history.push(locations.list())
   return response.data
 })
 
@@ -40,6 +42,8 @@ const updateStream = createAsyncThunk(
   'stream/update',
   async (stream: Stream) => {
     const response = await streamService.update(stream.id, stream)
+    // TODO: figure correct place for redirect (component / action creator / ?)
+    // history.push(locations.list())
     return response.data
   }
 )
