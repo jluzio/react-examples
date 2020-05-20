@@ -1,5 +1,5 @@
 import localResourceApi from 'api/local/local-resource-api'
-import { Stream, StreamEditData } from '../data/models'
+import { Stream } from '../data/models'
 
 export class StreamService {
   private api = localResourceApi
@@ -14,7 +14,7 @@ export class StreamService {
     return this.api.get<Stream>(`${this.resource}/${id}`)
   }
 
-  create(data: StreamEditData) {
+  create(data: Stream) {
     return this.api.post<Stream>(`${this.resource}`, data)
   }
 

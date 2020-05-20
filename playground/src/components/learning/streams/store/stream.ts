@@ -53,7 +53,6 @@ const createStream = createAsyncThunk<Stream, StreamEditData, AsyncThunkConfig>(
       id: 0
     }
     const response = await streamService.create(finalCreateData)
-    // TODO: figure correct place for redirect (component / action creator / ?)
     return response.data
   }
 )
@@ -62,7 +61,6 @@ const updateStream = createAsyncThunk(
   'stream/update',
   async (stream: Stream) => {
     const response = await streamService.update(stream.id, stream)
-    // TODO: figure correct place for redirect (component / action creator / ?)
     return response.data
   }
 )
