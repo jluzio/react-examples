@@ -72,7 +72,7 @@ class StreamEdit extends React.Component<Props, State> {
     const updatedStream: Stream = { ...stream!, ...values }
 
     resetStreamRootStatus()
-    updateStream(updatedStream)
+    updateStream({ id: stream!.id, stream: values })
     this.setState({ onActionComplete: onSubmitComplete })
   }
 

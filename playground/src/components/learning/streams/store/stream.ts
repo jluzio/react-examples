@@ -59,8 +59,8 @@ const createStream = createAsyncThunk<Stream, StreamEditData, AsyncThunkConfig>(
 
 const updateStream = createAsyncThunk(
   'stream/update',
-  async (stream: Stream) => {
-    const response = await streamService.update(stream.id, stream)
+  async (payload: { id: number; stream: Partial<Stream> }) => {
+    const response = await streamService.patchUpdate(payload.id, payload.stream)
     return response.data
   }
 )

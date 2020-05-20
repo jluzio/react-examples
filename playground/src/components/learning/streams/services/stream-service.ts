@@ -1,5 +1,5 @@
 import localResourceApi from 'api/local/local-resource-api'
-import { Stream } from '../data/models'
+import { Stream, StreamEditData } from '../data/models'
 
 export class StreamService {
   private api = localResourceApi
@@ -20,6 +20,10 @@ export class StreamService {
 
   update(id: number, data: Stream) {
     return this.api.put<Stream>(`${this.resource}/${id}`, data)
+  }
+
+  patchUpdate(id: number, data: Partial<Stream>) {
+    return this.api.patch<Stream>(`${this.resource}/${id}`, data)
   }
 
   delete(id: number) {
