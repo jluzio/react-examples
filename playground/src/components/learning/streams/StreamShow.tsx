@@ -1,9 +1,8 @@
 import React from 'react'
-import { Form, Button } from 'antd'
+import { Button, Descriptions } from 'antd'
 import { connect, ConnectedProps } from 'react-redux'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 import _ from 'lodash'
-import { defaultFormLayout } from './data/constants'
 import { RootState, actions } from './store'
 import {
   getStreamByMatchProps,
@@ -12,6 +11,8 @@ import {
 } from './store/selectors'
 import { RouteIdParams } from './routes'
 import StatusErrors from './StatusErrors'
+import VideoPlayer from './VideoPlayer'
+import streamPlayerService from './services/stream-player-service'
 
 type RouteProps = RouteComponentProps<RouteIdParams>
 
@@ -40,20 +41,19 @@ class StreamShow extends React.Component<Props, State> {
 
   render() {
     const { history, stream } = this.props
+    if (!stream) {
+      return <StatusErrors errorsSelector={getStreamStatusErrors} />
+    }
     return (
-      <Form
-        labelCol={defaultFormLayout.form?.labelCol}
-        wrapperCol={defaultFormLayout.form?.wrapperCol}
-      >
-        <Form.Item label="Title">{stream?.title}</Form.Item>
-        <Form.Item label="Description">{stream?.description}</Form.Item>
-        <Form.Item
-          wrapperCol={defaultFormLayout.formActionsItemProps?.wrapperCol}
-        >
-          <Button onClick={() => history.goBack()}>Back</Button>
-        </Form.Item>
-        <StatusErrors errorsSelector={getStreamStatusErrors} />
-      </Form>
+      <>
+        <VideoPlayer url={streamPlayerService.streamUrl(stream)} />
+        <Descriptions title={stream.title}>
+          <Descriptions.Item label="Description">
+            {stream.description}
+          </Descriptions.Item>
+        </Descriptions>
+        <Button onClick={() => history.goBack()}>Back</Button>
+      </>
     )
   }
 }
