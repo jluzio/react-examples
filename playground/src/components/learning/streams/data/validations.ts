@@ -12,9 +12,7 @@ export const streamFieldValidations = {
   description: fieldValidations.description.required()
 }
 
-export const streamCreateValidationSchema = yup
-  .object<StreamCreateData>()
-  .shape({
-    title: streamFieldValidations.title,
-    description: streamFieldValidations.description
-  })
+export const streamEditValidationSchema = yup.object<StreamCreateData>().shape({
+  title: streamFieldValidations.title,
+  description: streamFieldValidations.description
+})
