@@ -22,6 +22,7 @@ import ReduxExampleList from './redux/ReduxExampleList'
 import CacheExampleList from './cache/CacheExampleList'
 import OAuth2ExampleList from './oauth2/OAuth2ExampleList'
 import MiscExample from './misc/MiscExample'
+import PortalExampleList from './portal/PortalExampleList'
 
 const { TabPane } = Tabs
 
@@ -85,6 +86,9 @@ const ExampleList: React.FC = () => {
       </TabPane>
       <TabPane key="misc" tab="Misc">
         <MiscExample />
+      </TabPane>
+      <TabPane key="portal" tab="Portal">
+        <PortalExampleList />
       </TabPane>
     </ExampleListTabbedCard>
   )
