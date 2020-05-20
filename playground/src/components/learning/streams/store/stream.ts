@@ -12,7 +12,7 @@ import {
   statusActions,
   ResetStatusPayload
 } from 'store/status'
-import { StreamCreateData, Stream } from '../data/models'
+import { StreamEditData, Stream } from '../data/models'
 import streamService from '../services/stream-service'
 import { AsyncThunkConfig } from './thunk-config'
 
@@ -43,20 +43,19 @@ const getStream = createAsyncThunk('stream/get', async (id: number) => {
   return response.data
 })
 
-const createStream = createAsyncThunk<
-  Stream,
-  StreamCreateData,
-  AsyncThunkConfig
->('stream/create', async (createData, thunkApi) => {
-  const state = thunkApi.getState()
-  const finalCreateData: StreamCreateData = {
-    ...createData,
-    userId: state.auth.userProfile?.id
+const createStream = createAsyncThunk<Stream, StreamEditData, AsyncThunkConfig>(
+  'stream/create',
+  async (createData, thunkApi) => {
+    const state = thunkApi.getState()
+    const finalCreateData: StreamEditData = {
+      ...createData,
+      userId: state.auth.userProfile?.id
+    }
+    const response = await streamService.create(finalCreateData)
+    // TODO: figure correct place for redirect (component / action creator / ?)
+    return response.data
   }
-  const response = await streamService.create(finalCreateData)
-  // TODO: figure correct place for redirect (component / action creator / ?)
-  return response.data
-})
+)
 
 const updateStream = createAsyncThunk(
   'stream/update',

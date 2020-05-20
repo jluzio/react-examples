@@ -1,5 +1,5 @@
 import * as yup from 'yup'
-import { StreamCreateData } from './models'
+import { StreamEditData } from './models'
 
 export const fieldValidations = {
   name: yup.string().max(20),
@@ -12,7 +12,7 @@ export const streamFieldValidations = {
   description: fieldValidations.description.required()
 }
 
-export const streamEditValidationSchema = yup.object<StreamCreateData>().shape({
+export const streamEditValidationSchema = yup.object<StreamEditData>().shape({
   title: streamFieldValidations.title,
   description: streamFieldValidations.description
 })

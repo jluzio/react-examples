@@ -5,4 +5,4 @@ export type Stream = {
   userId: string
 }
 
-export type StreamCreateData = Partial<Stream>
+export type StreamEditData = Partial<Stream>

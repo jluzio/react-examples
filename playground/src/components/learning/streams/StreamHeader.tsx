@@ -11,7 +11,7 @@ const StreamHeader: React.FC = () => {
     <PageHeader
       title={
         <Link key="streams" to={locations.list()}>
-          Streams
+          Streamy
         </Link>
       }
       extra={[<GoogleAuthByStore key="auth" authSelector={authSelector} />]}
