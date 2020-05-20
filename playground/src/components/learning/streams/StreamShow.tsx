@@ -1,16 +1,61 @@
 import React from 'react'
-import { RouteComponentProps, withRouter } from 'react-router'
+import { Form, Button } from 'antd'
+import { connect, ConnectedProps } from 'react-redux'
+import { withRouter, RouteComponentProps } from 'react-router-dom'
+import _ from 'lodash'
+import { defaultFormLayout } from './data/constants'
+import { RootState, actions } from './store'
+import {
+  getStreamByMatchProps,
+  getStreamStatus,
+  getStreamStatusErrors
+} from './store/selectors'
+import { RouteIdParams } from './routes'
+import StatusErrors from './StatusErrors'
 
-type RouteParams = { id?: string }
+type RouteProps = RouteComponentProps<RouteIdParams>
 
-type Props = RouteComponentProps<RouteParams>
-class StreamShow extends React.Component<Props> {
+const mapStateToProps = (state: RootState, props: RouteProps) => ({
+  stream: getStreamByMatchProps(state, props),
+  streamStatus: getStreamStatus(state)
+})
+const mapDispatchToProps = {
+  getStream: actions.getStream
+}
+const connector = connect(mapStateToProps, mapDispatchToProps)
+type ReduxProps = ConnectedProps<typeof connector>
+
+type Props = ReduxProps & RouteProps
+type State = {}
+
+class StreamShow extends React.Component<Props, State> {
+  state: State = {}
+
+  componentDidMount() {
+    const { stream, getStream, match } = this.props
+    if (!stream) {
+      getStream(_.parseInt(match.params.id))
+    }
+  }
+
   render() {
-    const { match } = this.props
-    const { params } = match
-
-    return <div>StreamShow: {params.id}</div>
+    const { history, stream } = this.props
+    return (
+      <Form
+        labelCol={defaultFormLayout.form?.labelCol}
+        wrapperCol={defaultFormLayout.form?.wrapperCol}
+      >
+        <Form.Item label="Title">{stream?.title}</Form.Item>
+        <Form.Item label="Description">{stream?.description}</Form.Item>
+        <Form.Item
+          wrapperCol={defaultFormLayout.formActionsItemProps?.wrapperCol}
+        >
+          <Button onClick={() => history.goBack()}>Back</Button>
+        </Form.Item>
+        <StatusErrors errorsSelector={getStreamStatusErrors} />
+      </Form>
+    )
   }
 }
 
-export default withRouter(StreamShow)
+export default connector(withRouter(StreamShow))

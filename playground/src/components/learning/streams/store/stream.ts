@@ -1,4 +1,9 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
+import {
+  createSlice,
+  createAsyncThunk,
+  PayloadAction,
+  Action
+} from '@reduxjs/toolkit'
 import _ from 'lodash'
 import { ActionStatus } from 'store/models'
 import {
@@ -105,6 +110,10 @@ export const streamSlice = createSlice({
     resetStreamStatus: (state, action: PayloadAction<ResetStatusPayload>) => ({
       ...state,
       status: statusReducer(state.status, statusActions.reset(action.payload))
+    }),
+    resetStreamRootStatus: (state, action: Action) => ({
+      ...state,
+      status: statusReducer(state.status, statusActions.resetRoot())
     })
   },
   extraReducers: {
@@ -118,6 +127,19 @@ export const streamSlice = createSlice({
         {
           ...state,
           values: _.mapKeys(action.payload, 'id')
+        },
+        action
+      ),
+    [getStream.pending.type]: pendingReducer,
+    [getStream.rejected.type]: rejectedReducer,
+    [getStream.fulfilled.type]: (
+      state,
+      action: ReturnType<typeof getStream.fulfilled>
+    ) =>
+      fulfilledReducer(
+        {
+          ...state,
+          values: { ...state.values, [action.payload.id]: action.payload }
         },
         action
       ),

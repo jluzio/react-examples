@@ -2,7 +2,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect, ConnectedProps } from 'react-redux'
-import { List, Card, Avatar, Button, Result } from 'antd'
+import { List, Card, Avatar, Button } from 'antd'
 import {
   CameraOutlined,
   DeleteOutlined,
@@ -10,7 +10,6 @@ import {
   FormOutlined
 } from '@ant-design/icons'
 import { RouteComponentProps, withRouter } from 'react-router'
-import { LocationDescriptorObject } from 'history'
 import { RootState, actions, AppDispatch } from './store'
 import selectors from './store/selectors'
 import { Stream } from './data/models'
@@ -21,18 +20,23 @@ const mapStateToProps = (state: RootState) => ({
   streams: selectors.getStreamsList(state),
   userId: selectors.getUserId(state)
 })
+
 const mapDispatchToProps = {
-  onListStreams: actions.listStreams,
-  onResetStreamStatus: actions.resetStreamStatus
+  resetStreamRootStatus: actions.resetStreamRootStatus,
+  listStreams: actions.listStreams
 }
+
 // demonstration on how to map multiple actions on a single handler
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const mapDispatchToPropsUsingDispatch = (dispatch: AppDispatch) => ({
   onListStreams: () => {
-    dispatch(actions.resetStreamStatus({ rootOnly: true }))
+    dispatch(actions.resetStreamRootStatus())
     dispatch(actions.listStreams())
   }
 })
+// const mapDispatchToPropsUsingDispatchBindActionCreators = (
+//   dispatch: Dispatch
+// ) => bindActionCreators({ resetStreamRootStatus, listStreams }, dispatch)
 
 const connector = connect(mapStateToProps, mapDispatchToProps)
 type ReduxProps = ConnectedProps<typeof connector>
@@ -44,9 +48,9 @@ class StreamList extends React.Component<Props> {
   }
 
   listStreams() {
-    const { onListStreams, onResetStreamStatus } = this.props
-    onResetStreamStatus({ rootOnly: true })
-    onListStreams()
+    const { resetStreamRootStatus, listStreams } = this.props
+    resetStreamRootStatus()
+    listStreams()
   }
 
   renderStreamActions(stream: Stream) {

@@ -9,13 +9,12 @@ const StreamHeader: React.FC = () => {
   const authSelector = (state: RootState) => state.auth
   return (
     <PageHeader
-      title="Streamer"
-      extra={[
-        <Link key="streams" to={locations.list()} className="ant-btn">
+      title={
+        <Link key="streams" to={locations.list()}>
           Streams
-        </Link>,
-        <GoogleAuthByStore key="auth" authSelector={authSelector} />
-      ]}
+        </Link>
+      }
+      extra={[<GoogleAuthByStore key="auth" authSelector={authSelector} />]}
     />
   )
 }

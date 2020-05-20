@@ -9,8 +9,13 @@ import { Stream } from './data/models'
 import { streamCreateValidationSchema } from './data/validations'
 import { defaultFormLayout } from './data/constants'
 import { RootState, actions } from './store'
-import { getStreamByMatchProps } from './store/selectors'
-import { RouteIdParams } from './routes'
+import {
+  getStreamByMatchProps,
+  getStreamStatus,
+  getStreamStatusErrors
+} from './store/selectors'
+import { RouteIdParams, locations } from './routes'
+import StatusErrors from './StatusErrors'
 
 type RouteProps = RouteComponentProps<RouteIdParams>
 
@@ -21,29 +26,66 @@ const emptyStream: Stream = {
   userId: ''
 }
 const mapStateToProps = (state: RootState, props: RouteProps) => ({
-  stream: getStreamByMatchProps(state, props)
+  stream: getStreamByMatchProps(state, props),
+  streamStatus: getStreamStatus(state)
 })
 const mapDispatchToProps = {
-  onGetStream: actions.getStream,
-  onUpdateStream: actions.updateStream
+  getStream: actions.getStream,
+  updateStream: actions.updateStream,
+  resetStreamRootStatus: actions.resetStreamRootStatus
 }
 const connector = connect(mapStateToProps, mapDispatchToProps)
 type ReduxProps = ConnectedProps<typeof connector>
 
 type Props = ReduxProps & RouteProps
-class StreamEdit extends React.Component<Props> {
+type State = {
+  onActionComplete?: () => void
+  actionSuccessful: boolean
+}
+
+class StreamEdit extends React.Component<Props, State> {
+  state: State = {
+    actionSuccessful: false
+  }
+
+  static getDerivedStateFromProps(
+    props: Props,
+    state: State
+  ): Partial<State> | null {
+    const { streamStatus } = props
+    const { onActionComplete } = state
+    if (onActionComplete != null && !streamStatus.pending) {
+      onActionComplete()
+      return {
+        onActionComplete: undefined,
+        actionSuccessful: streamStatus.errors.length === 0
+      }
+    }
+    return null
+  }
+
   componentDidMount() {
-    const { stream, onGetStream, match } = this.props
+    const { stream, getStream, match } = this.props
     if (!stream) {
-      onGetStream(_.parseInt(match.params.id))
+      getStream(_.parseInt(match.params.id))
+    }
+  }
+
+  componentDidUpdate() {
+    const { history } = this.props
+    const { actionSuccessful } = this.state
+    if (actionSuccessful) {
+      history.push(locations.list())
     }
   }
 
   handleSubmit = (values: Stream, { setSubmitting }: FormikHelpers<Stream>) => {
     notifyFormValues(values)
-    setSubmitting(false)
-    const { onUpdateStream } = this.props
-    onUpdateStream(values)
+
+    const { updateStream, resetStreamRootStatus } = this.props
+    resetStreamRootStatus()
+    updateStream(values)
+    this.setState({ onActionComplete: () => setSubmitting(false) })
   }
 
   render() {
@@ -110,6 +152,7 @@ class StreamEdit extends React.Component<Props> {
                 Cancel
               </Button>
             </Form.Item>
+            <StatusErrors errorsSelector={getStreamStatusErrors} />
           </Form>
         )}
       </Formik>

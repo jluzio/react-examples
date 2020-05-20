@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   Route,
   Switch,
@@ -18,10 +18,16 @@ import store, { actions } from './store'
 import { getRoutes } from './routes'
 
 class StreamExample extends React.Component<RouteComponentProps> {
+  unregisterHistoryListener!: Function
+
   componentDidMount() {
-    history.listen(() =>
+    this.unregisterHistoryListener = history.listen(() =>
       store.dispatch(actions.resetStreamStatus({ rootOnly: true }))
     )
+  }
+
+  componentWillUnmount() {
+    this.unregisterHistoryListener()
   }
 
   render() {

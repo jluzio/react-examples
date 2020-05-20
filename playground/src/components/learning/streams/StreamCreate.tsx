@@ -3,7 +3,7 @@ import { Formik, FormikHelpers, ErrorMessage } from 'formik'
 import { Form, Input, Button } from 'antd'
 import { notifyFormValues } from 'components/debug/debug-notifications'
 import { connect, ConnectedProps } from 'react-redux'
-import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom'
+import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { StreamCreateData } from './data/models'
 import { streamCreateValidationSchema } from './data/validations'
 import { defaultFormLayout } from './data/constants'
@@ -21,8 +21,8 @@ const mapStateToProps = (state: RootState) => ({
   streamStatus: getStreamStatus(state)
 })
 const mapDispatchToProps = {
-  onCreateStream: actions.createStream,
-  onResetStreamStatus: actions.resetStreamStatus
+  createStream: actions.createStream,
+  resetStreamRootStatus: actions.resetStreamRootStatus
 }
 
 const connector = connect(mapStateToProps, mapDispatchToProps)
@@ -30,30 +30,39 @@ type ReduxProps = ConnectedProps<typeof connector>
 
 type Props = ReduxProps & RouteComponentProps
 type State = {
-  submitting: boolean
-  redirect: boolean
+  onActionComplete?: () => void
+  actionSuccessful: boolean
 }
 
 class StreamCreate extends React.Component<Props, State> {
   state: State = {
-    submitting: false,
-    redirect: false
+    actionSuccessful: false
   }
 
-  // eslint-disable-next-line consistent-return
-  static getDerivedStateFromProps(props: Props, state: State): State | null {
+  static getDerivedStateFromProps(
+    props: Props,
+    state: State
+  ): Partial<State> | null {
     const { streamStatus } = props
-    const { submitting } = state
-    if (submitting && !streamStatus.pending) {
+    const { onActionComplete } = state
+    if (onActionComplete != null && !streamStatus.pending) {
+      onActionComplete()
       return {
-        submitting: false,
-        redirect: streamStatus.errors.length === 0
+        onActionComplete: undefined,
+        actionSuccessful: streamStatus.errors.length === 0
       }
     }
     return null
   }
 
-  // eslint-disable-next-line react/sort-comp
+  componentDidUpdate() {
+    const { history } = this.props
+    const { actionSuccessful } = this.state
+    if (actionSuccessful) {
+      history.push(locations.list())
+    }
+  }
+
   handleSubmit = (
     values: StreamCreateData,
     { setSubmitting }: FormikHelpers<StreamCreateData>
@@ -61,27 +70,10 @@ class StreamCreate extends React.Component<Props, State> {
     notifyFormValues(values)
 
     // TODO: watch streamStatus.pending, when done check errors and redirect if needed
-    const { onCreateStream, onResetStreamStatus } = this.props
-    onResetStreamStatus({ rootOnly: true })
-    onCreateStream(values)
-    this.setState({ submitting: true })
-  }
-
-  componentDidUpdate() {
-    // const { submitting } = this.state
-    // const { streamStatus, history } = this.props
-    // if (submitting && !streamStatus.pending) {
-    //   // eslint-disable-next-line react/no-did-update-set-state
-    //   this.setState({ submitting: false })
-    //   if (!streamStatus.errors.length) {
-    //     history.push(locations.list())
-    //   }
-    // }
-    const { redirect } = this.state
-    const { history } = this.props
-    if (redirect) {
-      history.push(locations.list())
-    }
+    const { createStream, resetStreamRootStatus } = this.props
+    resetStreamRootStatus()
+    createStream(values)
+    this.setState({ onActionComplete: () => setSubmitting(false) })
   }
 
   render() {

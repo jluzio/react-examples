@@ -50,6 +50,18 @@ const setStatus = (
   }
 }
 
+const resetReducer = (
+  state: StatusState,
+  rootOnly: boolean = false
+): StatusState =>
+  rootOnly
+    ? {
+        ...state,
+        pending: false,
+        errors: []
+      }
+    : initialState
+
 export const statusSlice = createSlice({
   name: 'status',
   initialState,
@@ -79,13 +91,8 @@ export const statusSlice = createSlice({
       )
     },
     reset: (state, action: PayloadAction<ResetStatusPayload>) =>
-      action.payload?.rootOnly ?? false
-        ? {
-            ...state,
-            pending: false,
-            errors: []
-          }
-        : initialState
+      resetReducer(state, action.payload?.rootOnly),
+    resetRoot: (state, action: Action) => resetReducer(state, true)
   }
 })
 
