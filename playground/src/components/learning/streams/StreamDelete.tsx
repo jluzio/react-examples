@@ -103,7 +103,7 @@ class StreamDelete extends React.Component<Props, State> {
         </Form.Item>
         <StatusErrors errorsSelector={getStreamStatusErrors} />
         <Modal
-          title="Delete"
+          title="Delete Stream"
           visible={modalVisible}
           confirmLoading={modalConfirmLoading}
           onOk={this.onDeleteStream}
@@ -112,7 +112,7 @@ class StreamDelete extends React.Component<Props, State> {
           onCancel={() => history.goBack()}
           cancelText="No"
         >
-          Delete stream {stream?.title}?
+          Are you sure you want to delete stream {stream?.title}?
         </Modal>
       </Form>
     )
