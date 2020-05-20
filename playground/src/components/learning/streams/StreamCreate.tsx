@@ -2,8 +2,7 @@ import React from 'react'
 import { notifyFormValues } from 'components/debug/debug-notifications'
 import { connect, ConnectedProps } from 'react-redux'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
-import _ from 'lodash'
-import { Stream } from './data/models'
+import { StreamEditData } from './data/models'
 import { RootState, actions } from './store'
 import { getStreamStatus } from './store/selectors'
 import { RouteIdParams, locations } from './routes'
@@ -27,11 +26,9 @@ type State = {
   actionSuccessful: boolean
 }
 
-const initialValues: Stream = {
+const initialValues: StreamEditData = {
   description: '',
-  title: '',
-  id: 0,
-  userId: ''
+  title: ''
 }
 
 class StreamCreate extends React.Component<Props, State> {
@@ -63,7 +60,7 @@ class StreamCreate extends React.Component<Props, State> {
     }
   }
 
-  handleSubmit = (values: Stream, onSubmitComplete: () => void) => {
+  handleSubmit = (values: StreamEditData, onSubmitComplete: () => void) => {
     notifyFormValues(values)
 
     const { createStream, resetStreamRootStatus } = this.props

@@ -3,7 +3,7 @@ import { notifyFormValues } from 'components/debug/debug-notifications'
 import { connect, ConnectedProps } from 'react-redux'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 import _ from 'lodash'
-import { Stream } from './data/models'
+import { Stream, StreamEditData } from './data/models'
 import { RootState, actions } from './store'
 import { getStreamByMatchProps, getStreamStatus } from './store/selectors'
 import { RouteIdParams, locations } from './routes'
@@ -65,18 +65,24 @@ class StreamEdit extends React.Component<Props, State> {
     }
   }
 
-  handleSubmit = (values: Stream, onSubmitComplete: () => void) => {
+  handleSubmit = (values: StreamEditData, onSubmitComplete: () => void) => {
     notifyFormValues(values)
 
-    const { updateStream, resetStreamRootStatus } = this.props
+    const { stream, updateStream, resetStreamRootStatus } = this.props
+    const updatedStream: Stream = { ...stream!, ...values }
+
     resetStreamRootStatus()
-    updateStream(values)
+    updateStream(updatedStream)
     this.setState({ onActionComplete: onSubmitComplete })
   }
 
   render() {
     const { stream } = this.props
-    return <StreamForm initialValues={stream} onSubmit={this.handleSubmit} />
+    const streamEditData =
+      stream && (_.pick(stream, 'title', 'description') as StreamEditData)
+    return (
+      <StreamForm initialValues={streamEditData} onSubmit={this.handleSubmit} />
+    )
   }
 }
 

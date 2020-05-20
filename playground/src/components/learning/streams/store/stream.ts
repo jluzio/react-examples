@@ -47,9 +47,10 @@ const createStream = createAsyncThunk<Stream, StreamEditData, AsyncThunkConfig>(
   'stream/create',
   async (createData, thunkApi) => {
     const state = thunkApi.getState()
-    const finalCreateData: StreamEditData = {
+    const finalCreateData: Stream = {
       ...createData,
-      userId: state.auth.userProfile?.id
+      userId: state.auth.userProfile!.id,
+      id: 0
     }
     const response = await streamService.create(finalCreateData)
     // TODO: figure correct place for redirect (component / action creator / ?)

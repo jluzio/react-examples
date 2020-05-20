@@ -3,7 +3,7 @@ import { Formik, FormikHelpers, ErrorMessage } from 'formik'
 import { Form, Input, Button } from 'antd'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 import _ from 'lodash'
-import { Stream } from './data/models'
+import { StreamEditData } from './data/models'
 import { streamEditValidationSchema } from './data/validations'
 import { defaultFormLayout } from './data/constants'
 import { getStreamStatusErrors } from './store/selectors'
@@ -11,16 +11,14 @@ import { RouteIdParams } from './routes'
 import StatusErrors from './StatusErrors'
 
 type OwnProps = {
-  initialValues?: OptNull<Stream>
-  onSubmit: (stream: Stream, onSubmitComplete: () => void) => void
+  initialValues?: OptNull<StreamEditData>
+  onSubmit: (stream: StreamEditData, onSubmitComplete: () => void) => void
 }
 type RouteProps = RouteComponentProps<RouteIdParams>
 
-const emptyValues: Stream = {
+const emptyValues: StreamEditData = {
   description: '',
-  id: 0,
-  title: '',
-  userId: ''
+  title: ''
 }
 
 type Props = OwnProps & RouteComponentProps
@@ -29,7 +27,10 @@ type State = {}
 class StreamForm extends React.Component<Props, State> {
   state: State = {}
 
-  handleSubmit = (values: Stream, { setSubmitting }: FormikHelpers<Stream>) => {
+  handleSubmit = (
+    values: StreamEditData,
+    { setSubmitting }: FormikHelpers<StreamEditData>
+  ) => {
     const { onSubmit } = this.props
     onSubmit(values, () => setSubmitting(false))
   }
@@ -37,7 +38,7 @@ class StreamForm extends React.Component<Props, State> {
   render() {
     const { history, initialValues } = this.props
     return (
-      <Formik<Stream>
+      <Formik<StreamEditData>
         initialValues={initialValues ?? emptyValues}
         enableReinitialize
         onSubmit={this.handleSubmit}
