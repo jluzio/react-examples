@@ -37,8 +37,10 @@ interface MouseState {
   x: number
   y: number
 }
+type RenderType = (state: MouseState) => React.ReactElement
 interface MouseProps {
-  render: (state: MouseState) => React.ReactElement
+  render?: RenderType
+  children?: RenderType
 }
 
 class Mouse extends React.Component<MouseProps, MouseState> {
@@ -60,8 +62,9 @@ class Mouse extends React.Component<MouseProps, MouseState> {
   }
 
   render() {
-    const { render } = this.props
+    const { render, children } = this.props
     const { x, y } = this.state
+    const finalRender: RenderType = (render ?? children)!
     return (
       <>
         <div
@@ -76,7 +79,7 @@ class Mouse extends React.Component<MouseProps, MouseState> {
           Instead of providing a static representation of what <Mouse> renders,
           use the `render` prop to dynamically determine what to render.
         */}
-          {render(this.state)}
+          {finalRender(this.state)}
           <p>
             x: {x}, y: {y}
           </p>
@@ -89,10 +92,18 @@ class Mouse extends React.Component<MouseProps, MouseState> {
 class MouseTracker extends React.Component {
   render() {
     return (
-      <div style={{ border: '1px solid red', height: '300px', width: '300px' }}>
-        <h1>Move the mouse around!</h1>
-        <Mouse render={mouse => <Cat mouse={mouse} />} />
-      </div>
+      <>
+        <div
+          style={{ border: '1px solid red', height: '300px', width: '300px' }}
+        >
+          <h1>Move the mouse around!</h1>
+          <Mouse render={mouse => <Cat mouse={mouse} />} />
+          {
+            // Since we defined render and children prop as a render prop, children can also be used aswell
+          }
+          {/* <Mouse>{mouse => <Cat mouse={mouse} />}</Mouse> */}
+        </div>
+      </>
     )
   }
 }
