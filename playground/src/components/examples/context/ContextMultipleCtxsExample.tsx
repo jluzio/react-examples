@@ -14,6 +14,11 @@ interface State {
   themeData: ThemeData
 }
 
+const alwaysDarkThemeData: ThemeData = {
+  theme: themes.dark,
+  toggleTheme: () => {}
+}
+
 const sampleUserProfile: UserProfile = {
   id: '99',
   email: 'johndoe@notexists.org',
@@ -50,6 +55,10 @@ class ContextExample extends React.Component<Props, State> {
             <ThemedButton />
             <ThemeTogglerButton />
             <ThemedUserCard />
+          </ThemeContext.Provider>
+          <ThemeContext.Provider value={alwaysDarkThemeData}>
+            <label>Always dark</label>
+            <ThemedButton />
           </ThemeContext.Provider>
         </UserContext.Provider>
       </Card>

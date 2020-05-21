@@ -13,24 +13,27 @@ const FlagButton: React.FC<FlagProps> = ({ src, onClick }: FlagProps) => (
 const ContextI18nExample: React.FC = () => {
   const [localeData, setLocaleData] = useState<LocaleData>({ locale: 'en' })
   return (
-    <LocaleContext.Provider value={localeData}>
-      <Card>
-        <Space direction="horizontal">
-          <span>Select a language:</span>
-          <FlagButton
-            key="localeEn"
-            src="https://image.flaticon.com/icons/svg/551/551953.svg"
-            onClick={() => setLocaleData({ locale: 'en' })}
-          />
-          <FlagButton
-            key="localePt"
-            src="https://image.flaticon.com/icons/svg/551/551932.svg"
-            onClick={() => setLocaleData({ locale: 'pt' })}
-          />
-        </Space>
+    <Card>
+      <Space direction="horizontal">
+        <span>Select a language:</span>
+        <FlagButton
+          key="localeEn"
+          src="https://image.flaticon.com/icons/svg/551/551953.svg"
+          onClick={() => setLocaleData({ locale: 'en' })}
+        />
+        <FlagButton
+          key="localePt"
+          src="https://image.flaticon.com/icons/svg/551/551932.svg"
+          onClick={() => setLocaleData({ locale: 'pt' })}
+        />
+      </Space>
+      <LocaleContext.Provider value={localeData}>
         <UserCreate />
-      </Card>
-    </LocaleContext.Provider>
+      </LocaleContext.Provider>
+      <LocaleContext.Provider value={{ locale: 'en' }}>
+        <UserCreate />
+      </LocaleContext.Provider>
+    </Card>
   )
 }
 
