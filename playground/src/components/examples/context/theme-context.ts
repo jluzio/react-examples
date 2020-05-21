@@ -1,5 +1,15 @@
 import React from 'react'
 
+export type Theme = {
+  foreground: string
+  background: string
+}
+
+export type ThemeData = {
+  theme: Theme
+  toggleTheme: () => void
+}
+
 export const themes = {
   light: {
     foreground: '#000000',
@@ -11,7 +21,7 @@ export const themes = {
   }
 }
 
-export const ThemeContext = React.createContext(
+export const ThemeContext = React.createContext<ThemeData>(
   // default value
   {
     theme: themes.dark,

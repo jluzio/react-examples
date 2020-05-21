@@ -1,6 +1,6 @@
 /* eslint-disable class-methods-use-this */
+import { UserProfile } from 'models/core'
 import { googleOAuth2 } from '../api-config.json'
-import { UserProfile } from './models'
 
 type GoogleAuthResult = Omit<gapi.auth2.GoogleAuth, 'then'>
 

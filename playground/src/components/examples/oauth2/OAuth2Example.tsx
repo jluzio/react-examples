@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prefer-const */
-import React, { useState } from 'react'
+import React from 'react'
 import { Button, Card, Descriptions, Avatar } from 'antd'
 import authService from 'services/oauth2/google-oauth2-service'
-import { UserProfile } from 'api/oauth2/models'
+import { UserProfile } from 'models/core'
 
 type Props = {}
 type State = {

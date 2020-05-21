@@ -6,7 +6,7 @@ import {
   PayloadAction,
   createSlice
 } from '@reduxjs/toolkit'
-import { UserProfile } from 'api/oauth2/models'
+import { UserProfile } from 'models/core'
 
 export interface AuthState {
   signedIn: boolean

@@ -13,7 +13,7 @@ import I18nExampleList from './i18n/I18nExampleList'
 import ValidatorExampleList from './validators/ValidatorExampleList'
 import RxjsExampleList from './rxjs/RxjsExampleList'
 import ErrorBoundaryExample from './error-boundary/ErrorBoundaryExample'
-import ContextExample from './context/ContextExample'
+import ContextExampleList from './context/ContextExampleList'
 import RefExample from './refs/RefExample'
 import HocExample from './hoc/HocExample'
 import FragmentsExample from './fragments/FragmentsExample'
@@ -61,7 +61,7 @@ const ExampleList: React.FC = () => {
         <ErrorBoundaryExample />
       </TabPane>
       <TabPane key="context" tab="Context">
-        <ContextExample />
+        <ContextExampleList />
       </TabPane>
       <TabPane key="ref" tab="Ref">
         <RefExample />

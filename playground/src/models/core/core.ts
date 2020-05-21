@@ -74,3 +74,10 @@ export class ResourceStatusData {
     }
   }
 }
+
+export type UserProfile = {
+  id: string
+  email: string
+  name: string
+  imageUrl?: string
+}
