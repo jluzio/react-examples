@@ -7,6 +7,10 @@ import UseRefHookExample from './UseRefHookExample'
 import UseContextHookExample from './UseContextHookExample'
 import UseReducerHookExample from './UseReducerHookExample'
 import UseEffectHookConcurrencyExample from './UseEffectHookConcurrencyExample'
+import UseMemoHookExample from './UseMemoHookExample'
+import UseImperativeHandleHookExample from './UseImperativeHandleHookExample'
+import UseLayoutEffectHookExample from './UseLayoutEffectHookExample'
+import UseCallbackHookExample from './UseCallbackHookExample'
 
 const { TabPane } = Tabs
 
@@ -30,6 +34,18 @@ const HooksExampleList: React.FC = () => {
       </TabPane>
       <TabPane key="useReducer" tab="useReducer">
         <UseReducerHookExample />
+      </TabPane>
+      <TabPane key="useMemo" tab="useMemo">
+        <UseMemoHookExample />
+      </TabPane>
+      <TabPane key="useImperativeHandle" tab="useImperativeHandle">
+        <UseImperativeHandleHookExample />
+      </TabPane>
+      <TabPane key="useLayoutEffect" tab="useLayoutEffect">
+        <UseLayoutEffectHookExample />
+      </TabPane>
+      <TabPane key="useCallback" tab="useCallback">
+        <UseCallbackHookExample />
       </TabPane>
     </ExampleListTabbedCard>
   )

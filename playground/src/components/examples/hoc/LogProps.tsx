@@ -1,5 +1,5 @@
 import React from 'react'
-import Log from 'utils/Log'
+import Log from 'utils/log-test'
 
 export function logProps<P = {}>(
   Component: React.ComponentType<P>

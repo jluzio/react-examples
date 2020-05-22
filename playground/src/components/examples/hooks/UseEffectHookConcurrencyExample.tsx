@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
-import log from 'utils/Log'
+import log from 'utils/log-test'
 import { Button, Form, List } from 'antd'
 import _ from 'lodash'
 
@@ -62,9 +62,6 @@ const UseEffectHookConcurrencyExample: React.FC = () => {
           Increment Count
         </Button>
         <Button onClick={() => setCount2(count2 + 1)}>Increment Count2</Button>
-      </Form.Item>
-      <Form.Item label="NOTE">
-        First action log for Count is lost due to concurrent access to actions
       </Form.Item>
       <Form.Item label="Action Log">
         <List

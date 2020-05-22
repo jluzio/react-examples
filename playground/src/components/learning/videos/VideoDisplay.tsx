@@ -1,7 +1,7 @@
 import React from 'react'
 import { Row, Col, notification } from 'antd'
 import YoutubeService from 'services/youtube-service'
-import Log from 'utils/Log'
+import Log from 'utils/log-test'
 import SearchBar from './SearchBar'
 import VideoDetail from './VideoDetail'
 import VideoList from './VideoList'

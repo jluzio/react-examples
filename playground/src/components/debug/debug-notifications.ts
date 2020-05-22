@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { notification } from 'antd'
-import log from 'utils/Log'
+import log from 'utils/log-test'
 
 export const notifyFormValues = (
   values: any,

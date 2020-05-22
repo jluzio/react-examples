@@ -1,7 +1,7 @@
 import React from 'react'
 import { Input, Button, Form, Card } from 'antd'
 import * as yup from 'yup'
-import Log from 'utils/Log'
+import Log from 'utils/log-test'
 
 const { Item } = Form
 

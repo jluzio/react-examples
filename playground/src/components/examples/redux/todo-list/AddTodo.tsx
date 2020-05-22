@@ -3,7 +3,7 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react'
 import { Form, Button } from 'antd'
-import log from 'utils/Log'
+import log from 'utils/log-test'
 import { connect, ConnectedProps } from 'react-redux'
 import { Formik, Field, useField, ErrorMessage, FormikHelpers } from 'formik'
 import { Todo } from './store/models'
