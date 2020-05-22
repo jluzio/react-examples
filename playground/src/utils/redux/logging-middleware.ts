@@ -1,4 +1,4 @@
-import log from 'utils/log-test'
+import log from 'utils/log'
 import { Middleware } from 'redux'
 
 const logger: Middleware = store => next => action => {

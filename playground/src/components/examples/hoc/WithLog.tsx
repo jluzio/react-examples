@@ -1,5 +1,5 @@
 import React from 'react'
-import Log from 'utils/log-test'
+import Log from 'utils/log'
 
 export type LogProps = {
   log: typeof Log

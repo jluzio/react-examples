@@ -1,7 +1,7 @@
 import React from 'react'
 import { Formik, Field, ErrorMessage } from 'formik'
 import { Button, Form } from 'antd'
-import Log from 'utils/log-test'
+import Log from 'utils/log'
 import validators from 'services/validation/validators'
 import { notifyFormValues } from 'components/debug/debug-notifications'
 import { LoginFormValues } from '../models'

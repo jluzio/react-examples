@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react'
 import { Button, Form } from 'antd'
-import log from 'utils/log-test'
+import log from 'utils/log'
 import _ from 'lodash'
 
 const expensiveItemsCalc = (items: number[]) => {

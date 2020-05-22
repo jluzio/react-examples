@@ -1,6 +1,6 @@
 import Spinner from 'components/common/Spinner'
 import React from 'react'
-import Log from 'utils/log-test'
+import Log from 'utils/log'
 import { Card } from 'antd'
 import SeasonDisplay from './SeasonDisplay'
 

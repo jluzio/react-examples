@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
-import log from 'utils/log-test'
+import log from 'utils/log'
 import { Button, Form, List } from 'antd'
 import _ from 'lodash'
 
