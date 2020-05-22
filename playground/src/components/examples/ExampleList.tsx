@@ -23,6 +23,7 @@ import CacheExampleList from './cache/CacheExampleList'
 import OAuth2ExampleList from './oauth2/OAuth2ExampleList'
 import MiscExample from './misc/MiscExample'
 import PortalExampleList from './portal/PortalExampleList'
+import HooksExampleList from './hooks/HooksExampleList'
 
 const { TabPane } = Tabs
 
@@ -89,6 +90,9 @@ const ExampleList: React.FC = () => {
       </TabPane>
       <TabPane key="portal" tab="Portal">
         <PortalExampleList />
+      </TabPane>
+      <TabPane key="hooks" tab="Hooks">
+        <HooksExampleList />
       </TabPane>
     </ExampleListTabbedCard>
   )

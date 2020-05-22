@@ -35,7 +35,11 @@ class ActiveTabBySearchParamTabs extends React.Component<Props, State> {
   }
 
   componentDidUpdate() {
-    this.validateActiveKeyUpdate()
+    const { activeKey } = this.props
+    const { activeKeyParam } = this
+    if (activeKey !== activeKeyParam) {
+      this.changeLocation(activeKey)
+    }
   }
 
   get activeKeyParam() {
@@ -62,14 +66,6 @@ class ActiveTabBySearchParamTabs extends React.Component<Props, State> {
     const { onChange } = this.props
     this.changeLocation(key)
     onChange(key)
-  }
-
-  validateActiveKeyUpdate() {
-    const { activeKey } = this.props
-    const { activeKeyParam } = this
-    if (activeKey !== activeKeyParam) {
-      this.changeLocation(activeKey)
-    }
   }
 
   render() {
