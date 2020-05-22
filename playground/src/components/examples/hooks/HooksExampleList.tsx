@@ -11,6 +11,7 @@ import UseMemoHookExample from './UseMemoHookExample'
 import UseImperativeHandleHookExample from './UseImperativeHandleHookExample'
 import UseLayoutEffectHookExample from './UseLayoutEffectHookExample'
 import UseCallbackHookExample from './UseCallbackHookExample'
+import UseCustomHookExample from './UseCustomHookExample'
 
 const { TabPane } = Tabs
 
@@ -46,6 +47,9 @@ const HooksExampleList: React.FC = () => {
       </TabPane>
       <TabPane key="useCallback" tab="useCallback">
         <UseCallbackHookExample />
+      </TabPane>
+      <TabPane key="useCustomHook" tab="useCustomHook">
+        <UseCustomHookExample />
       </TabPane>
     </ExampleListTabbedCard>
   )
