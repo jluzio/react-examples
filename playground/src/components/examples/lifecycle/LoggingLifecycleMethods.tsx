@@ -40,7 +40,10 @@ class LoggingLifecycleMethods extends React.Component<Props, State> {
     State
   > = error => {
     log.log('getDerivedStateFromError', { error })
-    return { error }
+    return {
+      error,
+      throwError: undefined
+    }
   }
 
   componentDidMount() {
@@ -93,9 +96,7 @@ class LoggingLifecycleMethods extends React.Component<Props, State> {
   }
 
   handleThrowErrorTriggered = () => {
-    this.setState({
-      throwError: undefined
-    })
+    log.log('error thrown in child component')
   }
 
   renderLifecycleMethods() {
@@ -119,7 +120,12 @@ class LoggingLifecycleMethods extends React.Component<Props, State> {
   render() {
     const { props, state } = this
     log.log('render', { props, state })
-    const { throwError } = this.state
+    const { throwError, error } = this.state
+
+    if (error) {
+      return <div>Error: {error}</div>
+    }
+
     return (
       <>
         <Space size="large" direction="vertical">
