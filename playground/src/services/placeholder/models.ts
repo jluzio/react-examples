@@ -1,3 +1,11 @@
+export type ResourceId =
+  | 'posts'
+  | 'comments'
+  | 'albums'
+  | 'photos'
+  | 'todos'
+  | 'users'
+
 export interface Post {
   userId: number
   id: number
@@ -33,4 +41,11 @@ export interface Company {
   name: string
   catchPhrase: string
   bs: string
+}
+
+export interface Todo {
+  userId: number
+  id: number
+  title: string
+  completed: boolean
 }

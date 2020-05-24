@@ -1,0 +1,22 @@
+{
+  "mounting": [
+    "constructor()",
+    "static getDerivedStateFromProps()",
+    "render()",
+    "componentDidMount()"
+  ],
+  "updating": [
+    "static getDerivedStateFromProps()",
+    "shouldComponentUpdate()",
+    "render()",
+    "getSnapshotBeforeUpdate()",
+    "componentDidUpdate()"
+  ],
+  "unmounting": [
+    "componentWillUnmount()"
+  ],
+  "error_handling": [
+    "static getDerivedStateFromError()",
+    "componentDidCatch()"
+  ]
+}

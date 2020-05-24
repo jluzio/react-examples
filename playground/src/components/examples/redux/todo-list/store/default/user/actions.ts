@@ -18,7 +18,7 @@ const fetchUsersFullfiled = (posts: User[]) =>
   } as PayloadAction<User[], UserActionType.FETCH_USERS_FULFILLED>)
 
 const fetchUsers = () => async (dispatch: Dispatch) => {
-  const response = await userService.getUsers()
+  const response = await userService.list()
   dispatch(fetchUsersFullfiled(response.data))
 }
 

@@ -17,7 +17,7 @@ const fetchPostsFullfiled = (posts: Post[]) =>
   } as PayloadAction<Post[], 'FETCH_POSTS'>)
 
 const fetchPosts = () => async (dispatch: Dispatch<Action<string>>) => {
-  const response = await postService.getPosts()
+  const response = await postService.list()
   dispatch(fetchPostsFullfiled(response.data))
 }
 

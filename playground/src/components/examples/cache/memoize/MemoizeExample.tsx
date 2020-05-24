@@ -20,7 +20,7 @@ export default class MemoizeExample extends Component<Props, State> {
   }
 
   componentDidMount() {
-    userService.getUsers().then(users => {
+    userService.list().then(users => {
       this.setState({
         userIds: users.data.map(u => u.id)
       })
@@ -28,12 +28,12 @@ export default class MemoizeExample extends Component<Props, State> {
   }
 
   getUser = async (id: number) => {
-    const response = await userService.getUser(id)
+    const response = await userService.get(id)
     return response.data
   }
 
   getUserMemoized = _.memoize(async (id: number) => {
-    const response = await userService.getUser(id)
+    const response = await userService.get(id)
     return response.data
   })
 

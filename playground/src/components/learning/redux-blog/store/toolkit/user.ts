@@ -9,7 +9,7 @@ const initialState: UserState = []
 
 const fetchUser = createAsyncThunk(
   'users/fetch',
-  async (userId: number, thunkAPI) => (await userService.getUser(userId)).data
+  async (userId: number, thunkAPI) => (await userService.get(userId)).data
 )
 
 export const userSlice = createSlice({

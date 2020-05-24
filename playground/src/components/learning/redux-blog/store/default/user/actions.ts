@@ -17,7 +17,7 @@ const fetchUserFulfilled = (user: User) =>
   } as PayloadAction<User, 'FETCH_USER'>)
 
 const fetchUser = (id: number) => async (dispatch: Dispatch) => {
-  const response = await userService.getUser(id)
+  const response = await userService.get(id)
   dispatch(fetchUserFulfilled(response.data))
 }
 

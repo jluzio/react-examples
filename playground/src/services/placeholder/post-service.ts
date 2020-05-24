@@ -1,12 +1,4 @@
-import jsonPlaceholderApi from 'api/json-placeholder-api'
+import ResourceService from './resource-service'
 import { Post } from './models'
 
-class PostService {
-  private api = jsonPlaceholderApi
-
-  async getPosts() {
-    return this.api.get<Post[]>('/posts')
-  }
-}
-
-export default new PostService()
+export default new ResourceService<Post, number>('posts')

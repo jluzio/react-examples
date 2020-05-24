@@ -9,7 +9,7 @@ const initialState: PostState = []
 
 // async actions
 const fetchPosts = createAsyncThunk('posts/fetch', async thunkAPI => {
-  return (await postService.getPosts()).data
+  return (await postService.list()).data
 })
 
 export const postSlice = createSlice({

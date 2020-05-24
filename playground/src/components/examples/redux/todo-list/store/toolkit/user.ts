@@ -8,7 +8,7 @@ const initialState: UserState = []
 
 // async actions
 const fetchUsers = createAsyncThunk('todos/fetch', async thunkAPI => {
-  const response = await userService.getUsers()
+  const response = await userService.list()
   return response.data
 })
 

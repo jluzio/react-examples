@@ -25,14 +25,14 @@ class StoreLoader extends React.Component<Props> {
 
   handleLoadPosts = () => {
     const { onSetPosts } = this.props
-    this.postService.getPosts().then(response => {
+    this.postService.list().then(response => {
       onSetPosts(response.data)
     })
   }
 
   handleLoadUsers = () => {
     const { onSetUsers } = this.props
-    this.userService.getUsers().then(response => {
+    this.userService.list().then(response => {
       onSetUsers(response.data)
     })
   }
