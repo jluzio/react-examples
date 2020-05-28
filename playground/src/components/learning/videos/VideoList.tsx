@@ -3,8 +3,6 @@ import { List } from 'antd'
 import * as models from './models'
 import VideoListItem from './VideoListItem'
 
-const { Item } = List
-
 type Props = {
   videos: models.VideoList
   onSelect: (video: models.Video) => void
@@ -17,6 +15,9 @@ class VideoList extends React.Component<Props, State> {
     this.state = {}
   }
 
+  videoId = (video: models.Video) =>
+    video.id.videoId ? `vid-${video.id.videoId}` : `cid-${video.id.channelId}`
+
   render() {
     const { videos, onSelect } = this.props
     return (
@@ -24,7 +25,7 @@ class VideoList extends React.Component<Props, State> {
         <List itemLayout="vertical">
           {videos.map(video => (
             <VideoListItem
-              key={video.id.videoId}
+              key={this.videoId(video)}
               video={video}
               onSelect={v => onSelect(v)}
             />
