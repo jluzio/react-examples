@@ -5,7 +5,7 @@ import { Button, Form, List } from 'antd'
 import _ from 'lodash'
 
 const logCtx = (message: string, ...optionalParams: any[]) =>
-  log.log(`UseEffectHookExample :: ${message}`, ...optionalParams)
+  log.log(`UseEffectHookSimpleExample :: ${message}`, ...optionalParams)
 
 type Props = {
   handleConcurrency?: boolean
@@ -17,7 +17,7 @@ const defaultProps: Props = {
 type ActionType = string
 type ActionValue = string | number | number[]
 
-const UseEffectHookExample: React.FC<Props> = (props: Props) => {
+const UseEffectHookSimpleExample: React.FC<Props> = (props: Props) => {
   const [count, setCount] = useState(0)
   const [count2, setCount2] = useState(0)
   const [actions, setActions] = useState<string[]>([])
@@ -44,18 +44,6 @@ const UseEffectHookExample: React.FC<Props> = (props: Props) => {
 
   const getActionList = () => _.reverse([...actions])
 
-  // NOTE: effects are called AFTER render
-
-  // NOTE: if using dependency checks with effects, we must use all dependencies
-  // in order to avoid stale references
-
-  // NOTE: in the scenario of using count, count2 and actions, if we register all dependencies
-  // it could lead to never ending renders (a count change results in a actions change which is also monitered)
-
-  useEffect(() => {
-    logCtx('hook')
-    return () => logCtx('unregister hook')
-  })
   useEffect(() => {
     registerAction('1', count)
   }, [count])
@@ -95,4 +83,4 @@ const UseEffectHookExample: React.FC<Props> = (props: Props) => {
   )
 }
 
-export default UseEffectHookExample
+export default UseEffectHookSimpleExample

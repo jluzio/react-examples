@@ -10,6 +10,7 @@ import ReduxSongsExample from './redux-songs/SongsExample'
 import ReduxBlogExample from './redux-blog/BlogExample'
 import StreamsExample from './streams/StreamsExample'
 import ContextI18nExample from './context/ContextI18nExample'
+import HookExampleList from './hooks/HookExampleList'
 
 const { TabPane } = Tabs
 
@@ -43,6 +44,9 @@ const LearningExampleList: React.FC = () => {
       </TabPane>
       <TabPane key="context" tab="Context">
         <ContextI18nExample />
+      </TabPane>
+      <TabPane key="hooks" tab="Hooks">
+        <HookExampleList />
       </TabPane>
     </ExampleListTabbedCard>
   )

@@ -6,9 +6,9 @@ export default class StandardResourceService<T, ID> {
     //
   }
 
-  resourcePath = () => `/${this.resource}`
+  private resourcePath = () => `/${this.resource}`
 
-  resourceItemPath = (id: ID) => `/${this.resource}/${id}`
+  private resourceItemPath = (id: ID) => `/${this.resource}/${id}`
 
   async list() {
     return this.api.get<T[]>(this.resourcePath())

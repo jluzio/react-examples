@@ -12,35 +12,36 @@ type State = {
   values: Post[] | Todo[]
 }
 
-class ResourceListExample extends React.Component<Props, State> {
+class ResourceList extends React.Component<Props, State> {
   state: State = {
     values: []
   }
 
   async componentDidMount() {
     const { type } = this.props
-    const values = await this.getData(type)
-    this.setState({ values })
+    this.getData(type)
   }
 
   async componentDidUpdate(prevProps: Props, prevState: State) {
     const { type } = this.props
     if (type !== prevProps.type) {
-      const values = await this.getData(type)
-      // eslint-disable-next-line react/no-did-update-set-state
-      this.setState({ values })
+      this.getData(type)
     }
   }
 
-  getData = (type?: ResourceId) => {
+  getData = async (type?: ResourceId) => {
+    let values: Todo[] | Post[]
     switch (type) {
       case 'todos':
-        return todoService.list().then(response => response.data)
+        values = await todoService.list().then(response => response.data)
+        break
       case 'posts':
-        return postService.list().then(response => response.data)
+        values = await postService.list().then(response => response.data)
+        break
       default:
-        return []
+        values = []
     }
+    this.setState({ values })
   }
 
   renderTodo(todo: Todo) {
@@ -61,7 +62,7 @@ class ResourceListExample extends React.Component<Props, State> {
     return (
       <List.Item key={post.id}>
         <Descriptions title={post.title}>
-          <Descriptions.Item label="Completed">{post.body}</Descriptions.Item>
+          <Descriptions.Item label="Body">{post.body}</Descriptions.Item>
           <Descriptions.Item label="Id">{post.id}</Descriptions.Item>
           <Descriptions.Item label="User Id">{post.userId}</Descriptions.Item>
         </Descriptions>
@@ -87,4 +88,4 @@ class ResourceListExample extends React.Component<Props, State> {
   }
 }
 
-export default ResourceListExample
+export default ResourceList

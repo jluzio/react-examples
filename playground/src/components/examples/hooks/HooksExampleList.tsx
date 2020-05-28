@@ -2,7 +2,8 @@ import React from 'react'
 import ExampleListTabbedCard from 'components/common/ExampleListTabbedCard'
 import { Tabs } from 'antd'
 import UseStateHookExample from './UseStateHookExample'
-import UseEffectHookExample from './UseEffectHookExample'
+import UseEffectHookBasicsExample from './UseEffectHookBasicsExample'
+import UseEffectHookSimpleExample from './UseEffectHookSimpleExample'
 import UseRefHookExample from './UseRefHookExample'
 import UseContextHookExample from './UseContextHookExample'
 import UseReducerHookExample from './UseReducerHookExample'
@@ -21,8 +22,11 @@ const HooksExampleList: React.FC = () => {
       <TabPane key="useState" tab="useState">
         <UseStateHookExample />
       </TabPane>
-      <TabPane key="useEffect" tab="useEffect">
-        <UseEffectHookExample />
+      <TabPane key="useEffectBasics" tab="useEffect Basics">
+        <UseEffectHookBasicsExample />
+      </TabPane>
+      <TabPane key="useEffectSimple" tab="useEffect Simple">
+        <UseEffectHookSimpleExample />
       </TabPane>
       <TabPane key="useEffectConc" tab="useEffect Concurrency">
         <UseEffectHookConcurrencyExample />
