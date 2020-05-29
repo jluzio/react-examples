@@ -1,5 +1,6 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
-import loggingMiddleware from 'utils/redux/logging-middleware'
+// import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit'
+// import loggingMiddleware from 'utils/redux/logging-middleware'
 import { rootReducer, RootState } from './root'
 
 export * from './root'

@@ -3,7 +3,7 @@ import { notifyFormValues } from 'components/debug/debug-notifications'
 import { connect, ConnectedProps } from 'react-redux'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 import _ from 'lodash'
-import { Stream, StreamEditData } from './data/models'
+import { StreamEditData } from './data/models'
 import { RootState, actions } from './store'
 import { getStreamByMatchProps, getStreamStatus } from './store/selectors'
 import { RouteIdParams, locations } from './routes'
@@ -69,7 +69,7 @@ class StreamEdit extends React.Component<Props, State> {
     notifyFormValues(values)
 
     const { stream, updateStream, resetStreamRootStatus } = this.props
-    const updatedStream: Stream = { ...stream!, ...values }
+    // const updatedStream: Stream = { ...stream!, ...values }
 
     resetStreamRootStatus()
     updateStream({ id: stream!.id, stream: values })

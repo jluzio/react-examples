@@ -44,16 +44,16 @@ const ExampleList: React.FC<Props> = ({
   const sortFunc = (tabPane: TabPaneElement) =>
     tabPane.props.tab?.toString().toLowerCase()
 
-  if (Array.isArray(children)) {
-    const typedChildren = children as TabPaneElement[]
-    const sortedTabPanes = _.sortBy(typedChildren, sortFunc)
-    if (sortTabsByName ?? true) {
-      tabPanes = sortedTabPanes
-    }
-    autoCompleteValues = sortedTabPanes.map(
-      tabPane => ({ value: tabPane.key, label: tabPane.props.tab } as Option)
-    )
+  const typedChildren = (Array.isArray(children)
+    ? children
+    : [children]) as TabPaneElement[]
+  const sortedTabPanes = _.sortBy(typedChildren, sortFunc)
+  if (sortTabsByName ?? true) {
+    tabPanes = sortedTabPanes
   }
+  autoCompleteValues = sortedTabPanes.map(
+    tabPane => ({ value: tabPane.key, label: tabPane.props.tab } as Option)
+  )
 
   return (
     <Card title={title} className={className}>

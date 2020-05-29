@@ -1,4 +1,4 @@
-import { HashRouter, BrowserRouter } from 'react-router-dom'
+// import { HashRouter, BrowserRouter } from 'react-router-dom'
 import { Router } from 'react-router'
 import React, { PropsWithChildren } from 'react'
 import history from './history'

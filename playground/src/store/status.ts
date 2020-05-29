@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction, AnyAction, Action } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction, Action } from '@reduxjs/toolkit'
 import { StatusType, ErrorLike, ActionStatus } from './models'
 
 export type StatusState = StatusType & {

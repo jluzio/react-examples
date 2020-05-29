@@ -1,5 +1,6 @@
 import React, { useLayoutEffect, useRef, useState, useEffect } from 'react'
-import { Button, Form } from 'antd'
+import { Form } from 'antd'
+import log from 'utils/log'
 
 const UseLayoutEffectHookExample: React.FC = () => {
   const inputRef = useRef<HTMLInputElement>(null)
@@ -7,12 +8,12 @@ const UseLayoutEffectHookExample: React.FC = () => {
 
   useEffect(() => {
     if (inputRef.current) {
-      console.log('Update', inputRef.current.value)
+      log.log('Update', inputRef.current.value)
     }
   })
   useLayoutEffect(() => {
     if (inputRef.current) {
-      console.log('DOM Update', inputRef.current.value)
+      log.log('DOM Update', inputRef.current.value)
     }
   })
 

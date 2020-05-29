@@ -14,7 +14,6 @@ import {
 import eventHandlers, {
   handleFieldUpdate
 } from 'services/validation/event-handlers'
-import _ from 'lodash'
 import { notifyFormValues } from 'components/debug/debug-notifications'
 import { SignupFormValues } from '../models'
 import { defaultFormLayout } from '../constants'

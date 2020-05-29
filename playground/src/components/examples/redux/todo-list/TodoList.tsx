@@ -1,7 +1,6 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react'
 import { List } from 'antd'
-import log from 'utils/log'
 import { connect, ConnectedProps } from 'react-redux'
 import { Todo, VisibilityFilters } from './store/models'
 import TodoListItem from './TodoListItem'

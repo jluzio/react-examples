@@ -3,17 +3,17 @@ import firebase from 'firebase'
 import apiConfig from 'api/api-config.json'
 
 export default class FirebaseService {
+  appCfg = apiConfig.firebase
+
   app!: firebase.app.App
 
   constructor() {
-    const { config } = apiConfig.firebase
-    this.app = firebase.initializeApp(config)
-    firebase.analytics()
+    this.app = firebase.initializeApp(this.appCfg.config)
+    this.app.analytics()
   }
 
   async signIn() {
-    const { auth } = apiConfig.firebase
-    const { username, password } = auth
-    return firebase.auth().signInWithEmailAndPassword(username, password)
+    const { username, password } = this.appCfg.auth
+    return this.app.auth().signInWithEmailAndPassword(username, password)
   }
 }

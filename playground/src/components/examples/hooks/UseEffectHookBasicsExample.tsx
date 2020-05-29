@@ -1,8 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
 import log from 'utils/log'
-import { Button, Form, List } from 'antd'
-import _ from 'lodash'
+import { Button, Form } from 'antd'
 
 const logCtx = (message: string, ...optionalParams: any[]) =>
   log.log(`UseEffectHookBasicsExample :: ${message}`, ...optionalParams)

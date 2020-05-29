@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from 'react'
 import { Button, Form, notification } from 'antd'
-import log from 'utils/log'
 
 const functionsCreated = new Set()
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect, ConnectedProps } from 'react-redux'
-import { RootState, userActions } from './store'
+import { RootState } from './store'
 
 const mapStateToProps = (state: RootState) => ({
   users: state.users

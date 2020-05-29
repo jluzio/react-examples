@@ -3,7 +3,8 @@ import React from 'react'
 import { reduxForm, Field, InjectedFormProps } from 'redux-form'
 import { Form, Button } from 'antd'
 import { notifyFormValues } from 'components/debug/debug-notifications'
-import { email, maxLength, required, minLength, max, min } from './validators'
+import log from 'utils/log'
+import { email, required, minLength, min } from './validators'
 import { SignupFormValues } from '../models'
 import { defaultFormLayout } from '../constants'
 import {
@@ -28,10 +29,10 @@ const renderInputNumberFieldInput = createRenderFormItem(InputNumberFieldInput)
 
 type Props = InjectedFormProps<SignupFormValues, OwnProps>
 const SignupForm: React.FC<Props> = (props: Props) => {
-  const { handleSubmit, pristine, reset, submitting } = props
+  const { handleSubmit, submitting } = props
 
   const handleTestFormValues = () => {
-    console.log('testing')
+    log.log('testing')
   }
 
   return (
