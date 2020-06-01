@@ -1,24 +1,18 @@
-import React from 'react'
+import React, { Suspense } from 'react'
+import { Button } from '@material-ui/core'
+import { BrowserRouter } from 'react-router-dom'
 import logo from './logo.svg'
+import RootRoutes from './routes/RootRoutes'
 import './App.css'
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <Suspense fallback={<div>Loading...</div>}>
+          <RootRoutes />
+        </Suspense>
+      </BrowserRouter>
     </div>
   )
 }
