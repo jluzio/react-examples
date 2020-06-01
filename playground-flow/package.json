@@ -23,7 +23,72 @@
     "flow": "flow"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "settings": {
+      "import/resolver": {
+        "node": {
+          "paths": [
+            "src"
+          ],
+          "extensions": [
+            ".js",
+            ".jsx",
+            ".ts",
+            ".tsx"
+          ]
+        }
+      }
+    },
+    "extends": [
+      "react-app",
+      "airbnb",
+      "plugin:jsx-a11y/recommended",
+      "prettier",
+      "prettier/react"
+    ],
+    "plugins": [
+      "jsx-a11y",
+      "prettier"
+    ],
+    "rules": {
+      "semi": 0,
+      "no-unused-vars": "off",
+      "react/state-in-constructor": "off",
+      "react/jsx-filename-extension": [
+        1,
+        {
+          "extensions": [
+            ".js",
+            ".jsx",
+            ".tsx"
+          ]
+        }
+      ],
+      "import/extensions": [
+        "error",
+        "ignorePackages",
+        {
+          "js": "never",
+          "ts": "never",
+          "jsx": "never",
+          "tsx": "never"
+        }
+      ],
+      "no-param-reassign": [
+        "error",
+        {
+          "props": false
+        }
+      ],
+      "prettier/prettier": [
+        "error",
+        {
+          "semi": false,
+          "singleQuote": true,
+          "endOfLine": "auto"
+        }
+      ],
+      "jsx-a11y/label-has-associated-control": "off"
+    }
   },
   "browserslist": {
     "production": [
@@ -38,6 +103,11 @@
     ]
   },
   "devDependencies": {
-    "flow-bin": "^0.125.1"
+    "eslint-config-airbnb": "^18.1.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.3",
+    "flow-bin": "^0.125.1",
+    "prettier": "^2.0.5"
   }
 }

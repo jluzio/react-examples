@@ -106,7 +106,8 @@
         "error",
         {
           "semi": false,
-          "singleQuote": true
+          "singleQuote": true,
+          "endOfLine": "auto"
         }
       ],
       "jsx-a11y/label-has-associated-control": "off"
