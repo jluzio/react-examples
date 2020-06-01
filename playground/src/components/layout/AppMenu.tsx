@@ -91,11 +91,6 @@ class AppMenu extends React.Component<Props, State> {
               {menuIcon} Debug Session
             </Link>
           </Menu.Item>
-          <Menu.Item key="bootstrap">
-            <Link to={this.getLink('/page/bootstrap')}>
-              {menuIcon} Bootstrap
-            </Link>
-          </Menu.Item>
           <Menu.Item key="ant-design-layout">
             <Link to={this.getLink('/page/ant-design-layout')}>
               {menuIcon} Ant Design Layout

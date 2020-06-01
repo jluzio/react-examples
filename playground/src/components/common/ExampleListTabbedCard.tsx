@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { Card } from 'antd'
-import { TabPaneProps } from 'antd/lib/tabs'
+import { TabPaneProps } from 'rc-tabs/lib/sugar/TabPane'
 import React, { PropsWithChildren, useState } from 'react'
 import _ from 'lodash'
 import ActiveTabBySearchParamTabs from './ActiveTabBySearchParamTabs'
