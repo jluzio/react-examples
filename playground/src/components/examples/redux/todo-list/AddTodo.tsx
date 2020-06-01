@@ -5,7 +5,7 @@ import React, { Component } from 'react'
 import { Form, Button } from 'antd'
 import log from 'utils/log'
 import { connect, ConnectedProps } from 'react-redux'
-import { Formik, Field, useField, ErrorMessage, FormikHelpers } from 'formik'
+import { Formik, Field, ErrorMessage, FormikHelpers } from 'formik'
 import { Todo } from './store/models'
 import { todoActions } from './store'
 
@@ -17,9 +17,6 @@ const connector = connect(mapStateToProps, mapDispatchToProps)
 type ReduxProps = ConnectedProps<typeof connector>
 
 type Props = ReduxProps
-type State = {
-  todo: Todo
-}
 
 type Values = Todo
 const initialValues: Values = {
