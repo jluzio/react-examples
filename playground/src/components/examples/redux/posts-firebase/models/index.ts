@@ -1,13 +1,13 @@
 export interface Post {
-  userId: number
-  id: number
+  id: string
   title: string
   body: string
+  userId?: string
 }
 
 export interface Todo {
-  userId: number
-  id: number
+  id: string
   title: string
   completed: boolean
+  userId?: string
 }
