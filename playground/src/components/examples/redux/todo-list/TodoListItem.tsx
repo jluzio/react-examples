@@ -4,8 +4,6 @@ import React from 'react'
 import { List } from 'antd'
 import { Todo } from './store/models'
 
-const { Item } = List
-
 interface Props {
   todo: Todo
   onClick: (todo: Todo) => void
@@ -13,14 +11,14 @@ interface Props {
 
 const TodoListItem: React.FC<Props> = ({ onClick, todo }: Props) => {
   return (
-    <Item
+    <List.Item
       onClick={() => onClick(todo)}
       style={{
         textDecoration: todo.completed ? 'line-through' : 'none'
       }}
     >
       {todo.title}
-    </Item>
+    </List.Item>
   )
 }
 

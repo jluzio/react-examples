@@ -93,6 +93,9 @@ Lifting state involves writing more “boilerplate” code than two-way binding 
 If something can be derived from either props or state, it probably shouldn’t be in the state. For example, instead of storing both celsiusValue and fahrenheitValue, we store just the last edited temperature and its scale. The value of the other input can always be calculated from them in the render() method. This lets us clear or apply rounding to the other field without losing any precision in the user input.
 
 
+### Crud guide
+https://medium.com/@rajaraodv/a-guide-for-building-a-react-redux-crud-app-7fe0b8943d0f#.bk3efe6jy
+
 ### Code Utils
 function.bind() (to set the correct this value?)
 ex:

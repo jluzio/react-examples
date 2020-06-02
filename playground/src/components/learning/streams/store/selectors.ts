@@ -4,8 +4,6 @@ import _ from 'lodash'
 import { RootState } from './index'
 import { RouteIdParams } from '../routes'
 
-type RouteProps = RouteComponentProps<RouteIdParams>
-
 const parseNumber = (value: string | undefined | null) =>
   value != null ? _.parseInt(value) : value
 

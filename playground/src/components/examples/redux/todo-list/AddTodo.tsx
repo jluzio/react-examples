@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react/prefer-stateless-function */
-import React, { Component } from 'react'
+import React from 'react'
 import { Form, Button, Input } from 'antd'
 import log from 'utils/log'
 import { connect, ConnectedProps } from 'react-redux'

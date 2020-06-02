@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux'
 import { configureStore } from '@reduxjs/toolkit'
 import { todoReducer, todoActions } from './todo'
+import { cloudTodoActions } from './todo-cloud'
 
 // action creators
-export { todoActions }
+export { todoActions, cloudTodoActions }
 
 // selectors
 export * from './selectors'
@@ -29,7 +30,7 @@ export const store = configureStore({
   reducer: rootReducer,
   preloadedState: initialState,
   devTools: {
-    name: 'Examples / TodoList Firebase'
+    name: 'Examples / TodoList Advanced'
   }
 })
 
