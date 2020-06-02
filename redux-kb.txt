@@ -10,6 +10,9 @@ https://redux-toolkit.js.org/usage/usage-with-typescript
 https://redux.js.org/recipes/usage-with-typescript
 https://github.com/piotrwitek/react-redux-typescript-guide
 
+### Libraries
+https://blog.logrocket.com/5-redux-libraries-to-improve-code-reuse-9f93eaceaa83/
+
 
 ### Redux Forms
 https://github.com/redux-form/redux-form
