@@ -1,6 +1,8 @@
 export interface Todo {
-  text: string
+  id: number
+  title: string
   completed: boolean
+  userId?: number
 }
 
 export enum VisibilityFilters {

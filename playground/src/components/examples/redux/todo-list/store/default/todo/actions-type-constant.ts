@@ -24,10 +24,9 @@ export const addTodoDefault = (todo: Todo) =>
 
 export const addTodo = addTodoToolkit
 
-export const toggleTodo = createAction<
-  { index: number },
+export const toggleTodo = createAction<{ id: number }, TodoActionType.TOGGLE>(
   TodoActionType.TOGGLE
->(TodoActionType.TOGGLE)
+)
 
 export type TodoActions =
   | ReturnType<typeof addTodo>

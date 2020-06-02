@@ -11,15 +11,19 @@ type ToggleTodoAction = PayloadAction<
   Parameters<typeof todoActions.toggleTodo>[0]
 >
 
-type SimplePayloadType = { todo: Todo } | { index: number }
+type SimplePayloadType = { todo: Todo } | { id: number }
 
 // reducer functions to be used in different reducer types
 function addTodoReducer(state: TodoState, todo: Todo) {
-  return [...state, todo]
+  const maxId = state
+    .map(v => v.id)
+    .reduce((acc, value) => Math.max(acc, value), 0)
+  const finalTodo: Todo = { ...todo, id: maxId + 1 }
+  return [...state, finalTodo]
 }
-function toggleTodoReducer(state: TodoState, index: number) {
-  return state.map((todo, currentIndex) => {
-    if (currentIndex === index) {
+function toggleTodoReducer(state: TodoState, id: number) {
+  return state.map(todo => {
+    if (todo.id === id) {
       return { ...todo, completed: !todo.completed } as Todo
     }
     return todo
@@ -42,7 +46,7 @@ export function todoReducerDefaultTypeString(
     }
     case TodoActionType.TOGGLE: {
       const toggleAction = action as ToggleTodoAction
-      return toggleTodoReducer(state, toggleAction.payload.index)
+      return toggleTodoReducer(state, toggleAction.payload.id)
     }
     default:
       return state
@@ -62,7 +66,7 @@ export function todoReducerDefaultTypeStringPayloadAny(
     case TodoActionType.ADD:
       return addTodoReducer(state, action.payload.todo)
     case TodoActionType.TOGGLE:
-      return toggleTodoReducer(state, action.payload.index)
+      return toggleTodoReducer(state, action.payload.id)
     default:
       return state
   }
@@ -82,7 +86,7 @@ export function todoReducerDefaultSwitchConstType(
     case TodoActionType.ADD:
       return addTodoReducer(state, action.payload.todo)
     case TodoActionType.TOGGLE:
-      return toggleTodoReducer(state, action.payload.index)
+      return toggleTodoReducer(state, action.payload.id)
     default:
       return state
   }
@@ -102,7 +106,7 @@ export function todoReducerToolkitSwitchConstActionType(
     case todoActions.addTodo.type:
       return addTodoReducer(state, action.payload.todo)
     case todoActions.toggleTodo.type:
-      return toggleTodoReducer(state, action.payload.index)
+      return toggleTodoReducer(state, action.payload.id)
     default:
       return state
   }
@@ -121,7 +125,7 @@ export function todoReducerToolkitSwitchMatch(
     return addTodoReducer(state, action.payload.todo)
   }
   if (todoActions.toggleTodo.match(action)) {
-    return toggleTodoReducer(state, action.payload.index)
+    return toggleTodoReducer(state, action.payload.id)
   }
   return state
 }
@@ -139,7 +143,7 @@ export const todoReducerToolkitMapType = createReducer(
       return addTodoReducer(state, action.payload.todo)
     },
     [todoActions.toggleTodo.type]: (state, action: ToggleTodoAction) => {
-      return toggleTodoReducer(state, action.payload.index)
+      return toggleTodoReducer(state, action.payload.id)
     }
   }
 )
@@ -158,7 +162,7 @@ export const todoReducerToolkitBuilder = createReducer(
         return addTodoReducer(state, action.payload.todo)
       })
       .addCase(todoActions.toggleTodo, (state, action) => {
-        return toggleTodoReducer(state, action.payload.index)
+        return toggleTodoReducer(state, action.payload.id)
       })
 )
 

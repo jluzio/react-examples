@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react'
+import React from 'react'
 import { connect, ConnectedProps } from 'react-redux'
 import { Button, Card } from 'antd'
 import { RootState, counterActions } from './store'
@@ -14,14 +14,17 @@ const connector = connect(mapStateToProps, mapDispatchToProps)
 
 type OwnProps = {}
 type ReduxProps = ConnectedProps<typeof connector>
-type Props = ReduxProps & PropsWithChildren<OwnProps>
+type Props = ReduxProps & OwnProps
 
-const ClickCounter: React.FC<Props> = (props: Props) => {
-  const { counter, onIncrementCounter, onDecrementCounter } = props
+const ClickCounter: React.FC<Props> = ({
+  counter,
+  onDecrementCounter,
+  onIncrementCounter
+}: Props) => {
   return (
     <Card title={`Counter: ${counter}`}>
-      <Button onClick={onIncrementCounter}>Increment</Button>
-      <Button onClick={onDecrementCounter}>Decrement</Button>
+      <Button onClick={() => onIncrementCounter()}>Increment</Button>
+      <Button onClick={() => onDecrementCounter()}>Decrement</Button>
     </Card>
   )
 }

@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react'
+import React from 'react'
 import { connect, ConnectedProps } from 'react-redux'
 import { Button, Card, Layout } from 'antd'
 import { RootState, userActions, todoActions } from './store'
@@ -17,15 +17,19 @@ const connector = connect(mapStateToProps, mapDispatchToProps)
 
 type OwnProps = {}
 type ReduxProps = ConnectedProps<typeof connector>
-type Props = ReduxProps & PropsWithChildren<OwnProps>
+type Props = ReduxProps & OwnProps
 
-const UserList: React.FC<Props> = (props: Props) => {
-  const { onFetchUsers, users, onAddTodo } = props
+const UserList: React.FC<Props> = ({
+  onAddTodo,
+  onFetchUsers,
+  users
+}: Props) => {
   const onTodosForUsers = () => {
     users.forEach(user => {
       onAddTodo({
         todo: {
-          text: `Todo for ${user.name}`,
+          id: 0,
+          title: `Todo for ${user.name}`,
           completed: false
         }
       })

@@ -19,8 +19,12 @@ type OwnProps = {
 type ReduxProps = ConnectedProps<typeof connector>
 type Props = ReduxProps & PropsWithChildren<OwnProps>
 
-const FilterLink: React.FC<Props> = (props: Props) => {
-  const { children, filter, currentFilter, onSetVisibilityFilter } = props
+const FilterLink: React.FC<Props> = ({
+  currentFilter,
+  filter,
+  onSetVisibilityFilter,
+  children
+}: Props) => {
   const isCurrentFilter = filter === currentFilter
   const handleVisibilityFilter = () => {
     if (!isCurrentFilter) {

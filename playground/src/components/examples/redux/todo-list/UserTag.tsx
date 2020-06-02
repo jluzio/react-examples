@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react'
+import React from 'react'
 import { connect, ConnectedProps } from 'react-redux'
 import { Tag } from 'antd'
 import { RootState } from './store'
@@ -16,10 +16,9 @@ const mapDispatchToProps = {}
 const connector = connect(mapStateToProps, mapDispatchToProps)
 type ReduxProps = ConnectedProps<typeof connector>
 
-type Props = ReduxProps & PropsWithChildren<OwnProps>
+type Props = ReduxProps & OwnProps
 
-const UserDetails: React.FC<Props> = (props: Props) => {
-  const { user } = props
+const UserDetails: React.FC<Props> = ({ user }: Props) => {
   return (user && <Tag>{user.name}</Tag>) ?? null
 }
 

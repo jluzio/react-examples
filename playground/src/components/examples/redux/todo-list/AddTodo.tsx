@@ -2,17 +2,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react'
-import { Form, Button } from 'antd'
+import { Form, Button, Input } from 'antd'
 import log from 'utils/log'
 import { connect, ConnectedProps } from 'react-redux'
 import { Formik, Field, ErrorMessage, FormikHelpers } from 'formik'
 import { Todo } from './store/models'
 import { todoActions } from './store'
 
-const { Item } = Form
-
 const mapStateToProps = () => ({})
-const mapDispatchToProps = { onAddTodo: todoActions.addTodo }
+const mapDispatchToProps = {
+  onAddTodo: todoActions.addTodo
+}
 const connector = connect(mapStateToProps, mapDispatchToProps)
 type ReduxProps = ConnectedProps<typeof connector>
 
@@ -20,46 +20,42 @@ type Props = ReduxProps
 
 type Values = Todo
 const initialValues: Values = {
-  text: '',
+  id: 0,
+  title: '',
   completed: false
 }
 
-class AddTodo extends Component<Props> {
-  handleAddTodo = (todo: Todo, actions: FormikHelpers<Todo>) => {
-    const { onAddTodo } = this.props
-    if (todo.text) {
+const AddTodo: React.FC<Props> = ({ onAddTodo }: Props) => {
+  const handleAddTodo = (todo: Values, actions: FormikHelpers<Values>) => {
+    if (todo.title) {
       onAddTodo({ todo })
     }
     actions.setSubmitting(false)
   }
 
-  render() {
-    return (
-      <Formik<Values>
-        initialValues={initialValues}
-        onSubmit={this.handleAddTodo}
-      >
-        {({ isSubmitting, handleSubmit }) => (
-          <Form onSubmitCapture={handleSubmit}>
-            <Item>
-              <Field
-                type="text"
-                name="text"
-                className="ant-input"
-                placeholder="Text"
-              />
-              <ErrorMessage name="text" component="div" />
-            </Item>
-            <Item>
-              <Button htmlType="submit" disabled={isSubmitting}>
-                Add Todo
-              </Button>
-            </Item>
-          </Form>
-        )}
-      </Formik>
-    )
-  }
+  return (
+    <Formik<Values> initialValues={initialValues} onSubmit={handleAddTodo}>
+      {({ isSubmitting, handleSubmit, values, handleChange, handleBlur }) => (
+        <Form onSubmitCapture={handleSubmit}>
+          <Form.Item>
+            <Input
+              name="title"
+              value={values.title}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              autoComplete="off"
+            />
+            <ErrorMessage name="text" component="div" />
+          </Form.Item>
+          <Form.Item>
+            <Button htmlType="submit" disabled={isSubmitting}>
+              Add Todo
+            </Button>
+          </Form.Item>
+        </Form>
+      )}
+    </Formik>
+  )
 }
 
 export default connector(AddTodo)

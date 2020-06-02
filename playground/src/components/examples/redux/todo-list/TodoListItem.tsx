@@ -11,8 +11,7 @@ interface Props {
   onClick: (todo: Todo) => void
 }
 
-const TodoListItem: React.FC<Props> = (props: Props) => {
-  const { todo, onClick } = props
+const TodoListItem: React.FC<Props> = ({ onClick, todo }: Props) => {
   return (
     <Item
       onClick={() => onClick(todo)}
@@ -20,7 +19,7 @@ const TodoListItem: React.FC<Props> = (props: Props) => {
         textDecoration: todo.completed ? 'line-through' : 'none'
       }}
     >
-      {todo.text}
+      {todo.title}
     </Item>
   )
 }
