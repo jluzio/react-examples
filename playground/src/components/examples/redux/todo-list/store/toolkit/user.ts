@@ -7,7 +7,7 @@ export type UserState = User[]
 const initialState: UserState = []
 
 // async actions
-const fetchUsers = createAsyncThunk('todos/fetch', async thunkAPI => {
+const fetchUsers = createAsyncThunk('user/fetch', async thunkAPI => {
   const response = await userService.list()
   return response.data
 })

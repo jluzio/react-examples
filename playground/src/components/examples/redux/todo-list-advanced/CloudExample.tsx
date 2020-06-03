@@ -5,9 +5,7 @@ import { Space } from 'antd'
 import { store } from './store'
 import TodoListContainer from './CloudTodoListContainer'
 import TodoEditContainer from './CloudTodoEditContainer'
-import { getRoutes } from './routes'
-
-const routes = getRoutes()
+import { routes } from './routes'
 
 const CloudExample: React.FC = () => {
   return (

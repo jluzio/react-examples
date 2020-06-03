@@ -91,7 +91,7 @@ class StreamList extends React.Component<Props> {
       <List.Item key={stream.id} actions={this.renderStreamActions(stream)}>
         <List.Item.Meta
           avatar={<Avatar icon={<CameraOutlined />} />}
-          title={<Link to={locations.show(stream.id)}>{stream.title}</Link>}
+          title={<Link to={locations.details(stream.id)}>{stream.title}</Link>}
           description={stream.description}
         />
       </List.Item>

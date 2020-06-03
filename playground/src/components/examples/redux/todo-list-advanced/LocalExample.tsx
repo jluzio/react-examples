@@ -5,9 +5,7 @@ import { Space } from 'antd'
 import { store } from './store'
 import TodoListContainer from './LocalTodoListContainer'
 import TodoEditContainer from './LocalTodoEditContainer'
-import { getRoutes } from './routes'
-
-const routes = getRoutes()
+import { routes } from './routes'
 
 const LocalExample: React.FC = () => {
   return (

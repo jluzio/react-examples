@@ -4,13 +4,13 @@ import history from 'router/history'
 
 export const ROOT_RESOURCE_PATH = '/examples/todos'
 
-export const getRoutes = () => ({
+export const routes = {
   list: `${ROOT_RESOURCE_PATH}`,
   details: `${ROOT_RESOURCE_PATH}/:id`,
   create: `${ROOT_RESOURCE_PATH}/create`,
   edit: `${ROOT_RESOURCE_PATH}/edit/:id`,
   delete: `${ROOT_RESOURCE_PATH}/delete/:id`
-})
+}
 
 export type RouteIdParams = {
   id: string

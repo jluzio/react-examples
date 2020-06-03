@@ -13,9 +13,9 @@ import StreamDelete from './StreamDelete'
 import StreamEdit from './StreamEdit'
 import StreamHeader from './StreamHeader'
 import StreamList from './StreamList'
-import StreamShow from './StreamShow'
+import StreamDetails from './StreamDetails'
 import store, { actions } from './store'
-import { getRoutes } from './routes'
+import { routes } from './routes'
 
 class StreamExample extends React.Component<RouteComponentProps> {
   unregisterHistoryListener!: Function
@@ -31,7 +31,6 @@ class StreamExample extends React.Component<RouteComponentProps> {
   }
 
   render() {
-    const routes = getRoutes()
     return (
       <Card title="Streamy" className="learning">
         <Provider store={store}>
@@ -40,7 +39,7 @@ class StreamExample extends React.Component<RouteComponentProps> {
             <Route path={routes.create} component={StreamCreate} />
             <Route path={routes.delete} component={StreamDelete} />
             <Route path={routes.edit} component={StreamEdit} />
-            <Route path={routes.show} component={StreamShow} />
+            <Route path={routes.details} component={StreamDetails} />
             <Route path={routes.list} component={StreamList} />
             <Route path="/" component={StreamList} />
           </Switch>
