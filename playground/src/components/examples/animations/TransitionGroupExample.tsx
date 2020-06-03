@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import { DeleteOutlined } from '@ant-design/icons'
-import { Card, Button, Form, Radio, List } from 'antd'
+import { Card, Button, List } from 'antd'
 import './transition-group.css'
 import { v4 as uuid } from 'uuid'
 
