@@ -26,6 +26,7 @@ import PortalExampleList from './portal/PortalExampleList'
 import HooksExampleList from './hooks/HooksExampleList'
 import LifecycleExampleList from './lifecycle/LifecycleExampleList'
 import RouterExample from './router/RouterExample'
+import AnimationsExampleList from './animations/AnimationsExampleList'
 
 const { TabPane } = Tabs
 
@@ -101,6 +102,9 @@ const ExampleList: React.FC = () => {
       </TabPane>
       <TabPane key="router" tab="Router">
         <RouterExample />
+      </TabPane>
+      <TabPane key="animations" tab="Animations">
+        <AnimationsExampleList />
       </TabPane>
     </ExampleListTabbedCard>
   )
