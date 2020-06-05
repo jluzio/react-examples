@@ -2,15 +2,20 @@ import React from 'react'
 import './learning.scss'
 import { Tabs } from 'antd'
 import ExampleListTabbedCard from 'components/common/ExampleListTabbedCard'
-import PropsBlogExample from './props-blog/BlogExample'
-import SeasonExample from './state-season/SeasonExample'
-import ImageSearch from './image-search/ImageSearchExample'
-import VideosExample from './videos/VideosExample'
-import ReduxSongsExample from './redux-songs/SongsExample'
-import ReduxBlogExample from './redux-blog/BlogExample'
-import StreamsExample from './streams/StreamsExample'
-import ContextI18nExample from './context/ContextI18nExample'
-import HookExampleList from './hooks/HookExampleList'
+
+const PropsBlogExample = React.lazy(() => import('./props-blog/BlogExample'))
+const SeasonExample = React.lazy(() => import('./state-season/SeasonExample'))
+const ImageSearch = React.lazy(() =>
+  import('./image-search/ImageSearchExample')
+)
+const VideosExample = React.lazy(() => import('./videos/VideosExample'))
+const ReduxSongsExample = React.lazy(() => import('./redux-songs/SongsExample'))
+const ReduxBlogExample = React.lazy(() => import('./redux-blog/BlogExample'))
+const StreamsExample = React.lazy(() => import('./streams/StreamsExample'))
+const ContextI18nExample = React.lazy(() =>
+  import('./context/ContextI18nExample')
+)
+const HookExampleList = React.lazy(() => import('./hooks/HookExampleList'))
 
 const { TabPane } = Tabs
 

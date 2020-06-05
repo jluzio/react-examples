@@ -4,29 +4,46 @@ import { Tabs } from 'antd'
 import React from 'react'
 
 import ExampleListTabbedCard from 'components/common/ExampleListTabbedCard'
-import BlankExample from './BlankExample'
-import DataBindingExampleList from './data-binding/DataBindingExampleList'
-import StateExamples from './state/StateExamples'
-import Game from './tic-tac-toe/Game'
-import Variables from './variables/Variables'
-import I18nExampleList from './i18n/I18nExampleList'
-import ValidatorExampleList from './validators/ValidatorExampleList'
-import RxjsExampleList from './rxjs/RxjsExampleList'
-import ErrorBoundaryExample from './error-boundary/ErrorBoundaryExample'
-import ContextExampleList from './context/ContextExampleList'
-import RefExample from './refs/RefExample'
-import HocExample from './hoc/HocExample'
-import FragmentsExample from './fragments/FragmentsExample'
-import RenderPropsExample from './render-props/RenderPropsExample'
-import ReduxExampleList from './redux/ReduxExampleList'
-import CacheExampleList from './cache/CacheExampleList'
-import OAuth2ExampleList from './oauth2/OAuth2ExampleList'
-import MiscExample from './misc/MiscExample'
-import PortalExampleList from './portal/PortalExampleList'
-import HooksExampleList from './hooks/HooksExampleList'
-import LifecycleExampleList from './lifecycle/LifecycleExampleList'
-import RouterExample from './router/RouterExample'
-import AnimationsExampleList from './animations/AnimationsExampleList'
+
+const ReduxExampleList = React.lazy(() => import('./redux/ReduxExampleList'))
+const BlankExample = React.lazy(() => import('./BlankExample'))
+const DataBindingExampleList = React.lazy(() =>
+  import('./data-binding/DataBindingExampleList')
+)
+const StateExamples = React.lazy(() => import('./state/StateExamples'))
+const Game = React.lazy(() => import('./tic-tac-toe/Game'))
+const Variables = React.lazy(() => import('./variables/Variables'))
+const I18nExampleList = React.lazy(() => import('./i18n/I18nExampleList'))
+const ValidatorExampleList = React.lazy(() =>
+  import('./validators/ValidatorExampleList')
+)
+const RxjsExampleList = React.lazy(() => import('./rxjs/RxjsExampleList'))
+const ErrorBoundaryExample = React.lazy(() =>
+  import('./error-boundary/ErrorBoundaryExample')
+)
+const ContextExampleList = React.lazy(() =>
+  import('./context/ContextExampleList')
+)
+const RefExample = React.lazy(() => import('./refs/RefExample'))
+const HocExample = React.lazy(() => import('./hoc/HocExample'))
+const FragmentsExample = React.lazy(() =>
+  import('./fragments/FragmentsExample')
+)
+const RenderPropsExample = React.lazy(() =>
+  import('./render-props/RenderPropsExample')
+)
+const CacheExampleList = React.lazy(() => import('./cache/CacheExampleList'))
+const OAuth2ExampleList = React.lazy(() => import('./oauth2/OAuth2ExampleList'))
+const MiscExample = React.lazy(() => import('./misc/MiscExample'))
+const PortalExampleList = React.lazy(() => import('./portal/PortalExampleList'))
+const HooksExampleList = React.lazy(() => import('./hooks/HooksExampleList'))
+const LifecycleExampleList = React.lazy(() =>
+  import('./lifecycle/LifecycleExampleList')
+)
+const RouterExample = React.lazy(() => import('./router/RouterExample'))
+const AnimationsExampleList = React.lazy(() =>
+  import('./animations/AnimationsExampleList')
+)
 
 const { TabPane } = Tabs
 
