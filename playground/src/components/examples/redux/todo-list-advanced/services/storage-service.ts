@@ -1,11 +1,13 @@
-import { Observable, from, Subject } from 'rxjs'
+/* eslint-disable class-methods-use-this */
+import { Observable, Subject } from 'rxjs'
 import firebaseApp from 'services/firebase/firebase-app'
-import log from 'utils/log'
 import { Todo } from '../models'
 import { todoConverter } from './converters'
 
 class StorageService {
-  private db = firebaseApp
+  private get firebaseApp() {
+    return firebaseApp.connect()
+  }
 
   private collectionId = (collectionId: string) =>
     `react-examples:${collectionId}`
@@ -13,48 +15,60 @@ class StorageService {
   private docId = (collectionId: string, docId: string) =>
     `${this.collectionId(collectionId)}/${docId}`
 
-  private get todosRef() {
-    return this.db.firestore().collection(this.collectionId('todos'))
+  private refs = {
+    todosRef: (app: firebase.app.App) =>
+      app.firestore().collection(this.collectionId('todos'))
   }
 
-  public getTodos(): Observable<Todo[]> {
-    return from(
-      this.todosRef
-        .withConverter(todoConverter)
-        .get()
-        .then(snapshot => snapshot.docs.map(d => d.data()))
-    )
+  async getTodos(): Promise<Todo[]> {
+    const app = await this.firebaseApp
+    return this.refs
+      .todosRef(app)
+      .withConverter(todoConverter)
+      .get()
+      .then(snapshot => snapshot.docs.map(d => d.data()))
   }
 
-  public onSnapshotTodos(): Observable<Todo[]> {
+  onSnapshotTodos(): Observable<Todo[]> {
     const subject = new Subject<Todo[]>()
-    this.todosRef.withConverter(todoConverter).onSnapshot(snapshot => {
-      subject.next(snapshot.docs.map(d => d.data()))
+    this.firebaseApp.then(app => {
+      this.refs
+        .todosRef(app)
+        .withConverter(todoConverter)
+        .onSnapshot(snapshot => {
+          subject.next(snapshot.docs.map(d => d.data()))
+        })
     })
     return subject
   }
 
-  public setTodos(todos: Todo[]): Observable<void> {
+  async setTodos(todos: Todo[]): Promise<void> {
+    const app = await this.firebaseApp
     const promises = todos.map(todo => {
-      return this.todosRef
+      return this.refs
+        .todosRef(app)
         .doc(todo.id.toString())
         .withConverter(todoConverter)
         .set(todo)
     })
-    return from(Promise.all(promises).then(v => {}))
+    return Promise.all(promises).then(() => {})
   }
 
-  public setTodo(todo: Todo): Observable<void> {
-    return from(
-      this.todosRef
-        .doc(todo.id.toString())
-        .withConverter(todoConverter)
-        .set(todo)
-    )
+  async setTodo(todo: Todo): Promise<void> {
+    const app = await this.firebaseApp
+    return this.refs
+      .todosRef(app)
+      .doc(todo.id.toString())
+      .withConverter(todoConverter)
+      .set(todo)
   }
 
-  public deleteTodo(todo: Todo): Observable<void> {
-    return from(this.todosRef.doc(todo.id.toString()).delete())
+  async deleteTodo(todo: Todo): Promise<void> {
+    const app = await this.firebaseApp
+    return this.refs
+      .todosRef(app)
+      .doc(todo.id.toString())
+      .delete()
   }
 }
 
