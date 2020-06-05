@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
 import { configureStore } from '@reduxjs/toolkit'
+import _ from 'lodash'
 import { todoReducer, todoActions } from './todo'
 import { cloudTodoActions } from './todo-cloud'
 
@@ -18,11 +19,14 @@ export const rootReducer = combineReducers({
 export type RootState = ReturnType<typeof rootReducer>
 
 const initialState: Partial<RootState> = {
-  todos: [
-    { id: 'id-1', title: 'Todo-1', completed: false },
-    { id: 'id-2', title: 'Todo-2', completed: false },
-    { id: 'id-3', title: 'Todo-3', completed: true }
-  ]
+  todos: _.mapKeys(
+    [
+      { id: 'id-1', title: 'Todo-1', completed: false },
+      { id: 'id-2', title: 'Todo-2', completed: false },
+      { id: 'id-3', title: 'Todo-3', completed: true }
+    ],
+    'id'
+  )
 }
 
 // store

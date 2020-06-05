@@ -2,13 +2,13 @@ import React from 'react'
 import { connect, ConnectedProps } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { Todo } from './models'
-import { RootState, todoActions } from './store'
+import { RootState, todoActions, selectors } from './store'
 import TodoList from './TodoList'
 import { locations } from './routes'
 
 type OwnProps = {}
 const mapStateToProps = (state: RootState) => ({
-  todos: state.todos
+  todos: selectors.selectTodoList(state)
 })
 const mapDispatchToProps = {
   toggleTodo: todoActions.toggleTodo,
