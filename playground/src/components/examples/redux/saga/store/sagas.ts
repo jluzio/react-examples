@@ -19,7 +19,7 @@ function* fetchUser(action: ReturnType<typeof userActions.fetchUser>) {
  Starts fetchUser on each dispatched `USER_FETCH_REQUESTED` action.
  Allows concurrent fetches of user.
 */
-function* mySaga() {
+function* rootSaga() {
   yield takeEvery(userActions.fetchUser.type, fetchUser)
 }
 
@@ -34,4 +34,4 @@ function* mySaga() {
 //   yield takeLatest('USER_FETCH_REQUESTED', fetchUser)
 // }
 
-export default mySaga
+export default rootSaga

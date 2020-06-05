@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect, ConnectedProps } from 'react-redux'
 import { useHistory, RouteComponentProps } from 'react-router-dom'
-import { Todo } from './models'
+import { Todo } from '../shared/todo/models'
 import { selectors, RootState, cloudTodoActions } from './store'
-import TodoEdit from './TodoEdit'
+import TodoEdit from '../shared/todo/TodoEdit'
 import { locations, RouteIdParams } from './routes'
 
 type RouteProps = RouteComponentProps<RouteIdParams>

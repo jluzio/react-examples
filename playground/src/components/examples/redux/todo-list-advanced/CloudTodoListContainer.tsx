@@ -2,9 +2,9 @@
 import React, { useEffect } from 'react'
 import { connect, ConnectedProps } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { Todo } from './models'
+import { Todo } from '../shared/todo/models'
 import { RootState, cloudTodoActions, selectors } from './store'
-import TodoList from './TodoList'
+import TodoList from '../shared/todo/TodoList'
 import { locations } from './routes'
 
 type OwnProps = {}

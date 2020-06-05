@@ -1,10 +1,18 @@
 import React from 'react'
 import ExampleListTabbedCard from 'components/common/ExampleListTabbedCard'
 import { Tabs } from 'antd'
-import TodoListExample from './todo-list/TodoListExample'
-import TodoListAdvCloudExample from './todo-list-advanced/CloudExample'
-import TodoListAdvLocalExample from './todo-list-advanced/LocalExample'
-import SagaExample from './saga/SagaExample'
+
+const TodoListExample = React.lazy(() => import('./todo-list/TodoListExample'))
+const TodoListAdvCloudExample = React.lazy(() =>
+  import('./todo-list-advanced/CloudExample')
+)
+const TodoListAdvLocalExample = React.lazy(() =>
+  import('./todo-list-advanced/LocalExample')
+)
+const SagaExample = React.lazy(() => import('./saga/SagaExample'))
+const ObservableExample = React.lazy(() =>
+  import('./observable/ObservableExample')
+)
 
 const { TabPane } = Tabs
 
@@ -22,6 +30,9 @@ const ReduxExampleList: React.FC = () => {
       </TabPane>
       <TabPane key="saga" tab="Saga">
         <SagaExample />
+      </TabPane>
+      <TabPane key="observable" tab="Observable">
+        <ObservableExample />
       </TabPane>
     </ExampleListTabbedCard>
   )

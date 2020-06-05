@@ -1,18 +1,19 @@
 import {
   combineReducers,
   configureStore,
-  getDefaultMiddleware
+  getDefaultMiddleware,
+  Action
 } from '@reduxjs/toolkit'
-import thunk from 'redux-thunk'
-import createSagaMiddleware from 'redux-saga'
+import { createEpicMiddleware } from 'redux-observable'
+import { ActionType } from 'typesafe-actions'
 
-import { userReducer } from './user'
-import rootSaga from './sagas'
+import { userReducer, userActions } from './user'
+import rootEpic from './epics'
 
 export { userActions } from './user'
 
-// create the saga middleware
-const sagaMiddleware = createSagaMiddleware()
+const actions = { ...userActions }
+export type ActionsType = ActionType<typeof actions>
 
 const rootReducer = combineReducers({
   users: userReducer
@@ -20,22 +21,23 @@ const rootReducer = combineReducers({
 
 export type RootState = ReturnType<typeof rootReducer>
 
+const epicMiddleware = createEpicMiddleware<Action, Action, RootState>()
+
 // mount it on the Store
 export const store = configureStore({
   reducer: rootReducer,
   devTools: {
-    name: 'Examples / Users Saga'
+    name: 'Examples / Users Observable'
   },
   // middleware: [thunk, sagaMiddleware]
   middleware: [
     ...getDefaultMiddleware({ serializableCheck: false }),
-    sagaMiddleware
+    epicMiddleware
   ]
 })
 // NOTE [@2020/06]: There are issues with getDefaultMiddleware() + serializableCheck and sagas
 // Disabling serializableCheck for now
 
-// then run the saga
-sagaMiddleware.run(rootSaga)
+epicMiddleware.run(rootEpic)
 
 export default store
