@@ -1,30 +1,21 @@
 import React from 'react'
+import log from 'utils/log'
 import { logProps } from '../hoc/LogProps'
 
-class RefExample extends React.Component {
-  ref!: React.RefObject<HTMLButtonElement>
+const RefExample: React.FC = () => {
+  const buttonRef: React.RefObject<HTMLButtonElement> = React.createRef<
+    HTMLButtonElement
+  >()
 
-  constructor(props: any) {
-    super(props)
-    this.ref = React.createRef()
+  const onClick = () => {
+    log.log(`Button: ${buttonRef.current?.id}`)
   }
 
-  onClick = () => {
-    console.log(`Button: ${this.ref.current?.id}`)
-  }
-
-  render() {
-    return (
-      <button
-        id="button-ref-id"
-        type="button"
-        ref={this.ref}
-        onClick={this.onClick}
-      >
-        ref button
-      </button>
-    )
-  }
+  return (
+    <button id="button-ref-id" type="button" ref={buttonRef} onClick={onClick}>
+      ref button
+    </button>
+  )
 }
 
 export default logProps(RefExample)

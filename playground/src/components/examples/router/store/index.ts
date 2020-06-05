@@ -1,5 +1,5 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
-import { userActions, userReducer } from 'store/placeholder/user-map'
+import { userActions, userReducer } from 'store/placeholder/user'
 
 const rootReducer = combineReducers({
   users: userReducer
