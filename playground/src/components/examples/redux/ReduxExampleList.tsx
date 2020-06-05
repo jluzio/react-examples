@@ -4,6 +4,7 @@ import { Tabs } from 'antd'
 import TodoListExample from './todo-list/TodoListExample'
 import TodoListAdvCloudExample from './todo-list-advanced/CloudExample'
 import TodoListAdvLocalExample from './todo-list-advanced/LocalExample'
+import SagaExample from './saga/SagaExample'
 
 const { TabPane } = Tabs
 
@@ -18,6 +19,9 @@ const ReduxExampleList: React.FC = () => {
       </TabPane>
       <TabPane key="todo-adv-cloud" tab="ToDo Adv Cloud">
         <TodoListAdvCloudExample />
+      </TabPane>
+      <TabPane key="saga" tab="Saga">
+        <SagaExample />
       </TabPane>
     </ExampleListTabbedCard>
   )
