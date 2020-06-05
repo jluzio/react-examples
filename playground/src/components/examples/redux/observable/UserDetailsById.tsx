@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react'
 import { connect, ConnectedProps } from 'react-redux'
+import { Result, Skeleton } from 'antd'
 import { RootState, userActions } from './store'
 import UserDetails from '../shared/user/UserDetails'
 
@@ -30,8 +31,17 @@ const UserDetailsById: React.FC<Props> = ({
     fetchUser({ id })
   }, [id])
 
+  if (status.pending) {
+    return <Skeleton />
+  }
   if (status.errorMessage) {
-    return <div>Error: {status.errorMessage}</div>
+    return (
+      <Result
+        status="error"
+        title="Api Failed"
+        subTitle={status.errorMessage}
+      />
+    )
   }
   if (user == null) {
     return null

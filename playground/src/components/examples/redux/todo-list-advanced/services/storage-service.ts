@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import { Observable, Subject } from 'rxjs'
 import firebaseApp from 'services/firebase/firebase-app'
-import { Todo } from '../models'
+import { Todo } from '../../shared/todo/models'
 import { todoConverter } from './converters'
 
 class StorageService {

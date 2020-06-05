@@ -2,7 +2,7 @@ import { Dispatch } from '@reduxjs/toolkit'
 import { v4 as uuidv4 } from 'uuid'
 import storageService from '../services/storage-service'
 import { todoActions } from './todo'
-import { Todo } from '../models'
+import { Todo } from '../../shared/todo/models'
 
 const nextId = () => uuidv4()
 
